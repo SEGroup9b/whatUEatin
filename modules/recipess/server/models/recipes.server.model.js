@@ -21,6 +21,9 @@ var recipeSchema = new Schema({
   //The steps for cooking
   directions: String,
 
+  //The user that uploaded the recipe
+  username: String,
+
   //book-keeping
   updated_at: Date,
   created_at: Date
