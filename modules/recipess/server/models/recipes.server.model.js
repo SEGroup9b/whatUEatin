@@ -2,15 +2,27 @@
 
 /* Import mongoose and define any variables needed to create the schema */
 var mongoose = require('mongoose'), 
-    Schema = mongoose.Schema;
+  Schema = mongoose.Schema;
 
 //I figure storing the original and "nutrified" recipes may be nice
 //BTW: [String] just means an array of Strings
 var recipeSchema = new Schema({
 
+  title: {
+    type: String,
+    default: '',
+    trim: true,
+    required: 'Title cannot be blank'
+  },
+
   //ingredients
-  original_ingredients: [String],
-  nutrified_ingredients: [String],
+  original_ingredients: [{
+    item: String,
+    quantity: Number,
+    unit: String
+  }],
+  /* We may not need nutrified ingredients because we'll just make a new recipe */
+  //nutrified_ingredients: [String],
 
   //tags for allergies/health concerns. This should allow for eacy filtering
   tags: {
@@ -22,7 +34,16 @@ var recipeSchema = new Schema({
   directions: String,
 
   //The user that uploaded the recipe
-  username: String,
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+
+  //recipe image
+  recipeImgURL: {
+    type: String,
+    //default?
+  },
 
   //book-keeping
   updated_at: Date,
