@@ -1,8 +1,8 @@
 <section ng-controller="RecipessController">
   <div class="page-header">
-    <h1>New Recipes</h1>
+    <h1>New Recipe</h1>
   </div>
-  <div class="col-md-12">
+  <div class="col-md-8">
     <form name="recipesForm" class="form-horizontal" ng-submit="create(recipesForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="content">Content</label>
+          <label for="content">Content</label> <!--this has to be edited-->
           <textarea name="content" ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
         </div>
         <div class="form-group">
@@ -23,6 +23,10 @@
           <strong ng-bind="error"></strong>
         </div>
       </fieldset>
+    </form>
+  </div>
+  <div class="col-md-4">
+    <form name="recipesImgForm" class="form-horizontal">
     </form>
   </div>
 </section>
