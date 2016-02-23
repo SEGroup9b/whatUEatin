@@ -68,7 +68,7 @@ recipeSchema.pre('save', function(next) {
 });
 
 /* Use your schema to instantiate a Mongoose model */
-var Recipe = mongoose.model('Recipes', recipeSchema);
+var Recipe = mongoose.model('Recipe', recipeSchema);
 
 /* Export the model to make it avaiable to other parts of your Node application */
 module.exports = Recipe;

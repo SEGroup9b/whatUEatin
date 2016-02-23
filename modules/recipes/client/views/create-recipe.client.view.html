@@ -1,8 +1,8 @@
-<section ng-controller="RecipessController">
+<section ng-controller="RecipesController">
   <div class="page-header">
     <h1>New Recipe</h1>
   </div>
-  <form name="recipesForm" class="form-horizontal" ng-submit="create(recipesForm.$valid)" novalidate>
+  <form name="recipeForm" class="form-horizontal" ng-submit="create(recipeForm.$valid)" novalidate>
     <div class="col-md-4">
     </div>
     <div class="col-md-8">
@@ -10,8 +10,8 @@
         <div class="form-group" show-errors>
           <label for="title">Title</label>
           <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required>
-          <div ng-messages="recipesForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Recipes title is required.</p>
+          <div ng-messages="recipeForm.title.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Recipe title is required.</p>
           </div>
         </div>
         <div class="form-group">
