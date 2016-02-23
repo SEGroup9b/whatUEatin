@@ -1,0 +1,20 @@
+<section ng-controller="RecipessController" ng-init="find()">
+  <div class="page-header">
+    <h1>Recipess</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="recipes in recipess" ui-sref="recipess.view({recipesId: recipes._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="recipes.updated_at | date:'mediumDate'"></span>
+        by
+        <span ng-bind="recipes.user.displayName"></span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="recipes.title"></h4>
+      <p class="list-group-item-text" ng-bind="recipes.content"></p> <!-- edit this-->
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="recipess.$resolved && !recipess.length">
+    No recipess yet, why don't you <a ui-sref="recipess.create">create one</a>?
+  </div>
+</section>

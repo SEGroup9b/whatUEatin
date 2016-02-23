@@ -1,19 +1,21 @@
-<section ng-controller="RecipesController">
+<section ng-controller="RecipessController">
   <div class="page-header">
     <h1>New Recipe</h1>
   </div>
-  <div class="col-md-12">
-    <form name="recipeForm" class="form-horizontal" ng-submit="create(recipeForm.$valid)" novalidate>
+  <form name="recipesForm" class="form-horizontal" ng-submit="create(recipesForm.$valid)" novalidate>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-8">
       <fieldset>
         <div class="form-group" show-errors>
           <label for="title">Title</label>
           <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required>
-          <div ng-messages="recipeForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Recipe title is required.</p>
+          <div ng-messages="recipesForm.title.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Recipes title is required.</p>
           </div>
         </div>
         <div class="form-group">
-          <label for="content">Content</label>
+          <label for="content">Content</label> <!--this has to be edited-->
           <textarea name="content" ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
         </div>
         <div class="form-group">
@@ -23,6 +25,6 @@
           <strong ng-bind="error"></strong>
         </div>
       </fieldset>
-    </form>
-  </div>
+    </div>
+  </form>
 </section>
