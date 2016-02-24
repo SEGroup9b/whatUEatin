@@ -17,7 +17,7 @@ var recipeSchema = new Schema({
 
   //ingredients
   original_ingredients: [{
-    item: String,
+    item: String, //probably saved as the ID gotten from the database api
     quantity: Number,
     unit: String
   }],
@@ -38,6 +38,9 @@ var recipeSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
+
+  servings: String,
+  cook_time: String,
 
   //recipe image
   recipeImgURL: {
@@ -68,7 +71,7 @@ recipeSchema.pre('save', function(next) {
 });
 
 /* Use your schema to instantiate a Mongoose model */
-var Recipe = mongoose.model('Recipes', recipeSchema);
+var Recipe = mongoose.model('Recipe', recipeSchema);
 
 /* Export the model to make it avaiable to other parts of your Node application */
 module.exports = Recipe;
