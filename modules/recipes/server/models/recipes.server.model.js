@@ -17,7 +17,7 @@ var recipeSchema = new Schema({
 
   //ingredients
   original_ingredients: [{
-    item: String,
+    item: String, //probably saved as the ID gotten from the database api
     quantity: Number,
     unit: String
   }],
@@ -38,6 +38,9 @@ var recipeSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
+
+  servings: String,
+  cook_time: String,
 
   //recipe image
   recipeImgURL: {
