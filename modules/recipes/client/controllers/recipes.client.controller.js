@@ -5,6 +5,12 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
   function ($scope, $stateParams, $location, Authentication, Recipes) {
     $scope.authentication = Authentication;
 
+    $scope.addIngredient = function (divName) {
+      var newDiv = document.createElement('div');
+      newDiv.innerHTML = "<div class='col-md-3'><!--quantity--><input name='quantity' ng-model='original_ingredients.quantity' placeholder='#'' class='form-control'></div><div class='col-md-3'><!--unit--><select class='form-control' name='unit'><option>tsp</option><option>tbsp</option><option>cup</option><option>stick</option><option>oz</option><option>grams</option><!--add more options here manually, OR database--></select></div><div class='col-md-6'><!--item--><input name='item' ng-modle='original_ingredients.item' placeholder='ingredient' class='form-control'></div>";
+      document.getElementById(divName).appendChild(newDiv);
+    };
+
     // Create new Recipe
     $scope.create = function (isValid) {
       $scope.error = null;
@@ -18,7 +24,6 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
       // Create new Recipe object
       var recipe = new Recipes({
         title: this.title,
-        content: this.content
       });
 
       // Redirect after save

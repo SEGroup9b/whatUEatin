@@ -28,13 +28,11 @@
           </div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" id="ingredientList">
         <div class="col-md-3"><!--quantity-->
-          <label for="quantity">Quantity</label>
           <input name="quatity" ng-model="original_ingredients.quantity" placeholder="#" class="form-control">
         </div>
         <div class="col-md-3"><!--unit-->
-          <label for="unit">Unit</label>
           <select class="form-control" name="unit">
             <option>tsp</option>
             <option>tbsp</option>
@@ -46,10 +44,10 @@
           </select>
         </div>
         <div class="col-md-6"><!--item-->
-          <label for="item">Ingredient</label>
-          <input name="item" ng-modle="original_ingredients.item" placeholder="ingredient" class="form-control">
+          <input name="item" ng-model="original_ingredients.item" placeholder="ingredient" class="form-control">
         </div>
       </div>
+      <button type="button" class="btn btn-primary" ng-click="addIngredient('ingredientList');">+ Add Ingredient</button>
     </div>
     <div class="form-group">
       <label for="directions">Cooking Instructions</label>
