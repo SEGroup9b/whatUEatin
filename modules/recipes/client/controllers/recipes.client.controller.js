@@ -7,7 +7,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
 
     $scope.addIngredient = function (divName) {
       var newDiv = document.createElement('div');
-      newDiv.innerHTML = "<div class='col-md-3'><!--quantity--><input name='quantity' ng-model='original_ingredients.quantity' placeholder='#'' class='form-control'></div><div class='col-md-3'><!--unit--><select class='form-control' name='unit'><option>tsp</option><option>tbsp</option><option>cup</option><option>stick</option><option>oz</option><option>grams</option><!--add more options here manually, OR database--></select></div><div class='col-md-6'><!--item--><input name='item' ng-modle='original_ingredients.item' placeholder='ingredient' class='form-control'></div>";
+      newDiv.innerHTML = "<div class='col-md-3'><!--quantity--><input name='quantity' ng-model='original_ingredients.quantity' placeholder='#'' class='form-control'></div><div class='col-md-3'><!--unit--><select class='form-control' name='unit'><option>tsp</option><option>tbsp</option><option>cup</option><option>stick</option><option>oz</option><option>grams</option><option>box</option><!--add more options here manually, OR database--></select></div><div class='col-md-6'><!--item--><input name='item' ng-modle='original_ingredients.item' placeholder='ingredient' class='form-control'></div>";
       document.getElementById(divName).appendChild(newDiv);
     };
 
@@ -24,6 +24,14 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
       // Create new Recipe object
       var recipe = new Recipes({
         title: this.title,
+        original_ingredients: [{
+          item: this.item,
+          quantity: this.quantity,
+          unit: this.unit
+        }],
+        directions: this.directions,
+        servings: this.servings,
+        cook_time: this.cook_time
       });
 
       // Redirect after save
@@ -32,7 +40,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
 
         // Clear form fields
         $scope.title = '';
-        $scope.content = '';
+        $scope.directions = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

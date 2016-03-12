@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
 //I figure storing the original and "nutrified" recipes may be nice
 //BTW: [String] just means an array of Strings
 var recipeSchema = new Schema({
-
+  
   title: {
     type: String,
     default: '',

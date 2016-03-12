@@ -18,5 +18,13 @@
       <span ng-bind="recipe.user.displayName"></span>
     </em>
   </small>
-  <p class="lead" ng-bind="recipe.content"></p> <!--This is what needs to be edited-->
+  <!--This is what needs to be edited-->
+  <p>Servings:</p>
+  <p class="lead" ng-bind="recipe.servings"></p>
+  <p>Cook Time:</p>
+  <p class="lead" ng-bind="recipe.cook_time"></p>
+  <p>Ingredients:</p>
+  <p class="lead" ng-bind="recipe.original_ingredients[1].item"></p>
+  <p>Directions:</p>
+  <p class="lead" ng-bind="recipe.directions"></p> 
 </section>
