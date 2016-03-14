@@ -70,6 +70,10 @@ var UserSchema = new Schema({
     type: String,
     default: 'modules/users/client/img/profile/default.png'
   },
+  allergies: {
+    type: [String],
+    default: ''
+  },
   provider: {
     type: String,
     required: 'Provider is required'
@@ -99,6 +103,8 @@ var UserSchema = new Schema({
     type: Date
   }
 });
+//Attempt to fix bad requests due to changing version on profile saves
+UserSchema.set('versionKey', false);
 
 /**
  * Hook a pre save method to hash the password

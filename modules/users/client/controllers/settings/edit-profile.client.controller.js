@@ -4,6 +4,15 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
   function ($scope, $http, $location, Users, Authentication) {
     $scope.user = Authentication.user;
 
+    //add to allergy array
+    $scope.addAllergy = function(){
+      $scope.user.allergies.push($scope.allergy);
+      $scope.allergy = '';
+    };
+    //renove from allergy array
+    $scope.removeAllergy = function(index){
+      $scope.user.allergies.splice(index,1);
+    }
     // Update a user profile
     $scope.updateUserProfile = function (isValid) {
       $scope.success = $scope.error = null;
