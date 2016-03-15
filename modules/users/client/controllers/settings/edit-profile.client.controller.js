@@ -12,7 +12,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
     //renove from allergy array
     $scope.removeAllergy = function(index){
       $scope.user.allergies.splice(index,1);
-    }
+    };
     // Update a user profile
     $scope.updateUserProfile = function (isValid) {
       $scope.success = $scope.error = null;
