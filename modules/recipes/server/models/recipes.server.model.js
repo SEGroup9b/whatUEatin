@@ -14,7 +14,7 @@ var recipeSchema = new Schema({
     trim: true,
     required: 'Title cannot be blank'
   },
-
+  
   //ingredients
   original_ingredients: [{
     item: String, //probably saved as the ID gotten from the database api

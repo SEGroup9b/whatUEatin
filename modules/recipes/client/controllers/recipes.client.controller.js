@@ -4,12 +4,25 @@
 angular.module('recipes').controller('RecipesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Recipes',
   function ($scope, $stateParams, $location, Authentication, Recipes) {
     $scope.authentication = Authentication;
-
+//maybe check if previous ingredient filled out
     $scope.addIngredient = function (divName) {
+      var i = 2;
       var newDiv = document.createElement('div');
-      newDiv.innerHTML = "<div class='col-md-3'><!--quantity--><input name='quantity' ng-model='original_ingredients.quantity' placeholder='#'' class='form-control'></div><div class='col-md-3'><!--unit--><select class='form-control' name='unit'><option>tsp</option><option>tbsp</option><option>cup</option><option>stick</option><option>oz</option><option>grams</option><option>box</option><!--add more options here manually, OR database--></select></div><div class='col-md-6'><!--item--><input name='item' ng-modle='original_ingredients.item' placeholder='ingredient' class='form-control'></div>";
+      newDiv.innerHTML = "<div class='col-md-3'><!--quantity--><input name='quantity"+ i+ "' ng-model='original_ingredients.quantity' placeholder='#'' class='form-control'></div><div class='col-md-3'><!--unit--><select class='form-control' name='unit" +i+"'ng-model='original_ingredients.unit'><option>tsp</option><option>tbsp</option><option>cup</option><option>stick</option><option>oz</option><option>grams</option><option>box</option><!--add more options here manually, OR database--></select></div><div class='col-md-6'><!--item--><input name='item" +i+"' ng-modle='original_ingredients.item' placeholder='ingredient' class='form-control'></div>";
       document.getElementById(divName).appendChild(newDiv);
+      i++;
     };
+
+    $scope.populateArr = function() {
+      //This block adds ingredients to ingredient array
+      var prevIngredient = {
+        item: this.item1,
+        unit1: this.unit1,
+        quantity: this.quantity1
+      };
+      $scope.original_ingredients.push(prevIngredient);
+      //end useful block
+    }
 
     // Create new Recipe
     $scope.create = function (isValid) {
@@ -24,11 +37,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
       // Create new Recipe object
       var recipe = new Recipes({
         title: this.title,
-        original_ingredients: [{
-          item: this.item,
-          quantity: this.quantity,
-          unit: this.unit
-        }],
+        original_ingredients: $scope.original_ingredients,//fill in array here
         directions: this.directions,
         servings: this.servings,
         cook_time: this.cook_time

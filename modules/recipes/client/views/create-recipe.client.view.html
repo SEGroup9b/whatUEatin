@@ -18,7 +18,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="servings">Servings</label>
-            <input name="servings" ng-model="servings" id="servings"  placeholder="Servings" class="form-control"></input>
+            <input name="servings" ng-model="servings" id="servings" placeholder="Servings" class="form-control"></input>
           </div>
         </div>
         <div class="col-md-6">
@@ -30,10 +30,10 @@
       </div>
       <div class="form-group" id="ingredientList">
         <div class="col-md-3"><!--quantity-->
-          <input name="quantity" ng-model="original_ingredients.quantity" placeholder="#" class="form-control">
+          <input name="quantity1" ng-model="original_ingredients.quantity" placeholder="#" class="form-control">
         </div>
         <div class="col-md-3"><!--unit-->
-          <select class="form-control" name="unit">
+          <select class="form-control" name="unit1" ng-model="original_ingredients.unit">
             <option>tsp</option>
             <option>tbsp</option>
             <option>cup</option>
@@ -45,7 +45,7 @@
           </select>
         </div>
         <div class="col-md-6"><!--item-->
-          <input name="item" ng-model="original_ingredients.item" placeholder="ingredient" class="form-control">
+          <input name="item1" ng-model="original_ingredients.item" placeholder="ingredient" class="form-control">
         </div>
       </div>
       <button type="button" class="btn btn-primary" ng-click="addIngredient('ingredientList');">+ Add Ingredient</button>

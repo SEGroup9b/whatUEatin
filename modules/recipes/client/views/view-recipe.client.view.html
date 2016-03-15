@@ -24,7 +24,12 @@
   <p>Cook Time:</p>
   <p class="lead" ng-bind="recipe.cook_time"></p>
   <p>Ingredients:</p>
-  <p class="lead" ng-bind="recipe.original_ingredients[1].item"></p>
+  <p>unit</p>
+  <p class="lead" ng-bind="recipe.original_ingredients[0].unit"></p>
+  <p>quantity</p>
+  <p class="lead" ng-bind="recipe.original_ingredients[0].quantity"></p>
+  <p>item</p>
+  <p class="lead" ng-bind="recipe.original_ingredients[0].item"></p>
   <p>Directions:</p>
   <p class="lead" ng-bind="recipe.directions"></p> 
 </section>
