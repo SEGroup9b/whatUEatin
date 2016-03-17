@@ -5,28 +5,18 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
   function ($scope, $stateParams, $location, Authentication, Recipes) {
     $scope.authentication = Authentication;
     $scope.original_ingredients = [];
-    $scope.ingredient = {
-      quantity: Number,
-      unit: String,
+    $scope.ingredients = {
+      quantity: null,
+      unit: 'tbsp',
       item: ''
     };
 
-    $scope.addIngredientLine = function (divName) {
+    $scope.addIngredientLine = function () {
       //maybe check if previous ingredient filled out
-      $scope.ingredient = {
-        quantity: this.quantity,
-        unit: this.unit,
-        item: this.item
-      };
-      $scope.original_ingredients.push($scope.ingredient);
-      $scope.item = '';
-      $scope.quantity = 0;
-      // var i = 2;
-      // var newDiv = document.createElement('div');
-      // newDiv.innerHTML = "<div class='col-md-3'><!--quantity--><input name='quantity"+ i+ "' ng-model='original_ingredients.quantity' placeholder='#'' class='form-control'></div><div class='col-md-3'><!--unit--><select class='form-control' name='unit" +i+"'ng-model='original_ingredients.unit'><option>tsp</option><option>tbsp</option><option>cup</option><option>stick</option><option>oz</option><option>grams</option><option>box</option><!--add more options here manually, OR database--></select></div><div class='col-md-6'><!--item--><input name='item" +i+"' ng-modle='original_ingredients.item' placeholder='ingredient' class='form-control'></div>";
-      // document.getElementById(divName).appendChild(newDiv);
-      // i++;
-      //callback function to add previous ingredient to array
+      console.log($scope.ingredients.item,$scope.ingredients.unit,$scope.ingredients.quantity);
+      $scope.original_ingredients.push($scope.ingredients);
+      $scope.ingredients={};
+      
     };
 
     // Create new Recipe

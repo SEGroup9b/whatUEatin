@@ -28,14 +28,13 @@
           </div>
         </div>
       </div>
-
-
       <div class="input-group" id="ingredientList">
         <div class="col-md-3"><!--quantity-->
-          <input name="quantity" ng-model="ingredient.quantity" placeholder="#" class="form-control" type="number">
+            
+          <input name="quantity" ng-model="ingredients.quantity" placeholder="#" class="form-control" type="number" id="quantity">
         </div>
         <div class="col-md-3"><!--unit-->
-          <select class="form-control" name="unit" ng-model="ingredient.unit">
+          <select class="form-control" name="unit" ng-model="ingredients.unit">
             <option>tsp</option>
             <option>tbsp</option>
             <option>cup</option>
@@ -47,33 +46,25 @@
           </select>
         </div>
         <div class="col-md-6"><!--item-->
-          <input name="item" ng-model="ingredient.item" placeholder="ingredient" class="form-control" type="text">
+          <input name="item" ng-model="ingredients.item" placeholder="ingredient" class="form-control" type="text">
         </div>
         <span class="input-group-btn">
-          <button type="button" class="btn btn-secondary" ng-click="addIngredientLine('ingredientList');">
+          <button type="button" class="btn btn-secondary" ng-click="addIngredientLine()">
             <span class="glyphicon glyphicon-plus"></span>
           </button>
         </span>
       </div>
 
       <div class="input-group" id="ingredientsAdded" ng-repeat="ingredient in original_ingredients">
+
         <div class="col-md-3"><!--quantity-->
-          <input name="quantity" placeholder="#" class="form-control" value="{{ingredient.quantity}}" type="number">
+          <input  readonly name="quantity" placeholder="#" class="form-control" value="{{ingredient.quantity}}" type="number">
         </div>
         <div class="col-md-3"><!--unit-->
-          <select class="form-control" name="unit" value="{{ingredient.unit}}">
-            <option>tsp</option>
-            <option>tbsp</option>
-            <option>cup</option>
-            <option>stick</option>
-            <option>oz</option>
-            <option>grams</option>
-            <option>box</option>
-            <!--add more options here manually, OR database-->
-          </select>
+          <input readonly class="form-control" name="unit" value="{{ingredient.unit}}" type="text">
         </div>
         <div class="col-md-6" ><!--item-->
-          <input name="item" placeholder="ingredient" class="form-control" value="{{ingredient.item}}" type="text">
+          <input  readonly name="item" placeholder="ingredient" class="form-control" value="{{ingredient.item}}" type="text">
         </div>
         <span class="input-group-btn">
             <button type="button" class="btn btn-secondary">
