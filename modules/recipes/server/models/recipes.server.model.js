@@ -17,9 +17,9 @@ var recipeSchema = new Schema({
   
   //ingredients
   original_ingredients: [{
-    item: String, //probably saved as the ID gotten from the database api
     quantity: Number,
-    unit: String
+    unit: String,
+    item: String//probably saved as the ID gotten from the database api
   }],
   /* We may not need nutrified ingredients because we'll just make a new recipe */
   //nutrified_ingredients: [String],
