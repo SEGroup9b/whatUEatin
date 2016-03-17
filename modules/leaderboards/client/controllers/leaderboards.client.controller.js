@@ -74,7 +74,7 @@ angular.module('leaderboards').controller('LeaderboardsController', ['$scope', '
     $scope.showDetails = function(id){
       for(var i in $scope.recipes){
         if($scope.recipes[i]._id === id) {
-            $scope.detailedInfo = $scope.recipes[i];
+          $scope.detailedInfo = $scope.recipes[i];
         }
       }
     };
