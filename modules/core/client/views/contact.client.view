@@ -1,29 +1,37 @@
 <section ng-controller="HomeController">
-  <div class="jumbotron text-center">
+  <div class="jumbotron">
+
     <div class="row">
-      <div class="col-md-2">
-        
-      </div>
-      <div class="col-md-4">
-        <img alt="Dr. Wanda Eugene" class="img-responsive modal-content text-center" src="modules/core/client/img/brand/wanda.jpg"/>
-      </div>
-      <div class="col-md-4 text-right">
-        <h2 class="text-center"><strong>C</strong>ontact</h2>
-        <p>Wanda Eugene </br>
+      <header class="text-center">
+        <h2 id="aboutheader"> Contact Us </h2>
+      </header>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5 panel panel-default contact-panel">
+        <h2 class="text-center">Administrator</h2>
+        <p><strong>Wanda Eugene</strong> </br>
           Ph.D. </br>
           CISE </br>
           University of Florida </br>
           P.O. Box 116120 </br>
           Gainesville, FL 32611 </br>
           weugene@ufl.edu </br>
-          <a href="wandaeugene.com">wandaeugene.com</a>
+          <a href="http://www.wandaeugene.com">wandaeugene.com</a>
         </p>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-6 panel panel-default contact-panel">
+        <h2 class="text-center">Dev Team</h2>
+        <p><strong>Ben Hammack:</strong> bhammack@ufl.edu <br>
+          <strong>Conor Doherty:</strong> <br>
+          <strong>Dakota Funchess:</strong> dfunchess@ufl.edu <br>
+          <strong>Ed Tischler:</strong> etischler@ufl.edu <br>
+          <strong>Madeleine Monfort:</strong> mlmonfort95@gmail.com <br>
+          <strong>Mitchell Irvin:</strong> mirvin@ufl.edu 
+        </p>
       </div>
     </div>
   </div>
-
 
   <footer class="modal-footer modal-footer-center">
     <a ui-sref="contact" class="footer">Contact Us</a>
