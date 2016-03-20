@@ -13,15 +13,9 @@ angular.module('leaderboards').run(['Menus',
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'leaderboards', {
-      title: 'List Leaderboards',
+      title: 'View Leaderboards',
       state: 'leaderboards.list'
     });
 
-    // Add the dropdown create item
-    Menus.addSubMenuItem('topbar', 'leaderboards', {
-      title: 'Create Leaderboards',
-      state: 'leaderboards.create',
-      roles: ['user']
-    });
   }
 ]);
