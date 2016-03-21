@@ -1592,8 +1592,6 @@ pre code {
 .container {
   margin-right: auto;
   margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 @media (min-width: 768px) {
   .container {
@@ -1609,7 +1607,11 @@ pre code {
   .container {
     width: 1170px;
   }
+@media (min-width: 1670px) {
+  .container {
+    width: 100%;
 }
+
 .container-fluid {
   margin-right: auto;
   margin-left: auto;
@@ -1617,8 +1619,10 @@ pre code {
   padding-right: 15px;
 }
 .row {
-  margin-left: -15px;
-  margin-right: -15px;
+  /*margin-left: -15px;
+  margin-right: -15px;*/
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
@@ -3646,6 +3650,10 @@ tbody.collapse.in {
   margin-bottom: 2px;
 }
 @media (min-width: 768px) {
+  .navbar-center {
+    margin-left: auto;
+    margin-right: auto;
+  }
   .navbar-right .dropdown-menu {
     left: auto;
     right: 0;
@@ -4110,7 +4118,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #ffffff;
-  background-color: #22AA22;
+  background-color: #37DB37;
 }
 .nav-stacked > li {
   float: none;
@@ -4499,7 +4507,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .navbar-right {
     float: right !important;
-    margin-right: -15px;
+    /*margin-right: -15px;*/
   }
   .navbar-right ~ .navbar-right {
     margin-right: 0;
@@ -4604,6 +4612,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse {
   background-color: #22AA22;
   border-color: #22AA22;
+  padding-left: 10px;
 }
 .navbar-inverse .navbar-brand {
   color: #fff;
@@ -4971,7 +4980,7 @@ a.badge:focus {
 }
 .jumbotron {
   padding-top: 30px;
-  margin-bottom: 30px;
+  /*margin-bottom: 30px;*/
   color: inherit;
   background-color: #ffffff;
 }
@@ -5966,7 +5975,6 @@ button.close {
 }
 .modal-footer-center {
   text-align: center;
-  margin-top: 100px;
 }
 .modal-footer .btn + .btn {
   margin-left: 5px;
@@ -6821,4 +6829,267 @@ button.close {
 #bodytext {
   font-size: 18px;
   font-family: 'Signika', sans-serif;
+}
+
+#tfheader{
+  /*background-color:#c3dfef;*/
+}
+#tfnewsearch{
+  padding:20px;
+}
+.tftextinput{
+  margin: 0;
+  padding: 5px 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:14px;
+  border:1px solid #22AA22; border-right:0px;
+  border-top-left-radius: 5px 5px;
+  border-bottom-left-radius: 5px 5px;
+}
+.tfbutton {
+  margin: 0;
+  padding: 5px 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:14px;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  border: solid 1px #22aa22; border-right:0px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #37DB37;
+  background: -webkit-gradient(linear, left top, left bottom, from(#37DB37), to(#37DB37));
+  background: -moz-linear-gradient(top,  #37DB37,  #37DB37); 
+  border-top-right-radius: 5px 5px;
+  border-bottom-right-radius: 5px 5px;
+}
+.tfbutton:hover {
+  text-decoration: none;
+  /*
+  background: #007ead;
+  background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
+  background: -moz-linear-gradient(top,  #0095cc,  #00678e);
+  */
+}
+/* Fixes submit button height problem in Firefox */
+.tfbutton::-moz-focus-inner {
+  border: 0;
+}
+.tfclear{
+  clear:both;
+}
+
+.row1style {
+  
+}
+
+.style {
+  background-color: #E8FFBC;
+  width: 100%;
+  height: 100%;
+}
+
+#style2 {
+  background-color: #E8FFBC;
+  border-top: 2.5px dashed #22aa22;
+}
+
+#style {
+  background-color: #E8FFBC;
+}
+
+#veggies {
+  border:1px solid #fff;
+  border-radius: 10px;
+  width: 100%;
+  height: 700px;
+}
+
+#logo {
+  border: 1px solid #fff;
+  border-radius: 75px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+
+#center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#homeheader {
+  padding-bottom: 40px;
+  padding-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 30px;
+}
+
+#overlay {
+  position: absolute;
+  top: 40px; 
+  left: 490px;
+  width: 700px;
+  height: 625px;
+  background-color: #E8FFBC;
+  opacity: 0.85;
+  border: 1px solid #fff;
+  border-radius: 25px;
+}
+
+#overlay-left {
+  position: absolute;
+  top: 60px; 
+  left: 65px;
+  width: 400px;
+  height: 550px;
+  background-color: #E8FFBC;
+  opacity: 0.85;
+  border: 1px solid #fff;
+  border-radius: 25px;
+}
+.topper {
+  padding-top: 25px;
+}
+
+#overlay-right {
+  position: absolute;
+  top: 60px; 
+  left: 1215px;
+  width: 400px;
+  height: 550px;
+  background-color: #E8FFBC;
+  opacity: 0.85;
+  border: 1px solid #fff;
+  border-radius: 25px;
+}
+
+#title {
+  position: absolute;
+  top: 2.5px; 
+  left: 735px;
+  width: 400px;
+  height: 50px;
+  font-size: 35px;
+}
+
+#table-border {
+  border: 1px solid #22aa22;
+}
+
+#paragraph {
+  font-size: 16px;
+}
+
+#searchBar {
+  margin: 15px 10px;
+}
+
+.picture-bg {
+  background-image: url("modules/core/client/img/brand/veggies.jpg");
+}
+/*
+  ========================================
+  Grid
+  ========================================
+*/
+
+.add-form {
+  /*border-top: 2px solid #919191;*/
+  border-bottom: 2px solid #919191;
+  padding: 5px;
+  margin: 15px 0px 20px 0px;
+  height: 245px;
+}
+
+.add-group {
+  margin: 10px 0px 10px 30px;
+}
+
+.add-item {
+  margin: 5px 0px;
+}
+
+/*
+  ========================================
+  Tables
+  ========================================
+*/
+
+.tableWrapper {
+  max-height: 400px;
+  overflow: auto;
+}
+
+.table-scrolling {
+  max-height: 500px;
+  overflow: auto;
+  border-bottom: 2px solid #919191;
+}
+
+.my-table {
+  border-bottom: 2px solid #919191;
+  padding-bottom: 20px;
+  width: 100%;
+}
+
+/*
+  ========================================
+  Buttons
+  ========================================
+*/
+
+.btn {
+  border-radius: 5px;
+  display: inline-block;
+  margin: 0;
+  background: rgba(200, 200, 200, .3);
+}
+
+.btn-default {
+  border: 1px solid #dfe2e5;
+  padding: 5px 20px;
+  margin: 5px 5px;
+  position: relative;
+  left: 380px;
+  bottom: 65px;
+  font-size: 17px;
+}
+
+#btn-remove {
+  font-size: 12px;
+}
+
+/*
+  ========================================
+  Typography
+  ========================================
+*/
+.myheaders {
+  font-size: 17px;
+}
+
+#codeheader {
+  width: 60px;
+  padding-left: 4px;
+  text-align: left;
+}
+#nameheader {
+  padding-left: 6px;
+  text-align: left;
+}
+
+#newListing {
+  margin: 5px 0px 0px 5px; 
+}
+
+#details {
+  font-size: 15px;
+}
+
+#details-info {
+  margin-left: 25px;
 }
