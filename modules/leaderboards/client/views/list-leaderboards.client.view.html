@@ -1,0 +1,64 @@
+<section ng-controller="LeaderboardsController" ng-init="find()">
+  <div class="page-header text-center">
+    <h1>Leaderboards</h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <h1>"Best" Recipes</h1>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="tableWrapper">
+          <table class="table table-striped table-hover">
+            <tr>
+              <th>Recipe Name</th>
+              <th>Recipe Creator</th>
+              <th>Date Created</th>
+            </tr>
+            <tr ng-repeat="recipe in recipes | orderBy: recipe.created_at" ng-click="showDetails(recipe._id)">
+              <td>{{recipe.title}}</td>
+              <td>{{recipe.user.displayName}}</td>
+              <td>{{recipe.created_at | date:'mediumDate'}}</td>
+            </tr>
+          </table>
+        </div>
+        
+        </div>
+
+      <div class="col-md-5">
+          <div class="jumbotron">
+            <h2>Recipe Information</h2>
+            <h4>{{detailedInfo.title}}</h4>
+            <table class="table table-hover">
+              <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+              </tr>
+              <tr>
+                <td>{{detailedInfo.original_ingredients.item}}</td>
+                <td>{{detailedInfo.original_ingredients.quantity}}</td>
+                <td>{{detailedInfo.original_ingredients.unit}}</td>
+              </tr>
+            </table>
+          </div>
+      </div>     
+    </div>
+  </div>
+<!--
+    <a ng-repeat="recipe in recipes" ui-sref="leaderboards.view({leaderboardId: leaderboard._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="recipe.created | date:'mediumDate'"></span>
+        by
+        <span ng-bind="leaderboard.user.displayName"></span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="leaderboard.title"></h4>
+      <p class="list-group-item-text" ng-bind="leaderboard.content"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="leaderboards.$resolved && !leaderboards.length">
+    No leaderboards yet, why don't you <a ui-sref="leaderboards.create">create one</a>?
+  </div>
+-->
+</section>
