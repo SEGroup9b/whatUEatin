@@ -1,44 +1,24 @@
 <section ng-controller="HomeController">
-  <div class="jumbotron">
-
+  <div class="jumbotron text-center">
     <div class="row">
-      <header class="text-center">
-        <h2 id="aboutheader"> Contact Us </h2>
-      </header>
-    </div>
-
-    <div class="row">
-      <div class="col-md-5 panel panel-default contact-panel">
-        <h2 class="text-center">Administrator</h2>
-        <p><strong>Wanda Eugene</strong> </br>
-          Ph.D. </br>
-          CISE </br>
-          University of Florida </br>
-          P.O. Box 116120 </br>
-          Gainesville, FL 32611 </br>
-          weugene@ufl.edu </br>
-          <a href="http://www.wandaeugene.com">wandaeugene.com</a>
-        </p>
+      <div class="col-sm-12 col-sm-offset-4">
+        <img alt="What U Eatin?" class="img-responsive text-center" src="modules/core/client/img/brand/newlogo.jpg"/>
       </div>
-      <div class="col-md-6 panel panel-default contact-panel">
-        <h2 class="text-center">Dev Team</h2>
-        <p><strong>Ben Hammack:</strong> bhammack@ufl.edu <br>
-          <strong>Conor Doherty:</strong> <br>
-          <strong>Dakota Funchess:</strong> dfunchess@ufl.edu <br>
-          <strong>Ed Tischler:</strong> etischler@ufl.edu <br>
-          <strong>Madeleine Monfort:</strong> mlmonfort95@gmail.com <br>
-          <strong>Mitchell Irvin:</strong> mirvin@ufl.edu 
-        </p>
+      <br>
+      <div class="col-sm-12 text-center">
+        <p class="blockquote"><strong>OUR MISSION</strong></p>
       </div>
     </div>
   </div>
+
+
 <br>
 <br>
 <br>
-  <footer class="modal-footer modal-footer-center">
-    <a ui-sref="contact" class="footer">Contact Us</a>
-    <a ui-sref="about" class="footer">About</a>
-    <a ui-sref="mission" class="footer">Our Mission</a>
+  <footer class="text-center">
+    <a ui-sref="" class="footer">Contact Us</a>
+    <a href="about.html" class="footer">About</a>
+    <a href="mission.html" class="footer">Our Mission</a>
   </footer>
 <br>
 </section>

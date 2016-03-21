@@ -31,15 +31,6 @@
             <p class="help-block error-text" ng-message="required">Username is required.</p>
           </div>
         </div>
-        <div class="form-inline">
-          <label for="alleries">Allergies</label>
-          <input type="text" id="allergies" name="allergies" class="form-control" placeholder="Allergy" ng-model="allergy">
-          <button type="button" ng-click="addAllergy()" class="glyphicon glyphicon-plus-sign" style="color:blue">
-        </div>
-        <div class="form-inline" ng-repeat="allergy in user.allergies">
-          <input type="text" id="allergy" name="allergy" class="form-control" value="{{allergy}}">
-          <button type="button" ng-click="removeAllergy($index)" class="glyphicon glyphicon-minus-sign" style="color:red"></button>
-        </div>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Save Profile</button>
         </div>

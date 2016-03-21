@@ -21,14 +21,6 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       url: '/contact',
       templateUrl: 'modules/core/client/views/contact.client.view'
     })
-    .state('about', {
-      url: '/about',
-      templateUrl: 'modules/core/client/views/about.client.view.html'
-    })
-    .state('mission', {
-      url: '/mission',
-      templateUrl: 'modules/core/client/views/mission.client.view.html'
-    })
     .state('not-found', {
       url: '/not-found',
       templateUrl: 'modules/core/client/views/404.client.view.html',
