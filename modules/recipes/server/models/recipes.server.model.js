@@ -8,44 +8,72 @@ var mongoose = require('mongoose'),
 //BTW: [String] just means an array of Strings
 var recipeSchema = new Schema({
 
-  title: {
-    type: String,
-    default: '',
-    trim: true,
-    required: 'Title cannot be blank'
-  },
-
-  //ingredients
-  original_ingredients: [{
-    item: String, //probably saved as the ID gotten from the database api
-    quantity: Number,
-    unit: String
-  }],
-  /* We may not need nutrified ingredients because we'll just make a new recipe */
-  //nutrified_ingredients: [String],
-
-  //tags for allergies/health concerns. This should allow for eacy filtering
-  tags: {
-    allergies: [String],
-    health_concerns: [String]
-  },
-  
-  //The steps for cooking
-  directions: String,
-
   //The user that uploaded the recipe
   user: {
     type: Schema.ObjectId,
     ref: 'User'
   },
-
-  servings: String,
-  cook_time: String,
+  
+  // Title of the recipe
+  title: {
+    type: String,
+    default: '',
+    trim: true,
+    required: true
+  },
+  
+  instructions: String,		// baking instructions
+  servings: Number,			// how many does this serve?
+  cook_time: String,		// time required to make
+  votes: Number,			// number of upthumblikes
+  
+  // Health tags for user dietary needs.
+  tags: {
+    allergies: [String],
+    health_concerns: [String]
+  },
+  
+  // Original ingredients
+  orig_ing: [{
+    item: String,
+    quantity: Number,
+    unit: String,
+    food_item: {
+      name: String,
+      ndbno: Number,
+      group: String,
+      manu: String,
+      nutrients: [{
+        nutrient_id: Number,
+        name: String,
+        unit: String,
+        value: Number
+      }]
+    }
+  }],
+  
+  // Original ingredients
+  healthy_ing: [{
+    item: String,
+    quantity: Number,
+    unit: String,
+    food_item: {
+      name: String,
+      ndbno: Number,
+      group: String,
+      manu: String,
+      nutrients: [{
+        nutrient_id: Number,
+        name: String,
+        unit: String,
+        value: Number
+      }]
+    }
+  }],
 
   //recipe image
   recipeImgURL: {
     type: String,
-    //default?
   },
 
   //book-keeping
