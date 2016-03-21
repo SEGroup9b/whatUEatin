@@ -10,7 +10,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
       url: 'api/users/picture',
       alias: 'newProfilePicture'
     });
-
+    
     // Set file uploader image filter
     $scope.uploader.filters.push({
       name: 'imageFilter',

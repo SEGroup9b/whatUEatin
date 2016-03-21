@@ -75,6 +75,10 @@ var recipeSchema = new Schema({
   recipeImgURL: {
     type: String,
   },
+  displayName: {
+    type: String,
+    trim: true
+  },
 
   //book-keeping
   updated_at: Date,
