@@ -40,7 +40,7 @@ exports.update = function (req, res) {
   var recipe = req.recipe;
 
   recipe.title = req.body.title;
-  recipe.content = req.body.content;
+  recipe.directions = req.body.directions;
 
   recipe.save(function (err) {
     if (err) {

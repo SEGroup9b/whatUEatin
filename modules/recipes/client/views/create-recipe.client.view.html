@@ -18,7 +18,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="servings">Servings</label>
-            <input name="servings" ng-model="servings" id="servings"  placeholder="Servings" class="form-control"></input>
+            <input name="servings" ng-model="servings" id="servings" placeholder="Servings" class="form-control"></input>
           </div>
         </div>
         <div class="col-md-6">
@@ -28,28 +28,51 @@
           </div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="input-group" id="ingredientList">
         <div class="col-md-3"><!--quantity-->
-          <label for="quantity">Quantity</label>
-          <input name="quatity" ng-model="original_ingredients.quantity" placeholder="#" class="form-control">
+            
+          <input name="quantity" ng-model="ingredients.quantity" placeholder="#" class="form-control" type="number" id="quantity">
         </div>
         <div class="col-md-3"><!--unit-->
-          <label for="unit">Unit</label>
-          <select class="form-control" name="unit">
+          <select class="form-control" name="unit" ng-model="ingredients.unit">
             <option>tsp</option>
             <option>tbsp</option>
             <option>cup</option>
             <option>stick</option>
             <option>oz</option>
             <option>grams</option>
+            <option>box</option>
             <!--add more options here manually, OR database-->
           </select>
         </div>
         <div class="col-md-6"><!--item-->
-          <label for="item">Ingredient</label>
-          <input name="item" ng-modle="original_ingredients.item" placeholder="ingredient" class="form-control">
+          <input name="item" ng-model="ingredients.item" placeholder="ingredient" class="form-control" type="text">
         </div>
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-secondary" ng-click="addIngredientLine()">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+        </span>
       </div>
+
+      <div class="input-group" id="ingredientsAdded" ng-repeat="ingredient in original_ingredients">
+
+        <div class="col-md-3"><!--quantity-->
+          <input  readonly name="quantity" placeholder="#" class="form-control" value="{{ingredient.quantity}}" type="number">
+        </div>
+        <div class="col-md-3"><!--unit-->
+          <input readonly class="form-control" name="unit" value="{{ingredient.unit}}" type="text">
+        </div>
+        <div class="col-md-6" ><!--item-->
+          <input  readonly name="item" placeholder="ingredient" class="form-control" value="{{ingredient.item}}" type="text">
+        </div>
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-secondary">
+              <span class="glyphicon glyphicon-minus"></span>
+            </button>
+          </span>
+      </div>
+
     </div>
     <div class="form-group">
       <label for="directions">Cooking Instructions</label>

@@ -14,20 +14,20 @@ var recipeSchema = new Schema({
     ref: 'User'
   },
   
-  // Title of the recipe
   title: {
     type: String,
     default: '',
     trim: true,
     required: true
   },
-  
+
   instructions: String,		// baking instructions
   servings: Number,			// how many does this serve?
   cook_time: String,		// time required to make
   votes: Number,			// number of upthumblikes
   
   // Health tags for user dietary needs.
+
   tags: {
     allergies: [String],
     health_concerns: [String]

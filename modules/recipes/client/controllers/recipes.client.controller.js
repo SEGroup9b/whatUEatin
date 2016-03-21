@@ -4,6 +4,20 @@
 angular.module('recipes').controller('RecipesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Recipes',
   function ($scope, $stateParams, $location, Authentication, Recipes) {
     $scope.authentication = Authentication;
+    $scope.original_ingredients = [];
+    $scope.ingredients = {
+      quantity: null,
+      unit: 'tbsp',
+      item: ''
+    };
+
+    $scope.addIngredientLine = function () {
+      //maybe check if previous ingredient filled out
+      console.log($scope.ingredients.item,$scope.ingredients.unit,$scope.ingredients.quantity);
+      $scope.original_ingredients.push($scope.ingredients);
+      $scope.ingredients={};
+      
+    };
 
     // Create new Recipe
     $scope.create = function (isValid) {
@@ -14,12 +28,30 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
 
         return false;
       }
+      //$scope.populateArr();
 
       // Create new Recipe object
       var recipe = new Recipes({
         title: this.title,
-        content: this.content
+        original_ingredients: [{}],//fill in array here
+        directions: this.directions,
+        servings: this.servings,
+        cook_time: this.cook_time
       });
+      console.log($scope.original_ingredients);
+      console.log(recipe);
+      for(var i=0;i <$scope.original_ingredients.length;i++){
+      /*  
+      var ingredient = {
+          quantity: $scope.original_ingredients[i].quantity,
+          unit: $scope.original_ingredients[i].unit,
+          item: $scope.original_ingredients[i].item
+        };*/
+        //console.log(ingredient);
+        recipe.original_ingredients.push($scope.original_ingredients[i]);
+        console.log(recipe);
+      }
+      
 
       // Redirect after save
       recipe.$save(function (response) {
@@ -27,7 +59,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
 
         // Clear form fields
         $scope.title = '';
-        $scope.content = '';
+        $scope.directions = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
