@@ -1,5 +1,5 @@
 'use strict';
-var nutrify = require('nutrify.js');
+//var nutrify = require('nutrify.js');
 
 // Recipes controller
 angular.module('recipes').controller('RecipesController', ['$scope', '$stateParams', '$timeout', '$location', '$window', 'Authentication', 'FileUploader', 'Recipes',
