@@ -6969,9 +6969,10 @@ button.close {
 
 #title {
   position: absolute;
+  text-align: center;
   top: 2.5px; 
   left: 735px;
-  width: 400px;
+  width: 250px;
   height: 50px;
   font-size: 35px;
 }
