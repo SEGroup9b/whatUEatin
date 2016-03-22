@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('CategoriesController', ['$scope', 'Authentication', 'Recipes',
-  function ($scope, Authentication, Recipes) {
+angular.module('core').controller('CategoriesController', ['$scope', '$stateParams', 'Authentication', 'Recipes',
+  function ($scope, $stateParams, Authentication, Recipes) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
     $scope.tag = 'gluten';
