@@ -9,6 +9,9 @@
     <a class="btn btn-primary" ng-click="remove();">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
+    <a class="btn btn-info" ng-click="">
+      <i class="glyphicon glyphicon-heart"> Healthify</i>
+    </a>
   </div>
   <small>
     <em class="text-muted">
@@ -18,18 +21,29 @@
       <span ng-bind="recipe.user.displayName"></span>
     </em>
   </small>
-  <!--This is what needs to be edited-->
+  <!--Recipe description-->
   <p>Servings:</p>
   <p class="lead" ng-bind="recipe.servings"></p>
   <p>Cook Time:</p>
   <p class="lead" ng-bind="recipe.cook_time"></p>
   <p>Ingredients:</p>
-  <p>unit</p>
-  <p class="lead" ng-bind="recipe.original_ingredients[0].unit"></p>
-  <p>quantity</p>
-  <p class="lead" ng-bind="recipe.original_ingredients[0].quantity"></p>
-  <p>item</p>
-  <p class="lead" ng-bind="recipe.original_ingredients[0].item"></p>
+  <!--table of ingredients-->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Quantity</th>
+        <th>Unit</th>
+        <th>Ingredient</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="ingredient in recipe.original_ingredients">
+        <td>{{ingredient.quantity}}</td>
+        <td>{{ingredient.unit}}</td>
+        <td>{{ingredient.item}}</td>
+      </tr>
+    </tbody>
+  </table>
   <p>Directions:</p>
-  <p class="lead" ng-bind="recipe.directions"></p> 
+  <p class="lead" ng-bind="recipe.instructions"></p> 
 </section>

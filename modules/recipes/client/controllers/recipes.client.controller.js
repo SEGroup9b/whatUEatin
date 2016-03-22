@@ -52,7 +52,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
       var recipe = new Recipes({
         title: this.title,
         original_ingredients: [{}],//fill in array here
-        directions: this.directions,
+        instructions: this.instructions,
         servings: this.servings,
         cook_time: this.cook_time
       });
