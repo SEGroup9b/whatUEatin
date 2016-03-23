@@ -52,7 +52,7 @@ var recipeSchema = new Schema({
     }
   }],
   
-  // Original ingredients
+  // Healthy ingredients
   healthy_ing: [{
     item: String,
     quantity: Number,

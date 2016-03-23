@@ -1624,6 +1624,14 @@ pre code {
   padding-top: 15px;
   padding-bottom: 15px;
 }
+.row1 {
+  clear: both;
+  padding-bottom: 15px;
+}
+.row2 {
+  clear: both;
+}
+
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
   min-height: 1px;
@@ -6930,6 +6938,13 @@ button.close {
   position: relative;
 }
 
+
+#featuredpic {
+  opacity: 1; 
+  margin-right: auto;
+  margin-left: auto; 
+}
+
 #overlay {
   position: absolute;
   top: 40px; 
@@ -6994,6 +7009,7 @@ button.close {
 .picture-bg {
   background-image: url("modules/core/client/img/brand/veggies.jpg");
 }
+
 /*
   ========================================
   Grid
@@ -7045,27 +7061,6 @@ button.close {
   ========================================
 */
 
-.btn {
-  border-radius: 5px;
-  display: inline-block;
-  margin: 0;
-  background: rgba(200, 200, 200, .3);
-}
-
-.btn-default {
-  border: 1px solid #dfe2e5;
-  padding: 5px 20px;
-  margin: 5px 5px;
-  position: relative;
-  left: 380px;
-  bottom: 65px;
-  font-size: 17px;
-}
-
-#btn-remove {
-  font-size: 12px;
-}
-
 /*
   ========================================
   Typography
@@ -7095,4 +7090,53 @@ button.close {
 
 #details-info {
   margin-left: 25px;
+}
+
+
+/* 
+
+CREATE RECIPE STYLES
+
+*/
+
+#picture-thumbnail {
+ max-width: 350px;
+ max-height: 350px; 
+}
+
+#image-border {
+  width: 75%;
+  height: 75%;
+  border: 1px solid #f5f5f5;
+}
+
+#ing {
+  vertical-align: center; 
+  border-bottom: 2px solid #000;
+  border-right: 2px solid #000;
+  margin-right: 20px;
+  text-align: right;
+}
+
+#padbot {
+  padding-bottom: 40px;
+  padding-top: -20px;
+  margin-top: -15px;
+
+}
+
+#recipeheader {
+  border-bottom: 2px solid #000;
+}
+
+#bottomborder {
+  height: 100%;
+  width: 100%;
+}
+
+#buffer1 {
+}
+
+#buffer2 {
+  margin-left: 10px;
 }
