@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('CategoriesController', ['$scope', 'Authentication', 'Recipes',
-  function ($scope, Authentication, Recipes) {
+angular.module('core').controller('CategoriesController', ['$scope', '$stateParams', 'Authentication', 'Recipes',
+  function ($scope, $stateParams, Authentication, Recipes) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
     $scope.tag = 'gluten';
@@ -9,6 +9,12 @@ angular.module('core').controller('CategoriesController', ['$scope', 'Authentica
       $scope.tag = newTag;
       console.log('Adjusting tag to ' + newTag);
     };
+    $scope.categories = [
+      'Gluten Free',
+      'Low Carb',
+      'Low Fat',
+      'Test'
+    ];
     // Find a list of recipes
     $scope.find = function () {
       $scope.recipes = Recipes.query();
