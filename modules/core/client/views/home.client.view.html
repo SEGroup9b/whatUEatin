@@ -78,10 +78,16 @@
              <br />
              <p id="details"><strong>Title:</strong> <br />
               <span>{{detailedInfo.title}}</span> <br />
+              <strong>Servings:</strong> <br />
+              <span>{{detailedInfo.servings}}</span> <br />
+              <strong>Cook Time:</strong> <br />
+              <span>{{detailedInfo.cook_time}}</span> <br />
+
               <strong>Ingredients:</strong><br /> 
               <span ng-repeat="ingredient in detailedInfo.original_ingredients">"{{ingredient.quantity}}  {{ingredient.unit}} {{ingredient.item}}" </span> <br>
+              <span ng-repeat="ingredient in detailedInfo.healthy_ing">"{{ingredient.quantity}}  {{ingredient.unit}} {{ingredient.item}}" </span> <br>
               <strong>Directions: </strong> <br>
-              <span>{{detailedInfo.directions}}</span>
+              <span>{{detailedInfo.directions}} {{detailedInfo.instructions}}</span>
              </p>
       </div>
 

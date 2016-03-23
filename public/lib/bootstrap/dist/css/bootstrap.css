@@ -7125,8 +7125,10 @@ CREATE RECIPE STYLES
 
 #ing {
   vertical-align: center; 
-  border-bottom: 2px dashed #22aa22;
+  border-bottom: 2px solid #000;
+  border-right: 2px solid #000;
   margin-right: 20px;
+  text-align: right;
 }
 
 #padbot {
@@ -7138,4 +7140,16 @@ CREATE RECIPE STYLES
 
 #recipeheader {
   border-bottom: 2px solid #000;
+}
+
+#bottomborder {
+  height: 100%;
+  width: 100%;
+}
+
+#buffer1 {
+}
+
+#buffer2 {
+  margin-left: 10px;
 }

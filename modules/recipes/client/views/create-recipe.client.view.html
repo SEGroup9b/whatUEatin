@@ -5,7 +5,7 @@
   <form name="recipeForm" class="form-horizontal" ng-submit="create(recipeForm.$valid)" novalidate id="style">
 
     <div class="row">
-      <div class="col-md-4 col-md-offset-1 panel panel-body"> <!--recipe data-->
+      <div class="col-md-4 col-md-offset-2 panel panel-body" id="buffer1"> <!--recipe data-->
         <div class="" show-errors id="recipe-title">
           <label for="title">Recipe Title </label>
           <input name="title" type="text" ng-model="title" class="form-control" placeholder="Title" required></input>
@@ -22,7 +22,7 @@
           <input name="cook_time" ng-model="cook_time" id="cook_time"  placeholder="Total Cooking Time" class="form-control"></input>
         </div>
       </div>
-      <div class="col-md-4 col-md-offset-2 panel panel-body"> <!--recipe image-->
+      <div class="col-md-4 panel panel-body" id="buffer2"> <!--recipe image-->
         <div class="">
           <img ng-src="{{imageURL}}" alt="{{recipe.displayName}}" id="picture-thumbnail">
         </div>
@@ -40,7 +40,7 @@
 
 
     <div class="row2">
-      <h4 class="col-md-1 col-md-offset-1" id="ing">Add New Ingredient:</h4>
+      <h4 class="col-md-1 col-md-offset-3" id="ing">Add New Ingredient:</h4>
       <div class="col-md-5 panel panel-body"><!--ingredient name-->
         <input id="ingredients" name="item" ng-model="ingredients.item" placeholder="Ingredient" class="" type="text">
         <input id="ingredients" name="quantity" ng-model="ingredients.quantity" placeholder="#" class="" type="number">
@@ -60,9 +60,9 @@
       </div>
 
       <div class="row1" >
-        <h4 class="col-md-2 col-md-offset-1" id="ing">Current Ingredients: </h4>
+        <h4 class="col-md-1 col-md-offset-3" id="ing">Current Ingredients: </h4>
         <div class="row2">
-          <div class="col-md-6 col-md-offset-2 panel panel-body" ng-repeat="ingredient in original_ingredients" ><!--item-->
+          <div class="col-md-6 col-md-offset-4 panel panel-body" ng-repeat="ingredient in original_ingredients" ><!--item-->
             <input readonly name="item" placeholder="Ingredient" class="" value="{{ingredient.item}}" type="text">
             <input readonly name="quantity" placeholder="#" class="" value="{{ingredient.quantity}}" type="number">
             <input readonly class="" name="unit" value="{{ingredient.unit}}" type="text">
@@ -79,15 +79,15 @@
 
 
     <div class="row">
-      <div class="col-md-6 col-md-offset-1 panel panel-body">
+      <div class="col-md-6 col-md-offset-3 panel panel-body">
         <label for="instructions">Cooking Instructions</label>
         <textarea name="instructions" ng-model="instructions" id="instructions" placeholder="Lorem ipsum..." class="form-control" rows="6"></textarea>
       </div>
     </div>
 
     <div class="row" id="padbot">
-      <div class="col-md-2 col-md-offset-2">
-        <input type="submit" class="" value="Submit my Recipe!">
+      <div class="col-md-1 col-md-offset-5">
+        <input type="submit" class="center btn btn-primary" value="Submit my Recipe!">
         <div ng-show="error" class="text-danger">
           <strong ng-bind="error"></strong>
         </div>
