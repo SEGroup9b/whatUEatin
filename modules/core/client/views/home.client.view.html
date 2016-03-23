@@ -1,23 +1,5 @@
 <section ng-controller="HomeController" ng-init="find()">
 
-<!--
-  <div class="text-center" id="style">
-    <div class="row" id="style">
-      <div class="col-lg-12 search-bar">
-          <div id="tfheader">
-            <form id="tfnewsearch" method="get" action="http://www.google.com">
-              <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search recipes" class="tfbutton">
-            </form>
-          <div class="tfclear"></div>
-          </div>
-      </div>
-      <div class="col-sm-3">
-      </div>
-      <div class="col-md-12 text-center">
-        <p id="paragraph">Healthier recipes, one ingredient at a time.</p>
-      </div>
-    </div>
-  </div>-->
     <div class="row topper" id="style">
       <div class="col-md-12 center">
         <img id="veggies" src="modules/core/client/img/brand/veggies.jpg"/>
@@ -28,24 +10,47 @@
             <li>Ingredient 1</li>
             <li>Ingredient 2</li>
           </ul>
+          <h4 class="text-center">Nutritional Information </h4>
+          <ul>
+            <li>Carbohydrates:</li>
+            <li>Saturated Fat:</li>
+            <li>Unsaturated Fat:</li>
+            <li>Protein:</li>
+            <li>Sugar:</li>
+            <li>Sodium:</li>
+            <li>Fiber:</li>
+          </ul>
         </div>
-        <div id="overlay" class="center">
-          <h2 class="text-center"> FEATURED RECIPE </h2>
-          <p class="text-center"> Insert some random recipe stuff here </p>
-          <ul ui-sref="recipes.view({recipeId: recipe._id})">
+        <div id="overlay">
+          <h2 class="text-center"> Recipe of the Day! </h2>
+          <!--<ul ui-sref="recipes.view({recipeId: recipe._id})">
             <li>
-              <span ng-bind="recipe.updated_at | date:'mediumDate'"></span>
               <span ng-bind="recipe.updated_at | date:'mediumDate'"></span>
               <h2 class="list-group-item-heading" ng-bind="recipe.title"></h2>
               <span ng-bind="recipe.user.displayName"></span>
               <p class="list-group-item-text" ng-bind="recipe.content"></p> 
             </li>
-          </ul>
+          </ul>-->
+          <img id="featuredpic" src="modules/core/client/img/brand/bananasfoster.jpg"/>
           
         </div>
         <div id="overlay-right">
           <h3 class="text-center"> Post-healthification! </h2>
           <p class="text-center"> healthy stuff </p>
+          <ul>
+            <li>Ingredient 1</li>
+            <li>Ingredient 2</li>
+          </ul>
+          <h4 class="text-center">Nutritional Information </h4>
+          <ul>
+            <li>Carbohydrates:</li>
+            <li>Saturated Fat:</li>
+            <li>Unsaturated Fat:</li>
+            <li>Protein:</li>
+            <li>Sugar:</li>
+            <li>Sodium:</li>
+            <li>Fiber:</li>
+          </ul>
         </div>
       </div> 
     </div>
@@ -90,8 +95,8 @@
               <span>{{detailedInfo.directions}} {{detailedInfo.instructions}}</span>
              </p>
       </div>
-
     </div>
+    
       <footer class="modal-footer modal-footer-center" id="style">
         <a ui-sref="contact" class="footer">Contact Us</a>
         <a ui-sref="about" class="footer">About</a>

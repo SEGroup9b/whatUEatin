@@ -6938,6 +6938,13 @@ button.close {
   position: relative;
 }
 
+
+#featuredpic {
+  opacity: 1; 
+  margin-right: auto;
+  margin-left: auto; 
+}
+
 #overlay {
   position: absolute;
   top: 40px; 
@@ -7002,6 +7009,7 @@ button.close {
 .picture-bg {
   background-image: url("modules/core/client/img/brand/veggies.jpg");
 }
+
 /*
   ========================================
   Grid
