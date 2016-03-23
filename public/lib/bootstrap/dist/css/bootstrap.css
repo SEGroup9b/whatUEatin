@@ -7061,27 +7061,6 @@ button.close {
   ========================================
 */
 
-.btn {
-  border-radius: 5px;
-  display: inline-block;
-  margin: 0;
-  background: rgba(200, 200, 200, .3);
-}
-
-.btn-default {
-  border: 1px solid #dfe2e5;
-  padding: 5px 20px;
-  margin: 5px 5px;
-  position: relative;
-  left: 380px;
-  bottom: 65px;
-  font-size: 17px;
-}
-
-#btn-remove {
-  font-size: 12px;
-}
-
 /*
   ========================================
   Typography
