@@ -1,102 +1,105 @@
 <section ng-controller="RecipesController">
-  <div class="page-header">
+  <div class="page-header col-md-10 col-md-offset-1 text-center" id="recipeheader">
     <h1>New Recipe</h1>
   </div>
-  <form name="recipeForm" class="form-horizontal" ng-submit="create(recipeForm.$valid)" novalidate>
+  <form name="recipeForm" class="form-horizontal" ng-submit="create(recipeForm.$valid)" novalidate id="style">
+
     <div class="row">
-      <div class="col-md-4"> <!--recipe image-->
-        <div class="form-group text-center">
-            <img ng-src="{{imageURL}}" alt="{{recipe.displayName}}" class="img-thumbnail user-profile-picture">
-          </div>
-          <div class="text-center form-group" ng-hide="uploader.queue.length">
-            <span class="btn btn-default btn-file">
-                Select Image <input type="file" nv-file-select uploader="uploader">
-            </span>
-          </div>
-          <div class="text-center form-group" ng-show="uploader.queue.length">
-            <button class="btn btn-primary" ng-click="uploadRecipePicture();">Upload</button>
-            <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
-          </div>
-      </div>
-      <div class="col-md-8"> <!--recipe data-->
-        <div class="form-group" show-errors>
-          <label for="title">Recipe Title</label>
-          <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required></input>
+      <div class="col-md-4 col-md-offset-1 panel panel-body"> <!--recipe data-->
+        <div class="" show-errors id="recipe-title">
+          <label for="title">Recipe Title </label>
+          <input name="title" type="text" ng-model="title" class="form-control" placeholder="Title" required></input>
           <div ng-messages="recipeForm.title.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Recipe title is required.</p>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="servings">Servings</label>
-              <input name="servings" ng-model="servings" id="servings" placeholder="Servings" class="form-control"></input>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="cook_time">Cook Time</label>
-              <input name="cook_time" ng-model="cook_time" id="cook_time"  placeholder="Total Cooking Time" class="form-control"></input>
-            </div>
-          </div>
+        <div class="">
+          <label for="servings">Servings</label>
+          <input name="servings" ng-model="servings" id="servings" placeholder="Serves how many?" class="form-control"></input>
+        </div>            
+        <div class="">
+          <label for="cook_time">Cook Time</label>
+          <input name="cook_time" ng-model="cook_time" id="cook_time"  placeholder="Total Cooking Time" class="form-control"></input>
         </div>
-        <div class="input-group" id="ingredientList">
-          <div class="col-md-3"><!--quantity-->
-              
-            <input name="quantity" ng-model="ingredients.quantity" placeholder="#" class="form-control" type="number" id="quantity">
-          </div>
-          <div class="col-md-3"><!--unit-->
-            <select class="form-control" name="unit" ng-model="ingredients.unit">
-              <option>tsp</option>
-              <option>tbsp</option>
-              <option>cup</option>
-              <option>stick</option>
-              <option>oz</option>
-              <option>grams</option>
-              <option>box</option>
-              <!--add more options here manually, OR database-->
-            </select>
-          </div>
-          <div class="col-md-6"><!--item-->
-            <input name="item" ng-model="ingredients.item" placeholder="ingredient" class="form-control" type="text">
-          </div>
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-secondary" ng-click="addIngredientLine()">
-              <span class="glyphicon glyphicon-plus"></span>
-            </button>
+      </div>
+      <div class="col-md-4 col-md-offset-2 panel panel-body"> <!--recipe image-->
+        <div class="">
+          <img ng-src="{{imageURL}}" alt="{{recipe.displayName}}" id="picture-thumbnail">
+        </div>
+        <div class=""  id="image-border" ng-hide="uploader.queue.length">
+          <span><strong>Upload a picture of your recipe!</strong> <input type="file" nv-file-select uploader="uploader">
           </span>
         </div>
-
-        <div class="input-group" id="ingredientsAdded" ng-repeat="ingredient in original_ingredients">
-
-          <div class="col-md-3"><!--quantity-->
-            <input  readonly name="quantity" placeholder="#" class="form-control" value="{{ingredient.quantity}}" type="number">
-          </div>
-          <div class="col-md-3"><!--unit-->
-            <input readonly class="form-control" name="unit" value="{{ingredient.unit}}" type="text">
-          </div>
-          <div class="col-md-6" ><!--item-->
-            <input  readonly name="item" placeholder="ingredient" class="form-control" value="{{ingredient.item}}" type="text">
-          </div>
-          <span class="input-group-btn">
-              <button type="button" class="btn btn-secondary">
-                <span class="glyphicon glyphicon-minus"></span>
-              </button>
-            </span>
+        <div class="" ng-show="uploader.queue.length">
+          <button class="" ng-click="uploadRecipePicture();">Upload</button>
+          <button class="" ng-click="cancelUpload();">Different Picture</button>          
         </div>
       </div>
     </div>
-    <div class="form-group">
-      <div class="col-md-4"> 
-        <label for="instructions">Cooking Instructions</label>
+
+
+
+    <div class="row2">
+      <h4 class="col-md-1 col-md-offset-1" id="ing">Add New Ingredient:</h4>
+      <div class="col-md-5 panel panel-body"><!--ingredient name-->
+        <input id="ingredients" name="item" ng-model="ingredients.item" placeholder="Ingredient" class="" type="text">
+        <input id="ingredients" name="quantity" ng-model="ingredients.quantity" placeholder="#" class="" type="number">
+        <select id="ingredients" class="" name="unit" ng-model="ingredients.unit">
+          <option>tsp</option>
+          <option>tbsp</option>
+          <option>cup</option>
+          <option>oz</option>
+          <option>grams</option>
+          <!--add more options here manually, OR database-->
+        </select>
+        <span class="" id="align-left">
+          <button type="button" class="btn btn-secondary" ng-click="addIngredientLine()">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+        </span>
       </div>
-      <textarea name="instructions" ng-model="instructions" id="instructions" placeholder="add instructions here" class="form-control" rows="6"></textarea>
+
+      <div class="row1" >
+        <h4 class="col-md-2 col-md-offset-1" id="ing">Current Ingredients: </h4>
+        <div class="row2">
+          <div class="col-md-6 col-md-offset-2 panel panel-body" ng-repeat="ingredient in original_ingredients" ><!--item-->
+            <input readonly name="item" placeholder="Ingredient" class="" value="{{ingredient.item}}" type="text">
+            <input readonly name="quantity" placeholder="#" class="" value="{{ingredient.quantity}}" type="number">
+            <input readonly class="" name="unit" value="{{ingredient.unit}}" type="text">
+            <span class="">
+              <button type="button" class="btn btn-secondary">
+                <span class="glyphicon glyphicon-minus">RM</span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div class="form-group">
-      <input type="submit" class="btn btn-default">
+
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-1 panel panel-body">
+        <label for="instructions">Cooking Instructions</label>
+        <textarea name="instructions" ng-model="instructions" id="instructions" placeholder="Lorem ipsum..." class="form-control" rows="6"></textarea>
+      </div>
     </div>
-    <div ng-show="error" class="text-danger">
-      <strong ng-bind="error"></strong>
+
+    <div class="row" id="padbot">
+      <div class="col-md-2 col-md-offset-2">
+        <input type="submit" class="" value="Submit my Recipe!">
+        <div ng-show="error" class="text-danger">
+          <strong ng-bind="error"></strong>
+        </div>
+      </div>
     </div>
+
   </form>
+
+  <footer class="modal-footer modal-footer-center" id="style">
+    <a ui-sref="contact" class="footer">Contact Us</a>
+    <a ui-sref="about" class="footer">About</a>
+    <a ui-sref="mission" class="footer">Our Mission</a>
+  </footer>
+
 </section>
