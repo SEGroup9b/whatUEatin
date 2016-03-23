@@ -1,0 +1,65 @@
+<section ng-controller="RecipesController">
+  <div class="page-header">
+    <h1>New Recipe</h1>
+  </div>
+  <form name="recipeForm" class="form-horizontal" ng-submit="create(recipeForm.$valid)" novalidate>
+    <div class="col-md-4">
+      <!--This is where the image formatting goes-->
+    </div>
+    <div class="col-md-8">
+      <div class="form-group" show-errors>
+        <label for="title">Recipe Title</label>
+        <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required></input>
+        <div ng-messages="recipeForm.title.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">Recipe title is required.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="servings">Servings</label>
+            <input name="servings" ng-model="servings" id="servings"  placeholder="Servings" class="form-control"></input>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="cook_time">Cook Time</label>
+            <input name="cook_time" ng-model="cook_time" id="cook_time"  placeholder="Total Cooking Time" class="form-control"></input>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-3"><!--quantity-->
+          <label for="quantity">Quantity</label>
+          <input name="quatity" ng-model="original_ingredients.quantity" placeholder="#" class="form-control">
+        </div>
+        <div class="col-md-3"><!--unit-->
+          <label for="unit">Unit</label>
+          <select class="form-control" name="unit">
+            <option>tsp</option>
+            <option>tbsp</option>
+            <option>cup</option>
+            <option>stick</option>
+            <option>oz</option>
+            <option>grams</option>
+            <!--add more options here manually, OR database-->
+          </select>
+        </div>
+        <div class="col-md-6"><!--item-->
+          <label for="item">Ingredient</label>
+          <input name="item" ng-modle="original_ingredients.item" placeholder="ingredient" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="directions">Cooking Instructions</label>
+      <textarea name="directions" ng-model="directions" id="directions" placeholder="add instructions here" class="form-control" rows="6"></textarea>
+    </div>
+    <div class="form-group">
+      <input type="submit" class="btn btn-default">
+    </div>
+    <div ng-show="error" class="text-danger">
+      <strong ng-bind="error"></strong>
+    </div>
+  </form>
+</section>

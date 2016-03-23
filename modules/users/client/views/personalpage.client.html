@@ -1,0 +1,154 @@
+<section class="row" ng-controller="PersonalPageController" ng-init="find()">
+
+<style>
+ 
+ .label {
+     display: display:inline-block;
+     width: 200px; // or whatever
+} 
+
+.right{
+   position: absolute;
+    left: 80%;
+    top: 20%;
+    width: 100%;
+    font-size: 18px;
+}
+
+table{
+  vertical-align: middle;
+}
+
+#table1{
+  width: 80%;
+}
+
+</style>
+
+
+ <u> 
+  <h1>
+    {{user.firstName}} {{user.lastName}}'s Personal Page
+  </h1>
+</u>
+
+<center><img src = "{{user.profileImageURL}}" width = "200" border="1"></center>
+
+
+<div class="row">
+    <div class="col-md-3">
+      <h2>My Recipes</h2>
+      <table class="table table-hover" id="table1">
+        <tr ng-repeat="recipe in recipes" ng-click="popupinfo(recipe)">
+          <td>
+            {{recipe.title}}
+          </td>
+        
+        </tr>
+
+    </table>
+    </div>
+    <div class="col-md-6">
+      <br>
+      <h2 class="text-center">Recipe Overview</h2>
+      <h3>Recipe Name: {{recipeName}}</h3>
+      <h3>Instructions: </h3>
+    </div>
+    <div class="col-md-3">
+      <h2>Suggested Recipes</h2>
+       <table class="table table-hover" id="table1">
+        <tr>
+          <td>
+           List of recipes would go here...
+          </td>
+        </tr>
+
+    </table>
+    </div>
+  </div>
+
+   
+
+  
+<!--<div class="list-group">
+    <a ng-repeat="recipe in recipes" ui-sref="recipes.view({recipeId: recipe._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="recipe.updated_at | date:'mediumDate'"></span>
+        by
+        <span ng-bind="recipe.user.displayName"></span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="recipe.title"></h4>
+      <p class="list-group-item-text" ng-bind="recipe.content"></p> <!-- edit this
+    </a>
+  </div>-->
+
+
+
+
+
+
+
+ <footer class="text-center">
+    <a href="contactus.html" class="footer">Contact Us</a>
+    <a href="about.html" class="footer">About</a>
+    <a href="mission.html" class="footer">Our Mission</a>
+  </footer>
+
+
+</section>
+
+
+
+<!--
+<section class="row" ng-controller="PersonalPageController">
+  <h3 class="col-md-12 text-center" ng-show="hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h3>
+  <div class="col-md-12 text-center">
+    <div ng-repeat="(providerName, providerData) in user.additionalProvidersData" class="social-account-container">
+      <img ng-src="/modules/users/client/img/buttons/{{providerName}}.png">
+      <a class="btn btn-danger btn-remove-account" ng-click="removeUserSocialAccount(providerName)">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+    </div>
+  </div>
+  <h3 class="col-md-12 text-center" ng-show="hasConnectedAdditionalSocialAccounts()">Unconnected social accounts:</h3>
+  <div class="col-md-12 text-center">
+    <div class="social-account-container" ng-hide="isConnectedSocialAccount('facebook')">
+      <img ng-src="/modules/users/client/img/buttons/facebook.png">
+      <a class="btn btn-success btn-remove-account" href="/api/auth/facebook" target="_self">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </div>
+    <div class="social-account-container" ng-hide="isConnectedSocialAccount('twitter')">
+      <img ng-src="/modules/users/client/img/buttons/twitter.png">
+      <a class="btn btn-success btn-remove-account" href="/api/auth/twitter" target="_self">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </div>
+    <div class="social-account-container" ng-hide="isConnectedSocialAccount('google')">
+      <img ng-src="/modules/users/client/img/buttons/google.png">
+      <a class="btn btn-success btn-remove-account" href="/api/auth/google" target="_self">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </div>
+    <div class="social-account-container" ng-hide="isConnectedSocialAccount('linkedin')">
+      <img ng-src="/modules/users/client/img/buttons/linkedin.png">
+      <a class="btn btn-success btn-remove-account" href="/api/auth/linkedin" target="_self">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </div>
+    <div class="social-account-container" ng-hide="isConnectedSocialAccount('github')">
+      <img ng-src="/modules/users/client/img/buttons/github.png">
+      <a class="btn btn-success btn-remove-account" href="/api/auth/github" target="_self">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </div>
+    <div class="social-account-container" ng-hide="isConnectedSocialAccount('paypal')">
+      <img ng-src="/modules/users/client/img/buttons/paypal.png">
+      <a class="btn btn-success btn-remove-account" href="/api/auth/paypal" target="_self">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </div>
+  </div>
+</section>
+-->
