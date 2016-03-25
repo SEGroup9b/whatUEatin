@@ -34,7 +34,7 @@ nutrify('butter', '01001', true, 291).then(function(result) {
 
 
 // Returns the most "healthy" ndbno alternative to a given ndbno; via PROMISES WOW WE LEAN BOYS.
-exports.healthify = function healthify(query, ndbno, same_fg, nut_id) {
+exports.healthify = function(query, ndbno, same_fg, nut_id) {
   var orig;
   return new Promise(function(resolve, reject) {
     var promiseArray = [];
@@ -101,7 +101,7 @@ function find_healthiest(orig_report, alt_reports, nutrient_id) {
 
 
 // Returns the nutrient report from a given ndbno; 
-exports.food_report = function food_report(ndbno) {
+exports.food_report = function (ndbno) {
   return new Promise(function(resolve, reject) {
     var payload = {
       api_key: key,
@@ -152,7 +152,8 @@ exports.food_report = function food_report(ndbno) {
 
 
 // Returns a list of possible ndbno values matching a given query; via callback.
-exports.find_foods = function find_foods(ing_name, food_group) {
+exports.find_foods = function (ing_name, food_group) {
+  console.log('Inside nutrify finding food');
   return new Promise(function(resolve, reject) {
     if (food_group === undefined) food_group = '';
     var payload = {
@@ -165,10 +166,11 @@ exports.find_foods = function find_foods(ing_name, food_group) {
       offset: 0,
     };
     var url = searchURL + querystring.stringify(payload);
+    console.log(url);
     new Request(url, function (error, response, body) {
       if (!error && response.statusCode === 200) {
         var json_res = JSON.parse(body);
-        resolve(json_res.list.item);            
+        resolve(json_res.list);            
       } else {
         console.log('find_foods() -> error: ', error, ', status code: ', response.statusCode);
         reject(response.statusCode);

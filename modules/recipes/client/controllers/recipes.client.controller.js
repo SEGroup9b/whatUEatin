@@ -2,8 +2,8 @@
 //var nutrify = require('nutrify.js');
 
 // Recipes controller
-angular.module('recipes').controller('RecipesController', ['$scope', '$stateParams', '$timeout', '$location', '$window', 'Authentication', 'FileUploader', 'Recipes',
-  function ($scope, $stateParams, $timeout, $location, $window, Authentication, FileUploader, Recipes) {
+angular.module('recipes').controller('RecipesController', ['$scope', '$stateParams', '$timeout', '$location', '$window', 'Authentication', 'FileUploader', 'Recipes','Usda',
+  function ($scope, $stateParams, $timeout, $location, $window, Authentication, FileUploader, Recipes,Usda) {
     $scope.authentication = Authentication;
     //$scope.imageURL = $scope.recipe.recipeImgURL;
     
@@ -27,6 +27,11 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
       quantity: null,
       unit: 'tbsp',
       item: ''
+    };
+    $scope.confirmIngredient = function(index){
+
+      $scope.confirmed = $scope.usdaList.item[index];
+      console.log($scope.confirmed);
     };
 
     $scope.addIngredientLine = function () {
@@ -126,6 +131,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
 
     // Find existing Recipe
     $scope.findOne = function () {
+      console.log($stateParams.recipeId);
       $scope.recipe = Recipes.get({
         recipeId: $stateParams.recipeId
       });
@@ -180,5 +186,14 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
       $scope.uploader.clearQueue();
       $scope.imageURL = $scope.recipe.recipeImgURL;
     };
+    
+    $scope.findFoods = function(){
+      console.log($scope.ingredients.item);
+      $scope.usdaList = Usda.get({
+        food: $scope.ingredients.item
+      });
+      console.log('printing list ' + $scope.usdaList[0]);
+    };
+   
   }
 ]);

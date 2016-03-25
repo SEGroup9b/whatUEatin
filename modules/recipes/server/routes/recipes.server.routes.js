@@ -17,7 +17,9 @@ module.exports = function (app) {
     .get(recipes.read)
     .put(recipes.update)
     .delete(recipes.delete);
+  app.route('/api/usda/:food').get(recipes.findFoods);
 
   // Finish by binding the recipe middleware
   app.param('recipeId', recipes.recipeByID);
+  app.param('food',recipes.getName);
 };
