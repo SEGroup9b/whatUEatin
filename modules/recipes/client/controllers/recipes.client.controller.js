@@ -23,11 +23,12 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
     });
 
     $scope.original_ingredients = [];
-    $scope.ingredients = {
-      quantity: null,
-      unit: 'tbsp',
-      item: ''
-    };
+
+    // $scope.ingredients = {
+    //   quantity: null,
+    //   unit: 'tbsp',
+    //   item: ''
+    // };
     $scope.confirmIngredient = function(index){
 
       $scope.confirmed = $scope.usdaList.item[index];
@@ -36,10 +37,14 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
 
     $scope.addIngredientLine = function () {
       //maybe check if previous ingredient filled out
-      console.log($scope.ingredients.item,$scope.ingredients.unit,$scope.ingredients.quantity);
-      $scope.original_ingredients.push($scope.ingredients);
-      $scope.ingredients={};
+      console.log($scope.item,$scope.unit,$scope.quantity);
+      $scope.original_ingredients.push({ item: $scope.item, unit: $scope.unit, quantity: $scope.quantity });
+      //reset the input values
+      $scope.quantity = null;
+      $scope.unit = '';
+      $scope.item = '';
       
+      console.log($scope.original_ingredients);
     };
 
     // Create new Recipe
@@ -56,14 +61,14 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
       // Create new Recipe object
       var recipe = new Recipes({
         title: this.title,
-        original_ingredients: [{}],//fill in array here
-        directions: this.directions,
+        orig_ing: [],//fill in array here
+        instructions: this.instructions,
         servings: this.servings,
         cook_time: this.cook_time
       });
       console.log($scope.original_ingredients);
       console.log(recipe);
-      for(var i=0;i <$scope.original_ingredients.length;i++){
+      for(var i=0;i < $scope.original_ingredients.length; i++){
       /*  
       var ingredient = {
           quantity: $scope.original_ingredients[i].quantity,
@@ -71,10 +76,10 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
           item: $scope.original_ingredients[i].item
         };*/
         //console.log(ingredient);
-        recipe.original_ingredients.push($scope.original_ingredients[i]);
-        console.log(recipe);
+        recipe.orig_ing.push($scope.original_ingredients[i]);
+        
       }
-      
+      console.log(recipe);
 
       // Redirect after save
       recipe.$save(function (response) {
