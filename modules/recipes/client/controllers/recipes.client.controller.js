@@ -56,7 +56,6 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
 
         return false;
       }
-      //$scope.populateArr();
 
       // Create new Recipe object
       var recipe = new Recipes({
@@ -193,9 +192,9 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
     };
     
     $scope.findFoods = function(){
-      console.log($scope.ingredients.item);
+      console.log($scope.item);
       $scope.usdaList = Usda.get({
-        food: $scope.ingredients.item
+        food: $scope.item
       });
       console.log('printing list ' + $scope.usdaList[0]);
     };
