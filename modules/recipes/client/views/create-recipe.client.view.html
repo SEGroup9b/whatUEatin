@@ -43,10 +43,10 @@
         <div class="input-group" id="ingredientList">
           <div class="col-md-3"><!--quantity-->
               
-            <input name="quantity" ng-model="ingredients.quantity" placeholder="#" class="form-control" type="number" id="quantity">
+            <input name="quantity" ng-model="quantity" placeholder="#" class="form-control" type="number" id="quantity">
           </div>
           <div class="col-md-3"><!--unit-->
-            <select class="form-control" name="unit" ng-model="ingredients.unit">
+            <select class="form-control" name="unit" ng-model="unit">
               <option>tsp</option>
               <option>tbsp</option>
               <option>cup</option>
@@ -58,7 +58,7 @@
             </select>
           </div>
           <div class="col-md-6"><!--item-->
-            <input name="item" ng-model="ingredients.item" placeholder="ingredient" class="form-control" type="text">
+            <input name="item" ng-model="item" placeholder="ingredient" class="form-control" type="text">
           </div>
           <span class="input-group-btn">
             <button type="button" class="btn btn-secondary" ng-click="addIngredientLine()">
