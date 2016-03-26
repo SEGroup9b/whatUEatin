@@ -38,6 +38,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
       $scope.unit = '';
       $scope.item = '';
       
+      console.log($scope.original_ingredients);
     };
 
     // Create new Recipe
@@ -54,7 +55,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
       // Create new Recipe object
       var recipe = new Recipes({
         title: this.title,
-        orig_ing: [{}],//fill in array here
+        orig_ing: [],//fill in array here
         instructions: this.instructions,
         servings: this.servings,
         cook_time: this.cook_time
@@ -70,9 +71,9 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
         };*/
         //console.log(ingredient);
         recipe.orig_ing.push($scope.original_ingredients[i]);
-        console.log(recipe);
+        
       }
-      
+      console.log(recipe);
 
       // Redirect after save
       recipe.$save(function (response) {
