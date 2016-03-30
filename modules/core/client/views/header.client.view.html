@@ -6,7 +6,8 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a ui-sref="home" class="navbar-brand">MEAN.JS</a>
+    <a ui-sref="home"><img alt="What U Eatin?" class="" width="100" height="60" id="" src="modules/core/client/img/brand/logo3.png"/></a>
+    <!--<a ui-sref="home" class="navbar-brand">What U Eatin?</a>-->
   </div>
   <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
     <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
@@ -20,6 +21,8 @@
         <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
       </li>
     </ul>
+    <ul class="nav navbar-nav navbar-center"> <a ui-sref="home" class="navbar-brand" id="title">What U Eatin?</a>
+    </ul>
     <ul class="nav navbar-nav navbar-right" ng-hide="authentication.user">
       <li ui-sref-active="active">
         <a ui-sref="authentication.signup">Sign Up</a>
@@ -31,11 +34,13 @@
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
       <li class="dropdown" dropdown>
-        <a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
-          <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
-          <span ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+        <a class="glyphicon glyphicon-cog" dropdown-toggle role="button">
+          <b class="caret"></b>
         </a>
         <ul class="dropdown-menu" role="menu">
+          <li ui-sref-active="active">
+            <a ui-sref="personalpage">View Profile</a>
+          </li>
           <li ui-sref-active="active">
             <a ui-sref="settings.profile">Edit Profile</a>
           </li>
@@ -50,7 +55,7 @@
           </li>
           <li class="divider"></li>
           <li>
-            <a href="/api/auth/signout" target="_self">Signout</a>
+            <a href="/api/auth/signout" target="_self">Sign Out</a>
           </li>
         </ul>
       </li>

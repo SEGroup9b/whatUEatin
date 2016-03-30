@@ -1,0 +1,29 @@
+<section ng-controller="RecipesController" ng-init="find()">
+  <div class="page-header col-md-10 col-md-offset-1 text-center" id="recipeheader">
+    <h1>List Recipes</h1>
+  </div>
+  <div class="row" id="style">
+    <div class="list-group col-md-8 col-md-offset-2">
+      <a ng-repeat="recipe in recipes" ui-sref="recipes.view({recipeId: recipe._id})" class="list-group-item">
+        <small class="list-group-item-text">
+          Posted on
+          <span ng-bind="recipe.updated_at | date:'mediumDate'"></span>
+          by
+          <span ng-bind="recipe.user.displayName"></span>
+        </small>
+        <h4 class="list-group-item-heading" ng-bind="recipe.title"></h4>
+        <p class="list-group-item-text" ng-bind="recipe.content"></p> <!-- edit this-->
+      </a>
+    </div>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="recipes.$resolved && !recipes.length">
+    No recipes yet, why don't you <a ui-sref="recipes.create">create one</a>?
+  </div>
+
+  <footer class="modal-footer modal-footer-center" id="style">
+    <a ui-sref="contact" class="footer">Contact Us</a>
+    <a ui-sref="about" class="footer">About</a>
+    <a ui-sref="mission" class="footer">Our Mission</a>
+  </footer>
+
+</section>

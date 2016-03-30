@@ -1,0 +1,76 @@
+<section ng-controller="RecipesController" ng-init="findOne()">
+  <div class="row" id="style">
+    <div class="page-header col-md-10 col-md-offset-1 text-center" id="recipeheader">
+      <h1 ng-bind="recipe.title"></h1>
+      <small>
+        <em class="text-muted">
+          Posted on
+          <span ng-bind="recipe.updated_at | date:'mediumDate'"></span>
+          by
+          <span ng-bind="recipe.user.displayName"></span>
+        </em>
+      </small>
+    </div>
+  </div>
+
+<div class="row" id="style">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="pull-right" ng-show="authentication.user._id == recipe.user._id">
+      <a class="btn btn-primary" ui-sref="recipes.edit({recipeId: recipe._id})">
+        <i class="glyphicon glyphicon-edit"></i>
+      </a>
+      <a class="btn btn-primary" ng-click="remove();">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+      <a class="btn btn-info" ng-click="">
+        <i class="glyphicon glyphicon-heart"> Healthify</i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="row" id="style">
+  <div class="col-md-6 col-md-offset-3">
+    <!--Recipe description-->
+    <p>Servings:</p>
+    <p class="lead" ng-bind="recipe.servings"></p>
+    <p>Cook Time:</p>
+    <p class="lead" ng-bind="recipe.cook_time"></p>
+  </div>
+</div>
+  <!--table of ingredients-->
+  <div class="row" id="style">
+    <div class="col-md-8 col-md-offset-2">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Quantity</th>
+            <th>Unit</th>
+            <th>Ingredient</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="ingredient in recipe.original_ingredients">
+            <td>{{ingredient.quantity}}</td>
+            <td>{{ingredient.unit}}</td>
+            <td>{{ingredient.item}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row" id="style">
+    <div class="col-md-8 col-md-offset-2">
+      <p>Directions:</p>
+      <p class="lead" ng-bind="recipe.instructions"></p> 
+    </div>
+  </div>
+
+  <footer class="modal-footer modal-footer-center" id="style">
+    <a ui-sref="contact" class="footer">Contact Us</a>
+    <a ui-sref="about" class="footer">About</a>
+    <a ui-sref="mission" class="footer">Our Mission</a>
+  </footer>
+
+</section>
