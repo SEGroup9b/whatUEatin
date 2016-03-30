@@ -24,11 +24,23 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
 
     $scope.original_ingredients = [];
 
-    // $scope.ingredients = {
-    //   quantity: null,
-    //   unit: 'tbsp',
-    //   item: ''
-    // };
+    $scope.ingredients = {
+      item: '',
+      quantity: 0,
+      unit: '',
+      food_item: {
+        name: '',
+        ndbno: 0,
+        group: '',
+        manu: '',
+        nutrients: [{
+          nutrient_id: 0,
+          name: '',
+          unit: '',
+          value: 0
+        }]
+      }
+    };
     $scope.confirmIngredient = function(index){
 
       $scope.confirmed = $scope.usdaList.item[index];
@@ -37,12 +49,29 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
 
     $scope.addIngredientLine = function () {
       //maybe check if previous ingredient filled out
-      console.log($scope.item,$scope.unit,$scope.quantity);
-      $scope.original_ingredients.push({ item: $scope.item, unit: $scope.unit, quantity: $scope.quantity });
+      console.log('Adding Ingredient Line');
+      $scope.ingredients.food_item.name = $scope.confirmed.name;
+      $scope.ingredients.food_item.dbno = $scope.confirmed.dbno;
+      $scope.ingredients.food_item.group = $scope.confirmed.group;
+      $scope.original_ingredients.push($scope.ingredients);
       //reset the input values
-      $scope.quantity = null;
-      $scope.unit = '';
-      $scope.item = '';
+      $scope.ingredients = {
+        item: '',
+        quantity: 0,
+        unit: '',
+        food_item: {
+          name: '',
+          ndbno: 0,
+          group: '',
+          manu: '',
+          nutrients: [{
+            nutrient_id: 0,
+            name: '',
+            unit: '',
+            value: 0
+          }]
+        }
+      };
       
       console.log($scope.original_ingredients);
     };
@@ -194,7 +223,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
     $scope.findFoods = function(){
       console.log($scope.item);
       $scope.usdaList = Usda.get({
-        food: $scope.item
+        food: $scope.ingredients.item
       });
       console.log('printing list ' + $scope.usdaList[0]);
     };

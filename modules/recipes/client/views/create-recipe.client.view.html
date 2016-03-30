@@ -43,10 +43,10 @@
         <div class="input-group" id="ingredientList">
           <div class="col-md-3"><!--quantity-->
               
-            <input name="quantity" ng-model="quantity" placeholder="#" class="form-control" type="number" id="quantity">
+            <input name="quantity" ng-model="ingredients.quantity" placeholder="#" class="form-control" type="Number" id="quantity">
           </div>
           <div class="col-md-3"><!--unit-->
-            <select class="form-control" name="unit" ng-model="unit">
+            <select class="form-control" name="unit" ng-model="ingredients.unit">
               <option>tsp</option>
               <option>tbsp</option>
               <option>cup</option>
@@ -58,10 +58,10 @@
             </select>
           </div>
           <div class="col-md-6"><!--item-->
-            <input name="item" ng-model="item" placeholder="ingredient" class="form-control" type="text">
+            <input name="item" ng-model="ingredients.item" placeholder="ingredient" class="form-control" type="text">
           </div>
           <span class="input-group-btn">
-            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" ng-click="findFoods();">
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" ng-click="findFoods();" ng-disabled="!ingredient.quantity || !ingredient.item">
               <span class="glyphicon glyphicon-plus"></span>
             </button>
 
@@ -80,7 +80,7 @@
       </div>
       <div class="modal-body">
        <table class="table table-striped table-hover">
-        <tr ng-repeat="option in usdaList.item" ng-click="confirmIngredient($index);">
+        <tr style="cursor: pointer;" ng-repeat="option in usdaList.item" ng-click="confirmIngredient($index);">
           <td>{{option.name}}</td>
         </tr>
       </table>
@@ -88,7 +88,7 @@
       </div>
       <div class="modal-footer">
         <span>Your Ingredient Is: {{confirmed.name}}</span>
-        <button type="button" class="btn btn-default" data-dismiss="modal" on-click="findFoods();">Okay!</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="addIngredientLine()">Okay!</button>
       </div>
     </div>
 
@@ -100,13 +100,13 @@
         <div class="input-group" id="ingredientsAdded" ng-repeat="ingredient in original_ingredients">
 
           <div class="col-md-3"><!--quantity-->
-            <input  readonly name="quantity" placeholder="#" class="form-control" value="{{ingredient.quantity}}" type="number">
+            <input  readonly name="quantity" placeholder="#" class="form-control" ng-model="ingredient.quantity" type="Number">
           </div>
           <div class="col-md-3"><!--unit-->
-            <input readonly class="form-control" name="unit" value="{{ingredient.unit}}" type="text">
+            <input readonly class="form-control" name="unit" ng-model="ingredient.unit" type="text">
           </div>
           <div class="col-md-6" ><!--item-->
-            <input  readonly name="item" placeholder="ingredient" class="form-control" value="{{ingredient.item}}" type="text">
+            <input  readonly name="item" placeholder="ingredient" class="form-control" ng-model="ingredient.food_item.name" type="text">
           </div>
           <span class="input-group-btn">
               <button type="button" class="btn btn-secondary">
