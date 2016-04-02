@@ -2,8 +2,8 @@
 //var nutrify = require('nutrify.js');
 
 // Recipes controller
-angular.module('recipes').controller('RecipesController', ['$scope', '$stateParams', '$timeout', '$location', '$window', 'Authentication', 'FileUploader', 'Recipes','Usda',
-  function ($scope, $stateParams, $timeout, $location, $window, Authentication, FileUploader, Recipes,Usda) {
+angular.module('recipes').controller('RecipesController', ['$http','$scope', '$stateParams', '$timeout', '$location', '$window', 'Authentication', 'FileUploader', 'Recipes','Usda',
+  function ($http,$scope, $stateParams, $timeout, $location, $window, Authentication, FileUploader, Recipes,Usda) {
     $scope.authentication = Authentication;
     //$scope.imageURL = $scope.recipe.recipeImgURL;
     
@@ -33,12 +33,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
         ndbno: 0,
         group: '',
         manu: '',
-        nutrients: [{
-          nutrient_id: 0,
-          name: '',
-          unit: '',
-          value: 0
-        }]
+        nutrients: []
       }
     };
     $scope.confirmIngredient = function(index){
@@ -48,32 +43,32 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
     };
 
     $scope.addIngredientLine = function () {
-      //maybe check if previous ingredient filled out
+      
       console.log('Adding Ingredient Line');
       $scope.ingredients.food_item.name = $scope.confirmed.name;
-      $scope.ingredients.food_item.dbno = $scope.confirmed.dbno;
+      $scope.ingredients.food_item.ndbno = $scope.confirmed.ndbno;
       $scope.ingredients.food_item.group = $scope.confirmed.group;
-      $scope.original_ingredients.push($scope.ingredients);
-      //reset the input values
-      $scope.ingredients = {
-        item: '',
-        quantity: 0,
-        unit: '',
-        food_item: {
-          name: '',
-          ndbno: 0,
-          group: '',
-          manu: '',
-          nutrients: [{
-            nutrient_id: 0,
+      findFoodReport().then(function(result){
+        console.log(' addIngredientLine log ' + JSON.stringify(result));
+        $scope.ingredients.food_item.nutrients = result.nutrients;
+        $scope.original_ingredients.push($scope.ingredients);
+          //reset the input values
+        $scope.ingredients = {
+          item: '',
+          quantity: 0,
+          unit: '',
+          food_item: {
             name: '',
-            unit: '',
-            value: 0
-          }]
-        }
-      };
+            ndbno: 0,
+            group: '',
+            manu: '',
+            nutrients: []
+          }
+        };
+        console.log($scope.original_ingredients);
+      });
       
-      console.log($scope.original_ingredients);
+      
     };
 
     // Create new Recipe
@@ -97,13 +92,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
       console.log($scope.original_ingredients);
       console.log(recipe);
       for(var i=0;i < $scope.original_ingredients.length; i++){
-      /*  
-      var ingredient = {
-          quantity: $scope.original_ingredients[i].quantity,
-          unit: $scope.original_ingredients[i].unit,
-          item: $scope.original_ingredients[i].item
-        };*/
-        //console.log(ingredient);
+
         recipe.orig_ing.push($scope.original_ingredients[i]);
         
       }
@@ -219,13 +208,23 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
       $scope.uploader.clearQueue();
       $scope.imageURL = $scope.recipe.recipeImgURL;
     };
-    
-    $scope.findFoods = function(){
-      console.log($scope.item);
-      $scope.usdaList = Usda.get({
-        food: $scope.ingredients.item
+
+
+    function findFoodReport() {
+      
+      return new Promise(function(resolve,reject){
+        resolve($http.get('/api/usda/foodReport/' + $scope.confirmed.ndbno).then(function(response){return response.data;}));
+        
       });
-      console.log('printing list ' + $scope.usdaList[0]);
+    }
+
+
+    $scope.findFoods = function(){
+      
+      Usda.food($scope.ingredients.item).then(function(result){
+        $scope.usdaList = result;
+        console.log('printing list ' + $scope.usdaList[0]);
+      });
     };
    
   }

@@ -117,7 +117,7 @@ exports.food_report = function (ndbno) {
         // Cut content from the report that we don't need. Why?
         // We need a standard defined format for the mongo db.
         
-        var nuts = {};
+        var nuts = [];
         
         for (var i = 0; i < f.nutrients.length; i++) {
           var n = f.nutrients[i];
@@ -126,12 +126,13 @@ exports.food_report = function (ndbno) {
             id === 204 || id === 205 || id === 291 || 
             id === 269 || id === 301 || id === 303 ||
             id === 306 || id === 307 || id === 606) {
-            nuts[id] = {
+            nuts.push({
               nutrient_id: n.nutrient_id,
               name: n.name,
               unit: n.unit,
               value: n.value // value per 100 grams.
-            };
+            });
+            console.log(JSON.stringify(nuts));
           }
         }
         var food = {
@@ -141,6 +142,8 @@ exports.food_report = function (ndbno) {
           manu: f.manu,
           nutrients: nuts
         };
+        console.log(JSON.stringify(food));
+        
         resolve(food);
       } else {
         console.log('food_report() -> error: ', error, ', status code: ', response.statusCode);

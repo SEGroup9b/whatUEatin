@@ -61,7 +61,7 @@
             <input name="item" ng-model="ingredients.item" placeholder="ingredient" class="form-control" type="text">
           </div>
           <span class="input-group-btn">
-            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" ng-click="findFoods();" ng-disabled="!ingredient.quantity || !ingredient.item">
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" ng-click="findFoods();" >
               <span class="glyphicon glyphicon-plus"></span>
             </button>
 
@@ -129,9 +129,5 @@
       <strong ng-bind="error"></strong>
     </div>
   </form>
-
-<button type="button" class="btn btn-secondary" on-click="addIngredientLine();">
-  <span class="glyphicon glyphicon-plus"></span>
-</button>
 </section>
 
