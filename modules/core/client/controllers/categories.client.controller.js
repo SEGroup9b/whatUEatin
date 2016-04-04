@@ -5,10 +5,12 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
     // This provides Authentication context.
     $scope.authentication = Authentication;
     $scope.filter = '';
+    //Adjusts the current filter
     $scope.adjustFilter = function(newTag) {
       $scope.filter = newTag.tag;
       console.log('Adjusting tag to ' + newTag.tag);
     };
+    //Call this method to obtain the list of recipes fitting the filter
     $scope.contains = function(index) {
       var filteredRecipes = [];
       for (var i = Recipes.length - 1; i >= 0; i--) {
@@ -18,6 +20,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
       }
       return filteredRecipes;
     };
+    //All categories supported
     $scope.categories = [
     	{ name: 'All', tag: ''},
       { name: 'Gluten Free', tag: 'gluten' },
@@ -25,6 +28,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
       { name: 'Low Carb', tag: 'carb' },
       { name: 'Low Fat', tag: 'fat' }
     ];
+
     // Find a list of recipes
     $scope.find = function () {
       $scope.recipes = Recipes.query();
