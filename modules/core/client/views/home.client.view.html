@@ -24,15 +24,6 @@
         <div class="text-center" id="overlay">
           <h2> Recipe of the Day! </h2>
           <p>Populate with image and description of the recipe.</p>
-          <!--<ul ui-sref="recipes.view({recipeId: recipe._id})">
-            <li>
-              <span ng-bind="recipe.updated_at | date:'mediumDate'"></span>
-              <h2 class="list-group-item-heading" ng-bind="recipe.title"></h2>
-              <span ng-bind="recipe.user.displayName"></span>
-              <p class="list-group-item-text" ng-bind="recipe.content"></p> 
-            </li>
-          </ul>-->
-          
         </div>
         <div id="overlay-right">
           <h3 class="text-center"> Post-healthification! </h2>
@@ -61,7 +52,7 @@
         <h2 class="text-center"> Browse Recipes </h2>
         <div class="table-scrolling">
           <table class="table table-striped table-hover" id="table-border">
-            <tr ng-repeat="recipe in recipes" ng-click='showDetails($index)'> <!--ui-sref="recipes.view({recipeId: recipe._id})"-->
+            <tr ng-repeat="recipe in recipes" ng-click='showDetails($index)' ui-sref="recipes.view({recipeId: recipe._id})">
               <td>Posted on
               <span ng-bind="recipe.updated_at | date:'mediumDate'"></span>
               <h2 class="list-group-item-heading" ng-bind="recipe.title"></h2>
@@ -76,10 +67,6 @@
       </div>
       <div class="jumbotron col-md-4 col-md-offset-1">
             <h3>Select a Recipe for more details</h3>
-            <!-- 
-              Include a way to display detailed information about an individual listing:
-                   * consider how to use ng-click within the the table to implement this feature
-             -->
              <br />
              <p id="details"><strong>Title:</strong> <br />
               <span>{{detailedInfo.title}}</span> <br />
