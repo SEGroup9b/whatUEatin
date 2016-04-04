@@ -9,7 +9,7 @@ angular.module('recipes').factory('Usda', function($http){
         return response.data;
       });
       return promiseA;
-    },
+    },//Not used for now, forced to used $http.get on client controller skipping this step
     ndbno: function(ndbno){
       var promiseB = $http.get('/api/usda/foodReport/' + ndbno).then(function(response){
         console.log(response);
