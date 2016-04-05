@@ -82,7 +82,7 @@ function find_healthiest(orig_report, alt_reports, nutrient_id, minimize) {
     for (var i = 0; i < alt_reports.length; i++) {
       var alt_val = alt_reports[i].nutrients[nutrient_id].value;
       
-      if (minimize == true) {
+      if (minimize === true) {
         if (alt_val < min_val) {
           mindex = i;
           min_val = alt_val;
