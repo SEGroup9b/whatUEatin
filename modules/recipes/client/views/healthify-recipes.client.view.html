@@ -16,10 +16,12 @@
       <h3>Parameters</h3>
         <div class="form-group">
           <select class="form-control" name="nutrients" ng-model="options.nutrients">
+          <!-- this right hurr is a drop down box with the nutrient names -->
           </select>
         </div>
         <div class="form-group">
           <input name="minimize" id="minimize" type="checkbox" checked="checked">
+          <!-- this checkbox determines whether we're finding alt ingredients that are greater/less than the current nutrient val -->
           Minimize
           </input>
         </div>
@@ -34,5 +36,12 @@
     
     
     </div>
+  </div>
+  <div class="row">
+    <h3>Healthification Statistics</h3>
+      <table id="stats_table">
+      
+      
+      </table>
   </div>
 </section>
