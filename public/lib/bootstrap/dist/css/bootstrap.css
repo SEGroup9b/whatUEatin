@@ -6889,7 +6889,7 @@ button.close {
 .tfclear{
   clear:both;
 }
-
+/*
 .row1style {
   
 }
@@ -6902,7 +6902,6 @@ button.close {
 
 #style2 {
   background-color: #F4F7D9;
-  /*border-top: 2.5px dashed #6c6e58;*/
 }
 
 #style {
@@ -7010,62 +7009,6 @@ button.close {
   background-image: url("modules/core/client/img/brand/veggies.jpg");
 }
 
-/*
-  ========================================
-  Grid
-  ========================================
-*/
-
-.add-form {
-  /*border-top: 2px solid #919191;*/
-  border-bottom: 2px solid #919191;
-  padding: 5px;
-  margin: 15px 0px 20px 0px;
-  height: 245px;
-}
-
-.add-group {
-  margin: 10px 0px 10px 30px;
-}
-
-.add-item {
-  margin: 5px 0px;
-}
-
-/*
-  ========================================
-  Tables
-  ========================================
-*/
-
-.tableWrapper {
-  max-height: 400px;
-  overflow: auto;
-}
-
-.table-scrolling {
-  max-height: 500px;
-  overflow: auto;
-  border-bottom: 2px solid #919191;
-}
-
-.my-table {
-  border-bottom: 2px solid #919191;
-  padding-bottom: 20px;
-  width: 100%;
-}
-
-/*
-  ========================================
-  Buttons
-  ========================================
-*/
-
-/*
-  ========================================
-  Typography
-  ========================================
-*/
 .myheaders {
   font-size: 17px;
 }
@@ -7093,11 +7036,7 @@ button.close {
 }
 
 
-/* 
 
-CREATE RECIPE STYLES
-
-*/
 
 #picture-thumbnail {
  max-width: 350px;
@@ -7140,3 +7079,4 @@ CREATE RECIPE STYLES
 #buffer2 {
   margin-left: 10px;
 }
+*/

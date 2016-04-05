@@ -1,9 +1,17 @@
 <section ng-controller="HomeController" ng-init="find()">
+<style>
+  body {
+    background-image: url('modules/core/client/img/brand/veggies.jpg');
+  }
+</style>
 
-    <div class="row topper" id="style">
-      <div class="col-md-12 center">
-        <img id="veggies" src="modules/core/client/img/brand/veggies.jpg"/>
-        <div id="overlay-left">
+
+<body>
+  
+    <div class="row topper">
+      <div class="">
+        <!--<img id="veggies" src="modules/core/client/img/brand/veggies.jpg"/>-->
+        <div class="col-md-2 col-md-offset-1" id="overlay-left">
           <h3 class="text-center"> Pre-healthification... </h2>
           <p class="text-center"> Unhealthy ingredients: </p>
           <ul>
@@ -21,11 +29,11 @@
             <li>Fiber:</li>
           </ul>
         </div>
-        <div class="text-center" id="overlay">
+        <div class="text-center col-md-6" id="overlay">
           <h2> Recipe of the Day! </h2>
           <p>Populate with image and description of the recipe.</p>
         </div>
-        <div id="overlay-right">
+        <div class="col-md-2" id="overlay-right">
           <h3 class="text-center"> Post-healthification! </h2>
           <p class="text-center"> healthy stuff </p>
           <ul>
@@ -84,9 +92,12 @@
       </div>
     </div>
 
-      <footer class="modal-footer modal-footer-center" id="style">
-        <a ui-sref="contact" class="footer">Contact Us</a>
-        <a ui-sref="about" class="footer">About</a>
-        <a ui-sref="mission" class="footer">Our Mission</a>
-      </footer>
+</body>
+
 </section>
+
+<footer class="modal-footer modal-footer-center" id="style">
+  <a ui-sref="contact" class="footer">Contact Us</a>
+  <a ui-sref="about" class="footer">About</a>
+  <a ui-sref="mission" class="footer">Our Mission</a>
+</footer>
