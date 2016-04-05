@@ -21,7 +21,7 @@ angular.module('categories').run(['Menus',
     Menus.addSubMenuItem('topbar', 'categories', {
       title: 'Create Categories',
       state: 'categories.create',
-      roles: ['admin']
+      roles: ['admin', 'user']
     });
   }
 ]);

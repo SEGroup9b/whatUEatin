@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('CategoriesController', ['$scope', '$stateParams', 'Authentication', 'Recipes', 'Categories',
-  function ($scope, $stateParams, Authentication, Recipes, Categories) {
+angular.module('core').controller('CategoriesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Recipes', 'Categories',
+  function ($scope, $stateParams, $location, Authentication, Recipes, Categories) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
     //For categories and filtering by category
@@ -39,7 +39,6 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
 //     };
 //   }
 // ]);
-
 
     // Create new Category
     $scope.create = function (isValid) {
@@ -91,7 +90,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
       $scope.error = null;
 
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'categorieForm');
+        $scope.$broadcast('show-errors-check-validity', 'categoryForm');
 
         return false;
       }
@@ -119,7 +118,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
     };
 
     $scope.recipes = Recipes.get({
-         recipeId: $stateParams.recipeId
+      recipeId: $stateParams.recipeId
     });
   }
 ]);

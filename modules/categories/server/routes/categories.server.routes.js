@@ -12,7 +12,7 @@ module.exports = function (app) {
     .get(categories.list)
     .post(categories.create);
 
-  // Single categorie routes
+  // Single category routes
   app.route('/api/categories/:categoryId').all(categoriesPolicy.isAllowed)
     .get(categories.read)
     .put(categories.update)
