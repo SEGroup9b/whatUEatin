@@ -23,6 +23,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     });
 
     $scope.original_ingredients = [];
+    $scope.ingredientNumber = 0;
 
     $scope.ingredients = {
       item: '',
@@ -44,18 +45,12 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     $scope.addIngredientLine = function () {
       
       console.log('Adding Ingredient Line');
-      $scope.ingredients.food_item.name = $scope.confirmed.name;
-      $scope.ingredients.food_item.ndbno = $scope.confirmed.ndbno;
-      $scope.ingredients.food_item.group = $scope.confirmed.group;
-      findFoodReport().then(function(result){
-        console.log(' addIngredientLine log ' + JSON.stringify(result));
-        $scope.ingredients.food_item.nutrients = result.nutrients;
-      }).then(function(){
-        console.log('no error in then 2');
+      var promise = new Promise(function(resolve,reject){
+        
+        $scope.ingredients.food_item.name = $scope.confirmed.name;
+        $scope.ingredients.food_item.ndbno = $scope.confirmed.ndbno;
+        $scope.ingredients.food_item.group = $scope.confirmed.group;
         $scope.original_ingredients.push($scope.ingredients);
-      }).then(function(){
-          //reset the input values
-        console.log('no error in then 3');
         $scope.ingredients = {
           item: '',
           quantity: 0,
@@ -68,7 +63,16 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
             nutrients: []
           }
         };
-        console.log($scope.original_ingredients);
+        resolve();
+      });
+      promise.then(function(){
+        findFoodReport().then(function(result){
+          console.log(' addIngredientLine log ' + JSON.stringify(result));
+          $scope.original_ingredients[$scope.ingredientNumber].food_item.nutrients = result.nutrients;
+            //reset the input values
+          $scope.ingredientNumber = $scope.ingredientNumber + 1;
+          console.log($scope.original_ingredients);
+        });
       });
       
       
