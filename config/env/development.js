@@ -99,5 +99,9 @@ module.exports = {
         roles: ['user', 'admin']
       }
     }
+  },
+  aws: {
+    akid: 'AKIAJ5RV2YZRJ7EW6ZTQ',
+    secret: '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'
   }
 };

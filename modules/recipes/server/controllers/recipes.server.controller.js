@@ -7,7 +7,9 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Recipe = mongoose.model('Recipe'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  nutrify = require(path.resolve('./modules/recipes/server/controllers/nutrify.js'));
+  nutrify = require(path.resolve('./modules/recipes/server/controllers/nutrify.js')),
+  config = require(path.resolve('./config/development.js')),
+  
 /**
  * Create a recipe
  */
@@ -136,3 +138,61 @@ exports.getName = function(req,res,next,name){
   
 };
 
+
+/*Amazon s3 upload*/
+exports.upload = function(req,res){
+  var recipe = req.recipe;
+  var message = null;
+  var upload = multer(config.uploads.profileUpload).single('newRecipePicture');
+  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
+  var uuid = require('node-uuid');
+  var AWS = require('aws-sdk');
+
+  AWS.config.region = 'US Standard';
+  
+  // Filtering to upload only images
+  upload.fileFilter = profileUploadFileFilter;
+  var recipeUUID = uuid.v4();
+  if (recipe) {
+    upload(req, res, function (uploadError) {
+      if(uploadError) {
+        return res.status(400).send({
+          message: 'Error occurred while uploading profile picture'
+        });
+      } else {
+        var params = {Key: recipeUUID, Body: 'Hello!'};
+        s3bucket.upload(params, function(err, data) {
+          if (err) {
+            console.log("Error uploading data: ", err);
+          } else {
+            console.log("Successfully uploaded data to myBucket/myKey");
+          }
+        });
+        recipe.recipeImageURL = config.uploads.recipeUpload.dest + recipeUUID;
+
+        user.save(function (saveError) {
+          if (saveError) {
+            return res.status(400).send({
+              message: errorHandler.getErrorMessage(saveError)
+            });
+          } else {
+            req.login(user, function (err) {
+              if (err) {
+                res.status(400).send(err);
+              } else {
+                res.json(user);
+              }
+            });
+          }
+        });
+      }
+    });
+  } else {
+    res.status(400).send({
+      message: 'User is not signed in'
+    });
+  }
+  var s3bucket = new AWS.S3({params: {Bucket: 'testbucket9091'}});
+
+  var params = {}
+}

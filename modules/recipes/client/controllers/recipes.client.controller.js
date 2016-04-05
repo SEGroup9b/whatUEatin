@@ -9,8 +9,8 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     
     // Create file uploader instance
     $scope.uploader = new FileUploader({
-      url: 'api/users/picture',
-      alias: 'newProfilePicture'
+      url: '/api/recipes/picture',
+      alias: 'newRecipePicture'
     });
 
      // Set file uploader image filter

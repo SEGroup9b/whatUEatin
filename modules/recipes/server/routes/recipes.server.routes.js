@@ -21,6 +21,8 @@ module.exports = function (app) {
 
   app.route('/api/usda/foodReport/:ndbno').get(recipes.returnFoodReport);
 
+  app.route('/api/recipes/picture').post(recipes.upload);
+
   // Finish by binding the recipe middleware
   app.param('recipeId', recipes.recipeByID);
   app.param('food',recipes.getName);
