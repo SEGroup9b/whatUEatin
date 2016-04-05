@@ -37,7 +37,6 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       }
     };
     $scope.confirmIngredient = function(index){
-
       $scope.confirmed = $scope.usdaList.item[index];
       console.log($scope.confirmed);
     };
@@ -51,8 +50,12 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       findFoodReport().then(function(result){
         console.log(' addIngredientLine log ' + JSON.stringify(result));
         $scope.ingredients.food_item.nutrients = result.nutrients;
+      }).then(function(){
+        console.log('no error in then 2');
         $scope.original_ingredients.push($scope.ingredients);
+      }).then(function(){
           //reset the input values
+        console.log('no error in then 3');
         $scope.ingredients = {
           item: '',
           quantity: 0,
@@ -69,6 +72,14 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       });
       
       
+    };
+
+    $scope.deleteIngredientLine = function(ingredient) {
+      for (var i in $scope.original_ingredients) {
+        if ($scope.original_ingredients[i] === ingredient) {
+          $scope.original_ingredients.splice(i,1);
+        }
+      }
     };
 
     // Create new Recipe

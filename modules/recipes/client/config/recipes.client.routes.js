@@ -31,6 +31,13 @@ angular.module('recipes').config(['$stateProvider',
         data: {
           roles: ['user', 'admin']
         }
+      })
+      .state('recipes.healthify', {
+        url: '/:recipeId/healthify',
+        templateUrl: 'modules/recipes/client/views/healthify-recipe.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       });
   }
 ]);
