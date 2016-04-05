@@ -25,7 +25,7 @@ var nutrientURL = 'http://api.nal.usda.gov/ndb/nutrients/?';
 
 
 /*
-nutrify('butter', '01001', true, 291).then(function(result) {     
+nutrify('butter', '01001', true, 291, true).then(function(result) {     
   console.log("Alternative food to [butter, whipped with salt]: ");
   console.log(result.healthiest);
   console.log("This value is " + result.difference + " less than the original");
@@ -34,7 +34,7 @@ nutrify('butter', '01001', true, 291).then(function(result) {
 
 
 // Returns the most "healthy" ndbno alternative to a given ndbno; via PROMISES WOW WE LEAN BOYS.
-exports.healthify = function(query, ndbno, same_fg, nut_id) {
+exports.healthify = function(query, ndbno, same_fg, nut_id, minimize) {
   var orig;
   return new Promise(function(resolve, reject) {
     var promiseArray = [];
@@ -62,7 +62,7 @@ exports.healthify = function(query, ndbno, same_fg, nut_id) {
       return Promise.all(promiseArray);
       
     }).then(function(resultArray) {
-      return find_healthiest(orig, resultArray, nut_id);
+      return find_healthiest(orig, resultArray, nut_id, minimize);
       
     }).then(function(conclusion) {
       resolve(conclusion);
@@ -71,7 +71,7 @@ exports.healthify = function(query, ndbno, same_fg, nut_id) {
   });
 };
 
-function find_healthiest(orig_report, alt_reports, nutrient_id) {
+function find_healthiest(orig_report, alt_reports, nutrient_id, minimize) {
   return new Promise(function(resolve, reject) {
     var base_val = orig_report.nutrients[nutrient_id].value;
     var min_val = base_val;
@@ -81,10 +81,19 @@ function find_healthiest(orig_report, alt_reports, nutrient_id) {
     // Now we got the base value. 
     for (var i = 0; i < alt_reports.length; i++) {
       var alt_val = alt_reports[i].nutrients[nutrient_id].value;
-      if (alt_val < min_val) {
-        mindex = i;
-        min_val = alt_val;
-        diff = base_val - min_val;
+      
+      if (minimize == true) {
+        if (alt_val < min_val) {
+          mindex = i;
+          min_val = alt_val;
+          diff = base_val - min_val;
+        }
+      } else {
+        if (alt_val > min_val) {
+          mindex = i;
+          min_val = alt_val;
+          diff = min_val - base_val;
+        }
       }
     }
     

@@ -19,7 +19,7 @@ angular.module('recipes').run(['Menus',
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'recipes', {
-      title: 'Create Recipes',
+      title: 'Create Recipe',
       state: 'recipes.create',
       roles: ['user']
     });
