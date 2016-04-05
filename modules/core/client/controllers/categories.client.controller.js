@@ -22,7 +22,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
     };
     //All categories supported
     $scope.categories = [
-    	{ name: 'All', tag: ''},
+    	{ name: 'All', tag: '' },
       { name: 'Gluten Free', tag: 'gluten' },
       { name: 'Lactose Free', tag: 'lactose' },
       { name: 'Low Carb', tag: 'carb' },
