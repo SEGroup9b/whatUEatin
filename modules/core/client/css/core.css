@@ -89,6 +89,17 @@ a:hover .header-profile-image {
 #style {
   background-color: #F4F7D9;
 }
+#footerstyle {
+  background-color: #3e423a;
+  color: #F4F7D9;
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
+}
+
+a {
+  color: #F4F7D9;
+}
 
 #logo {
   border: 1px solid #fff;
@@ -112,16 +123,29 @@ a:hover .header-profile-image {
 }
 
 #banner {
-  height: 200px;
+  height: 175px;
   width: 100%;
-  background-color: #F4F7D9;
+  position: absolute;
+  bottom: 5%;
+  background-color: #6c6e58;
+  z-index: -1;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.85);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.85);
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.85);
 }
 
 #food {
-  border:1px solid #fff;
+  position: absolute;
+  top: 40%;
+  left: 5%;
+  border:1px;
   border-radius: 100px;
-  width: 35%;
-  height: 35%;
+  width: 30%;
+  height: 40%;
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+  z-index: 1;
 }
 
 
@@ -131,19 +155,28 @@ a:hover .header-profile-image {
   margin-left: auto; 
 }
 
+.z-index-2 {
+
+  z-index: 2;
+}
+
 #overlay {
   /*position: absolute;
   top: 40px; 
   left: 24%;*/
-  margin-right: auto;
-  margin-left: auto; 
-  width: 90%;
-  height: 85%;
+
+  max-height: 50%;
+  max-width: 40%;
+  margin-right: 10%;
+  margin-left: auto;
+  margin-bottom: 5%;  
+  width: 100%;
+  height: 100%;
   background-color: #F4F7D9;
   opacity: 0.9;
-  border: 1px solid #fff;
+  border: 1px solid #F4F7D9;
   border-radius: 10px;
-  margin-top: 10px; 
+  margin-top: 5%; 
 }
 #overlay-two {
   /*position: absolute;
@@ -199,6 +232,7 @@ a:hover .header-profile-image {
 
 #table-border {
   border: 1px solid #6c6e58;
+  background-color: #e3e5ca;
 }
 
 #paragraph {
@@ -279,6 +313,13 @@ a:hover .header-profile-image {
 
 #buffer2 {
   margin-left: 10px;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #a4c4be;
+}
+.table-hover > tbody > tr:hover {
+  background-color: #417478;
 }
 
 .table-scrolling {
