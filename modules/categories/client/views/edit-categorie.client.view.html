@@ -1,20 +1,20 @@
 <section ng-controller="CategoriesController" ng-init="findOne()">
   <div class="page-header">
-    <h1>Edit Categorie</h1>
+    <h1>Edit Category</h1>
   </div>
   <div class="col-md-12">
-    <form name="categorieForm" class="form-horizontal" ng-submit="update(categorieForm.$valid)" novalidate>
+    <form name="categoryForm" class="form-horizontal" ng-submit="update(categoryForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
           <label for="title">Title</label>
-          <input name="title" type="text" ng-model="categorie.title" id="title" class="form-control" placeholder="Title" required>
-          <div ng-messages="categorieForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Categorie title is required.</p>
+          <input name="title" type="text" ng-model="category.title" id="title" class="form-control" placeholder="Title" required>
+          <div ng-messages="categoryForm.title.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Category title is required.</p>
           </div>
         </div>
         <div class="form-group">
           <label for="content">Content</label>
-          <textarea name="content" ng-model="categorie.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+          <textarea name="content" ng-model="category.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
         </div>
         <div class="form-group">
           <input type="submit" value="Update" class="btn btn-default">

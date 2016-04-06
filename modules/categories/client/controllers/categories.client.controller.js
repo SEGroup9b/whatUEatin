@@ -45,15 +45,15 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
       $scope.error = null;
 
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'categorieForm');
+        $scope.$broadcast('show-errors-check-validity', 'categoryForm');
 
         return false;
       }
 
       // Create new Category object
       var category = new Categories({
-        title: this.title,
-        content: this.content
+        name: this.name,
+        tag: this.tag
       });
 
       // Redirect after save
@@ -61,8 +61,8 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
         $location.path('categories/' + response._id);
 
         // Clear form fields
-        $scope.title = '';
-        $scope.content = '';
+        $scope.name = '';
+        $scope.tag = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -98,7 +98,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
       var category = $scope.category;
 
       category.$update(function () {
-        $location.path('categories/' + category._id);
+        $location.path('categories/list');
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -107,6 +107,9 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
     // Find a list of Categories
     $scope.find = function () {
       $scope.categories = Categories.query();
+    };
+
+    $scope.findRecipes = function() {
       $scope.recipes = Recipes.query();
     };
 
