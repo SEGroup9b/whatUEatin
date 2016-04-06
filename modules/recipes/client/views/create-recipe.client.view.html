@@ -79,12 +79,15 @@
         <h4 class="modal-title">Select Your Intended Ingredient</h4>
       </div>
       <div class="modal-body">
-       <table class="table table-striped table-hover">
-        <tr style="cursor: pointer;" ng-repeat="option in usdaList.item" ng-click="confirmIngredient($index);">
+       <table ng-hide="apiError" ng-show="assestsLoaded" class="table table-striped table-hover">
+        <tr  style="cursor: pointer;" ng-repeat="option in usdaList.item" ng-click="confirmIngredient($index);">
           <td>{{option.name}}</td>
         </tr>
       </table>
-
+      <span ng-show="apiError">There was an error finding your ingredient! You can keep this ingredient or try to find another</span>
+      <center>
+        <img src="./modules/core/client/img/loaders/Preloader_4.gif" align="middle" ng-hide="assestsLoaded">
+      </center>
       </div>
       <div class="modal-footer">
         <span>Your Ingredient Is: {{confirmed.name}}</span>
@@ -142,9 +145,3 @@
   </footer>
   
 </section>
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> dev

@@ -87,7 +87,11 @@ exports.list = function (req, res) {
 /*find food on usda database*/
 exports.returnFoods = function(req,res){
   console.log('entered find Foods serverside ' + req.foodList);
-  res.json(req.foodList);
+  if(req.foodlist){
+    res.json(req.foodList);
+  }else{
+    res.json(req.errorCode);
+  }
 
 };
 exports.returnFoodReport = function(req,res){
@@ -131,6 +135,10 @@ exports.getName = function(req,res,next,name){
   nutrify.find_foods(name,'').then(function(result){
     console.log(result);
     req.foodList = result;
+    next();
+  }).catch(function(reason){
+    console.log('error');
+    req.errorCode = reason;
     next();
   });
   

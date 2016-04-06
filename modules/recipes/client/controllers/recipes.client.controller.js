@@ -23,7 +23,9 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     });
 
     $scope.original_ingredients = [];
+    $scope.assestsLoaded = false;
     $scope.ingredientNumber = 0;
+    $scope.apiError = false;
 
     $scope.ingredients = {
       item: '',
@@ -68,10 +70,17 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       promise.then(function(){
         findFoodReport().then(function(result){
           console.log(' addIngredientLine log ' + JSON.stringify(result));
-          $scope.original_ingredients[$scope.ingredientNumber].food_item.nutrients = result.nutrients;
-            //reset the input values
-          $scope.ingredientNumber = $scope.ingredientNumber + 1;
-          console.log($scope.original_ingredients);
+          if(result){
+            $scope.original_ingredients[$scope.ingredientNumber].food_item.nutrients = result.nutrients;
+              //reset the input values
+            $scope.ingredientNumber = $scope.ingredientNumber + 1;
+            $scope.usdaList = [];
+            $scope.assestsLoaded = false;
+            $scope.apiError = false;
+            console.log($scope.original_ingredients);
+          }else{
+            $scope.apiError = true;
+          }
         });
       });
       
@@ -237,8 +246,16 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     $scope.findFoods = function(){
       
       Usda.food($scope.ingredients.item).then(function(result){
-        $scope.usdaList = result;
-        console.log('printing list ' + $scope.usdaList[0]);
+        if(result !== 404){
+          $scope.usdaList = result;
+          $scope.assestsLoaded = true;
+          console.log('printing list ' + $scope.usdaList[0]);
+        }else{
+          $scope.usdaList = [];
+          $scope.assestsLoaded = true;
+          $scope.apiError = true;
+          console.log('error recieving list' + result.data);
+        }
       });
     };
    
