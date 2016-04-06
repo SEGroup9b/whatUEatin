@@ -84,6 +84,7 @@ a:hover .header-profile-image {
 
 #style2 {
   background-color: #F4F7D9;
+  z-index: -2;
 }
 
 #style {
@@ -123,10 +124,10 @@ a {
 }
 
 #banner {
-  height: 175px;
+  height: 200px;
   width: 100%;
   position: absolute;
-  bottom: 5%;
+  top: 67.5%;
   background-color: #6c6e58;
   z-index: -1;
   -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.85);
@@ -160,6 +161,10 @@ box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
   z-index: 2;
 }
 
+.top {
+  margin-bottom: 4%;  
+}
+
 #overlay {
   /*position: absolute;
   top: 40px; 
@@ -169,14 +174,17 @@ box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
   max-width: 40%;
   margin-right: 10%;
   margin-left: auto;
-  margin-bottom: 5%;  
   width: 100%;
   height: 100%;
   background-color: #F4F7D9;
-  opacity: 0.9;
+  opacity: 0.95;
   border: 1px solid #F4F7D9;
   border-radius: 10px;
-  margin-top: 5%; 
+  margin-top: 7.5%; 
+
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
 }
 #overlay-two {
   /*position: absolute;
@@ -232,7 +240,7 @@ box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
 
 #table-border {
   border: 1px solid #6c6e58;
-  background-color: #e3e5ca;
+  background-color: #CBE3D9;
 }
 
 #paragraph {
