@@ -86,10 +86,13 @@ exports.list = function (req, res) {
 };
 /*find food on usda database*/
 exports.returnFoods = function(req,res){
-  console.log('entered find Foods serverside ' + req.foodList);
-  if(req.foodlist){
+  //console.log('entered find Foods serverside ' + JSON.stringify(req.foodList));
+
+  if(!req.errorCode){
+    console.log('success on foodlist');
     res.json(req.foodList);
   }else{
+    console.log('fail => error code');
     res.json(req.errorCode);
   }
 

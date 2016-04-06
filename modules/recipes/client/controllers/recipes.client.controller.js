@@ -39,6 +39,13 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         nutrients: []
       }
     };
+
+    $scope.clearResults = function(){
+      $scope.apiError = false;
+      $scope.assestsLoaded = false;
+      $scope.usdaList = [];
+    };
+
     $scope.confirmIngredient = function(index){
       $scope.confirmed = $scope.usdaList.item[index];
       console.log($scope.confirmed);
@@ -244,18 +251,20 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
 
     $scope.findFoods = function(){
-      
-      Usda.food($scope.ingredients.item).then(function(result){
-        if(result !== 404){
-          $scope.usdaList = result;
-          $scope.assestsLoaded = true;
-          console.log('printing list ' + $scope.usdaList[0]);
-        }else{
-          $scope.usdaList = [];
-          $scope.assestsLoaded = true;
-          $scope.apiError = true;
-          console.log('error recieving list' + result.data);
-        }
+      return new Promise(function(resolve,reject){
+        resolve($http.get('/api/usda/' + $scope.ingredients.item).then(function(response){
+          if(response.data !== 404){
+            $scope.usdaList = response.data;
+            $scope.assestsLoaded = true;
+            $scope.apiError = false;
+            console.log('printing list ' + JSON.stringify(response));
+          }else{
+            $scope.usdaList = [];
+            $scope.assestsLoaded = true;
+            $scope.apiError = true;
+            console.log('error recieving list' + JSON.stringify(response.data));
+          }
+        }));
       });
     };
    

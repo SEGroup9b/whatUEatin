@@ -5,7 +5,7 @@ angular.module('recipes').factory('Usda', function($http){
   var Usda = {
     food: function(food){
       	var promiseA = $http.get('/api/usda/' + food).then(function(response){
-        console.log(response);
+        console.log('promise in service ' + JSON.stringify(response));
         return response.data;
       });
       return promiseA;
