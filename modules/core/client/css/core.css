@@ -35,3 +35,9 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+.table-scrolling {
+  max-height: 500px;
+  overflow: auto;
+  margin: 15px;
+
+}
