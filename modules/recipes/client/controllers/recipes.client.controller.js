@@ -86,6 +86,16 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       }
     };
 
+    //initialize 
+    $scope.initializeOrigIng = function() {
+      console.log($scope.recipe.orig_ing);
+      $scope.recipe.original_ingredients = [];
+      for(var i in $scope.orig_ing) {
+        $scope.recipe.original_ingredients[i] = $scope.recipe.orig_ing[i];
+      }
+      console.log($scope.recipe.original_ingredients);
+    };
+
     // Create new Recipe
     $scope.create = function (isValid) {
       $scope.error = null;
@@ -102,7 +112,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         orig_ing: [],//fill in array here
         instructions: this.instructions,
         servings: this.servings,
-        cook_time: this.cook_time
+        cook_time: this.cook_time,
       });
       console.log($scope.original_ingredients);
       console.log(recipe);
@@ -172,6 +182,24 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       $scope.recipe = Recipes.get({
         recipeId: $stateParams.recipeId
       });
+      // var promise = new Promise(function(resolve,reject){
+      //   var result = Recipes.get({
+      //     recipeId: $stateParams.recipeId
+      //   });
+      //   console.log('resolving result.');
+      //   resolve(result);
+      // });
+      // promise.then(function(response) {
+      //   console.log('console log PROMISE THEN is running.');
+      //   $scope.recipe = response;
+      //   $scope.original_ingredients = [];
+      //   for(var i in $scope.orig_ing) {
+      //     $scope.original_ingredients.push($scope.recipe.orig_ing[i]);
+      //   }
+      //   console.log($scope.original_ingredients);
+      // });
+
+      
     };
 
     // Called after the user selected a new picture file

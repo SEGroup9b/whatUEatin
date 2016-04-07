@@ -23,7 +23,7 @@
         <i class="glyphicon glyphicon-trash"></i>
       </a>
       <a class="btn btn-info" ng-click="">
-        <i class="glyphicon glyphicon-heart"> Healthify</i>
+        <i class="glyphicon glyphicon-heart" ui-sref="recipes.healthify({recipeId: recipe._id})"> Healthify</i>
       </a>
     </div>
   </div>
@@ -50,7 +50,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="ingredient in recipe.original_ingredients">
+          <tr ng-repeat="ingredient in recipe.orig_ing">
             <td>{{ingredient.quantity}}</td>
             <td>{{ingredient.unit}}</td>
             <td>{{ingredient.item}}</td>
