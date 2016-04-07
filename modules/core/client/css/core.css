@@ -39,7 +39,6 @@ a:hover .header-profile-image {
 .container {
   margin-right: auto;
   margin-left: auto;
-  padding: 0px;
 }
 @media (min-width: 768px) {
   .container {
@@ -375,7 +374,6 @@ box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
 
 #cattitle {
   margin-top: 4%;
-  margin-bottom: ;
 }
 
 h1 span {
