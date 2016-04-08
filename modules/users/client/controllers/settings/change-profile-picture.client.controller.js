@@ -1,9 +1,15 @@
 'use strict';
 
-angular.module('users').controller('ChangeProfilePictureController', ['$scope', '$timeout', '$window', 'Authentication', 'FileUploader',
-  function ($scope, $timeout, $window, Authentication, FileUploader) {
+angular.module('users').controller('ChangeProfilePictureController', ['$scope', '$timeout', '$window', 'Authentication', 'FileUploader', '$http',
+  function ($scope, $timeout, $window, Authentication, FileUploader, $http) {
     $scope.user = Authentication.user;
     $scope.imageURL = $scope.user.profileImageURL;
+
+
+
+
+        //document.getElementById("displayNameDisplay").innerHTML = displayName;
+
 
     // Create file uploader instance
     $scope.uploader = new FileUploader({
@@ -20,6 +26,8 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
       }
     });
 
+
+
     // Called after the user selected a new picture file
     $scope.uploader.onAfterAddingFile = function (fileItem) {
       if ($window.FileReader) {
@@ -29,6 +37,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
         fileReader.onload = function (fileReaderEvent) {
           $timeout(function () {
             $scope.imageURL = fileReaderEvent.target.result;
+            console.log($scope.imageURL);
           }, 0);
         };
       }
@@ -68,6 +77,36 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
     $scope.cancelUpload = function () {
       $scope.uploader.clearQueue();
       $scope.imageURL = $scope.user.profileImageURL;
+    };
+
+    $scope.loadpic = function() {
+
+      console.log('this happens');
+
+    };
+
+    $scope.edUploadUserPic = function(url){
+      //console.log(url);
+      console.log('first half runs');
+      /*recipe.$update(function () {
+        $location.path('recipes/' + recipe._id);
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });*/
+      //console.log($scope.user._id);
+      //console.log($scope.imageURL);
+     // console.log(document.getElementById("bobby").value);
+     //console.log(document.getElementById('bobby').value);
+      //document.getElementById('bobby').src ="model.jpg"
+
+     
+
+
+      $http.post('/api/users/picture',{ user_id: $scope.user._id, pic: $scope.imageURL });
+     
+      //console.log(response.length);
+      
+      //console.log(JSON.stringify(response));
     };
   }
 ]);

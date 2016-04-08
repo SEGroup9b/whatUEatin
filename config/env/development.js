@@ -2,7 +2,16 @@
 
 var defaultEnvConfig = require('./default');
 
+
+
+
+
 module.exports = {
+  awscred:{
+    accessKeyId: 'AKIAI5HZP64VOLMZOHFA',
+    secretAccessKey: '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',
+    region: 'us-east-1'
+  },
   db: {
     uri: 'mongodb://zavum:koolkittykat@ds011278.mongolab.com:11278/logincredentials',
     options: {
