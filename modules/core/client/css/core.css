@@ -37,29 +37,31 @@ a:hover .header-profile-image {
 }
 
 .container {
-  margin-right: auto;
-  margin-left: auto;
+  margin-right: 0;
+  margin-left: 0;
   padding: 0px;
 }
 @media (min-width: 768px) {
   .container {
-    //width: 750px;
-    width: 100%;
+    width: 750px;
   }
 }
 @media (min-width: 992px) {
   .container {
-    //width: 970px;
-    width: 100%;
+    width: 970px;
   }
 }
 @media (min-width: 1200px) {
   .container {
-    //width: 1170px;
-    width: 100%;
+    width: 1170px;
   }
 }
 @media (min-width: 1360px) {
+  .container {
+    width: 100%;
+  }
+}
+@media (min-width: 1400px) {
   .container {
     width: 100%;
   }
@@ -86,7 +88,7 @@ a:hover .header-profile-image {
 }
 
 #style2 {
-  background-color: #F4F7D9;
+  /*background-color: #F4F7D9;*/
   z-index: -2;
 }
 
@@ -127,7 +129,10 @@ a {
 }
 
 #banner {
-  height: 200px;
+  margin-bottom:3%;
+  margin-left: 0;
+  margin-right: 0;
+  height: 225px;
   width: 100%;
   position: absolute;
   top: 67.5%;
@@ -144,6 +149,8 @@ a {
   left: 5%;
   border:1px;
   border-radius: 100px;
+  max-height: 400px;
+  max-width: 400px;
   width: 30%;
   height: 40%;
   -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
@@ -337,4 +344,57 @@ box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
   max-height: 400px;
   overflow: auto;
   margin: 15px; 
+}
+
+#homecat {
+  background-color: #F4F7D9;
+  border: 1px solid #F4F7D9;
+  border-radius: 10px;
+  margin-right: 2%;
+  margin-left: 2%;
+  margin-bottom: 2%;
+}
+
+#cat1 {
+  height: 90%;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto; 
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+#cat2 {
+  height: 90%;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto; 
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+#cat3 {
+  height: 90%;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto; 
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+#cattitle {
+  margin-top: 4%;
+}
+
+h1 span {
+  color: #F4F7D9; 
+  font: bold 52px/75px Helvetica, Sans-Serif; 
+  letter-spacing: -1px;  
+  background: rgb(25, 23, 24); /* fallback color */
+  background: rgba(25, 23, 24, 0.85);
+  padding: 10px; 
+
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
 }
