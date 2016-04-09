@@ -1,42 +1,64 @@
-<section ng-controller="RecipesController" ng-init="find()">
+<section ng-controller="RecipesController" ng-init="findOne()">
   <div class="page-header">
     <h1>Recipe Healthification</h1>
   </div>
   
   <div class="row">
-    <div class="col-md-5">
-      <h3>Original Ingredients</h3>
-        
-      <!-- ng repeat by the amount of ingredients -->
-      <!-- this is for each of these columns -->
-        
-        
-    </div>
-    <div class="col-md-2">
-      <h3>Parameters</h3>
-        <div class="form-group">
-          <select class="form-control" name="nutrients" ng-model="options.nutrients">
-          <!-- this right hurr is a drop down box with the nutrient names -->
-          </select>
-        </div>
-        <div class="form-group">
-          <input name="minimize" id="minimize" type="checkbox" checked="checked">
-          <!-- this checkbox determines whether we're finding alt ingredients that are greater/less than the current nutrient val -->
-          Minimize
-          </input>
-        </div>
-    </div>
-    <div class="col-md-5">
-      <h3>Alternative Ingredients</h3>
     
-    
-    
-    
-      <!-- display the health ingredients -->
-    
-    
-    </div>
   </div>
+
+  <div class="row">
+    <table id="ingredient_data_table" class="table table-striped">
+      <thead>
+        <tr>
+          <td>
+            <h3>Original Ingredients</h3>
+          </td>
+          <td>
+            <h3>Parameters</h3>
+          </td>
+          <td>
+            <h3>Max?</h3>
+          </td>
+          <td>
+            <!--this is where button goes-->
+          </td>
+          <td>
+            <h3>Alternative Ingredients</h3>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ng repeat by the amount of ingredients -->
+        <tr ng-repeat="ingredient in recipe.orig_ing">
+          <!-- this is for each of these columns -->
+          <td>{{ingredient.item}}</td>
+          <td>
+            <select name="nutrients" ng-model="options.nutrients">
+              <!-- this right hurr is a drop down box with the nutrient names -->
+            </select>
+          </td>
+          <td>
+            <input name="minimize" id="minimize" type="checkbox" checked="checked">
+              <!-- this checkbox determines whether we're finding alt ingredients that are greater/less than the current nutrient val -->
+            </input>
+          </td>
+          <td>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-success" ng-click="">
+                <span class="glyphicon glyphicon-arrow-right"></span>
+              </button>
+            </span>
+          </td>
+          <td>
+            {{ingredient.item}}
+            <!-- display the health ingredients -->
+          </td>
+        </tr>
+      </tbody>  
+    </table>
+  </div>
+  
   <div class="row">
     <h3>Healthification Statistics</h3>
       <table id="stats_table">

@@ -29,6 +29,12 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/recipes/:recipeId',
       permissions: ['get']
+    }, {
+      resources: '/api/usda/:food',
+      permissions: ['get']
+    }, {
+      resources: '/api/usda/foodReport/:ndbno',
+      permissions: ['get']
     }]
   }, {
     roles: ['guest'],
@@ -39,7 +45,8 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/recipes/:recipeId',
       permissions: ['get']
     }]
-  }]);
+  }
+  ]);
 };
 
 /**
