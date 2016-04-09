@@ -131,6 +131,22 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-md-8 col-md-offset-1">
+        <div>
+          <label for="allergies">Allergies</label>
+        </div>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="nuts">Nut Allergy</label>        
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="eggs">Eggs Allergy</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="dairy">Dairy Allergy</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="fish">Fish Allergy</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="wheat">Wheat Allergy</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="soy">Soy Allergy</label>
+
+      </div>
+    </div>
+
+
+    <div class="row">
       <div class="col-md-2 col-md-offset-1">
         <input value="Submit Recipe!" type="submit" class="btn btn-default">
       </div>
@@ -139,6 +155,7 @@
       <strong ng-bind="error"></strong>
     </div>
   </form>
+
 
 
   <footer class="modal-footer modal-footer-center" id="style">

@@ -27,6 +27,14 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     $scope.ingredientNumber = 0;
     $scope.apiError = false;
 
+    /*Allergy Initializations */
+    $scope.nuts = false;
+    $scope.eggs = false;
+    $scope.fish = false;
+    $scope.dairy = false;
+    $scope.wheat = false;
+    $scope.soy = false;
+
     $scope.ingredients = {
       item: '',
       quantity: 0,
@@ -118,7 +126,18 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         orig_ing: [],//fill in array here
         instructions: this.instructions,
         servings: this.servings,
-        cook_time: this.cook_time
+        cook_time: this.cook_time,
+        tags: {
+          allergies: {
+            nuts: $scope.nuts,
+            eggs: $scope.eggs,
+            fish: $scope.fish,
+            dairy: $scope.dairy,
+            wheat: $scope.wheat,
+            soy: $scope.soy
+          },
+          health_concerns: []
+        }
       });
       console.log($scope.original_ingredients);
       console.log(recipe);
@@ -137,6 +156,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         $scope.title = '';
         $scope.directions = '';
       }, function (errorResponse) {
+        console.log('error response function called anyways');
         $scope.error = errorResponse.data.message;
       });
     };
