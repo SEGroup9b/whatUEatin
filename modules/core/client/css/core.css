@@ -106,6 +106,9 @@ a:hover .header-profile-image {
 a {
   color: #F4F7D9;
 }
+a:hover {
+  color: #d6d6d6;
+}
 
 #logo {
   border: 1px solid #fff;
@@ -132,10 +135,11 @@ a {
   margin-bottom:3%;
   margin-left: 0;
   margin-right: 0;
-  height: 225px;
+  height: 100%;
+  max-height: 225px;
   width: 100%;
   position: absolute;
-  top: 67.5%;
+  top: 425px;
   background-color: #6c6e58;
   z-index: -1;
   -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.85);
@@ -145,7 +149,7 @@ a {
 
 #food {
   position: absolute;
-  top: 40%;
+  top: 285px;
   left: 5%;
   border:1px;
   border-radius: 100px;
@@ -184,8 +188,8 @@ box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
   max-width: 40%;
   margin-right: 10%;
   margin-left: auto;
-  width: 100%;
-  height: 100%;
+  width: 600px;
+  height: 375px;
   background-color: #F4F7D9;
   opacity: 0.95;
   border: 1px solid #F4F7D9;
