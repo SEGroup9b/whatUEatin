@@ -5,40 +5,29 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
     // This provides Authentication context.
     $scope.authentication = Authentication;
     //For categories and filtering by category
-    $scope.filter = '';
-    $scope.categories = [];
+    $scope.currentCategory = {
+      name: 'All',
+      tag: 'all'
+    };
+    $scope.recipes = [];
 
     //Adjusts the current filter
     $scope.adjustFilter = function(index) {
       console.log($scope.categories[index]);
-      $scope.filter = $scope.categories[index];
-      $scope.find();
-      console.log('Adjusting tag to ' + $scope.filter.tag);
+      $scope.currentCategory = $scope.categories[index];
+      console.log('Adjusting tag to ' + $scope.currentCategory.tag);
 
-      if ($scope.filter.tag === '') {
+      if ($scope.currentCategory.tag === 'all') {
+        $scope.recipes = $scope.allRecipes;
         return;
       } else {
-        var filteredRecipes = [];
         for (var i = $scope.recipes.length - 1; i >= 0; i--) {
-          if ($scope.recipes[i].tags.allergies.indexOf($scope.filter.tag) > -1 && $scope.recipes[i].tags.health_concerns.indexOf($scope.filter.tag) > -1){
-            filteredRecipes.push($scope.recipes[i]);
+          if ($scope.allRecipes[i].tags.allergies.indexOf($scope.currentCategory.tag) > -1 || $scope.allRecipes[i].tags.health_concerns.indexOf($scope.currentCategory.tag) > -1){
+            $scope.recipes.push($scope.allRecipes[i]);
           }
         }
-        $scope.recipes = filteredRecipes;
       }
     };
-//     // Find a list of recipes and categories
-//     $scope.find = function () {
-//       $scope.recipes = Recipes.query();
-//     };
-//     // Find existing recipes
-//     $scope.findOne = function () {
-//       $scope.recipes = Recipes.get({
-//         recipeId: $stateParams.recipeId
-//       });
-//     };
-//   }
-// ]);
 
     // Create new Category
     $scope.create = function (isValid) {
@@ -58,7 +47,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
 
       // Redirect after save
       category.$save(function (response) {
-        $location.path('categories/' + response._id);
+        $location.path('categories');
 
         // Clear form fields
         $scope.name = '';
@@ -98,7 +87,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
       var category = $scope.category;
 
       category.$update(function () {
-        $location.path('categories/list');
+        $location.path('categories');
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -109,10 +98,6 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
       $scope.categories = Categories.query();
     };
 
-    $scope.findRecipes = function() {
-      $scope.recipes = Recipes.query();
-    };
-
     // Find existing Category
     $scope.findOne = function () {
       $scope.category = Categories.get({
@@ -120,8 +105,9 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
       });
     };
 
-    $scope.recipes = Recipes.get({
-      recipeId: $stateParams.recipeId
-    });
+    $scope.findRecipes = function() {
+      $scope.allRecipes = Recipes.query();
+      $scope.recipes = $scope.allRecipes;
+    };
   }
 ]);
