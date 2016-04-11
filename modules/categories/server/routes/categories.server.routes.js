@@ -10,7 +10,8 @@ module.exports = function (app) {
   // Categories collection routes
   app.route('/api/categories').all(categoriesPolicy.isAllowed)
     .get(categories.list)
-    .post(categories.create);
+    .post(categories.create)
+    .delete(categories.delete);
 
   // Single category routes
   app.route('/api/categories/:categoryId').all(categoriesPolicy.isAllowed)

@@ -13,7 +13,6 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
 
     //Adjusts the current filter
     $scope.adjustFilter = function(index) {
-      console.log($scope.categories[index]);
       $scope.currentCategory = $scope.categories[index];
       console.log('Adjusting tag to ' + $scope.currentCategory.tag);
 
@@ -59,6 +58,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
 
     // Remove existing Category
     $scope.remove = function (category) {
+      console.log(category);
       if (category) {
         category.$remove();
 
@@ -69,7 +69,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
         }
       } else {
         $scope.category.$remove(function () {
-          $location.path('categories');
+          $location.path('');
         });
       }
     };
