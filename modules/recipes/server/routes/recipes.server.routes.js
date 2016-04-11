@@ -12,11 +12,15 @@ module.exports = function (app) {
     .get(recipes.list)
     .post(recipes.create);
 
+    //app.route('/api/recipes/create').post(recipes.edUploadPic);
+    // app.route('/api/users/picture').post(users.edCreateBucket);
+
   // Single recipe routes
   app.route('/api/recipes/:recipeId').all(recipesPolicy.isAllowed)
     .get(recipes.read)
     .put(recipes.update)
-    .delete(recipes.delete);
+    .delete(recipes.delete)
+    .post(recipes.edUploadPic);
   app.route('/api/usda/:food').get(recipes.returnFoods);
 
   app.route('/api/usda/foodReport/:ndbno').get(recipes.returnFoodReport);

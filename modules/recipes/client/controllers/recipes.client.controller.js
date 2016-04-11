@@ -146,7 +146,8 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         recipe.orig_ing.push($scope.original_ingredients[i]);
         
       }
-      console.log(recipe);
+
+      //console.log
 
       // Redirect after save
       recipe.$save(function (response) {
@@ -155,6 +156,10 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         // Clear form fields
         $scope.title = '';
         $scope.directions = '';
+        console.log(recipe._id);
+        console.log(recipe.imageURL);
+        $scope.edUploadRecipePic(recipe);
+        console.log(recipe.imageURL);
       }, function (errorResponse) {
         console.log('error response function called anyways');
         $scope.error = errorResponse.data.message;
@@ -207,6 +212,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       console.log($stateParams.recipeId);
       $scope.recipe = Recipes.get({
         recipeId: $stateParams.recipeId
+        //this is when i'll do it
       });
     };
 
@@ -219,6 +225,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         fileReader.onload = function (fileReaderEvent) {
           $timeout(function () {
             $scope.imageURL = fileReaderEvent.target.result;
+
           }, 0);
         };
       }
@@ -252,6 +259,17 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
       // Start upload
       $scope.uploader.uploadAll();
+    };
+
+    $scope.edUploadRecipePic = function (passedRecipe){
+      console.log('first half runs');
+
+     // console.log(passedRecipe._id);
+      //console.log($scope.recipe.recipeImgURL);
+      //console.log($scope.imageURL);
+      $http.post('/api/recipes/'+passedRecipe._id,{ _id: passedRecipe._id, pic: $scope.imageURL });
+
+
     };
 
     // Cancel the upload process
