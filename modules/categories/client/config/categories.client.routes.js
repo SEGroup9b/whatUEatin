@@ -18,7 +18,6 @@ angular.module('categories').config(['$stateProvider',
         url: '/create',
         templateUrl: 'modules/categories/client/views/create-categorie.client.view.html',
         data: {
-<<<<<<< Updated upstream
           roles: ['admin', 'user']
         }
       })
@@ -27,16 +26,6 @@ angular.module('categories').config(['$stateProvider',
         templateUrl: 'modules/categories/client/views/edit-categorie.client.view.html',
         data: {
           roles: ['admin', 'user']
-=======
-          roles: ['admin']
-        }
-      })
-      .state('categories.edit', {
-        url: '/:categorieId/edit',
-        templateUrl: 'modules/categories/client/views/edit-categorie.client.view.html',
-        data: {
-          roles: ['admin']
->>>>>>> Stashed changes
         }
       });
   }
