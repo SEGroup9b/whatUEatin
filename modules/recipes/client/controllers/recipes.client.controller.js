@@ -269,6 +269,12 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       });
     }
 
+    // $scope.findAlternatives = function() {
+    //   var promise = new Promise(function(resolve,reject){
+    //     resolve($http.get('/api/usda/healthify/...' + $scope.confirmed.ndbno).then(function(response){return response.data;}));
+    //   });
+    // };
+
 
     $scope.findFoods = function(){
       return new Promise(function(resolve,reject){
