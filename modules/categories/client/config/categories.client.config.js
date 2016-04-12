@@ -21,11 +21,7 @@ angular.module('categories').run(['Menus',
     Menus.addSubMenuItem('topbar', 'categories', {
       title: 'Create Categories',
       state: 'categories.create',
-<<<<<<< Updated upstream
       roles: ['admin', 'user']
-=======
-      roles: ['user']
->>>>>>> Stashed changes
     });
   }
 ]);

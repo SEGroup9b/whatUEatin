@@ -7,26 +7,18 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
-<<<<<<< Updated upstream
  * Category Schema
  */
 var CategorySchema = new Schema({
-=======
- * Categorie Schema
- */
-var CategorieSchema = new Schema({
->>>>>>> Stashed changes
   created: {
     type: Date,
     default: Date.now
   },
-<<<<<<< Updated upstream
   name: String,
   tag: String
 });
 
 mongoose.model('Category', CategorySchema);
-=======
   title: {
     type: String,
     default: '',
@@ -43,6 +35,3 @@ mongoose.model('Category', CategorySchema);
     ref: 'User'
   }
 });
-
-mongoose.model('Categorie', CategorieSchema);
->>>>>>> Stashed changes
