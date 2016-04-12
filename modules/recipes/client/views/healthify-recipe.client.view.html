@@ -30,7 +30,7 @@
             {{ingredient.item}}
           </td>
           <td>
-            <select name="nutrients" ng-model="options.nutrients">
+            <select name="nutrients" ng-model="parameters[$index]">
               <!-- this right hurr is a drop down box with the nutrient names -->
               <option data-tokens="255">water</option>
               <option data-tokens="208">energy</option>
@@ -47,13 +47,13 @@
             </select>
           </td>
           <td>
-            <input name="minimize" id="minimize" type="checkbox">
+            <input name="minimize" ng-model="min_check[$index]" id="minimize" type="checkbox">
               <!-- this checkbox determines whether we're finding alt ingredients that are greater/less than the current nutrient val -->
             </input>
           </td>
           <td>
             <span class="input-group-btn">
-             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="" > <!--findFoods()-->
+             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="findAlternatives($index, ingredient)" > <!--findFoods()-->
                 <span class="glyphicon glyphicon-arrow-right"></span>
               </button>
             </span>
@@ -66,7 +66,7 @@
     </table>
   </div>
 
-   <div id="myModal" class="modal fade" role="dialog">
+<div id="myModal" class="modal fade" role="dialog">
    <div class="modal-dialog">
  
      <!-- Modal content-->
@@ -86,19 +86,13 @@
        <div class="modal-footer">
          <span>Your Ingredient Is: {{confirmed.name}}</span>
          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="">Okay!</button> <!--addIngredientLine()-->
-       </div>
-     </div>
- 
-   </div>
- </div>
-    
-    
-    
-      <!-- display the health ingredients -->
-    
-    
+      </div>
     </div>
+ 
   </div>
+</div>
+    
+    
   <div class="row">
     <h3>Healthification Statistics</h3>
       <table id="stats_table">

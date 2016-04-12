@@ -27,6 +27,11 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     $scope.ingredientNumber = 0;
     $scope.apiError = false;
 
+    //initialize healthify stuff
+    $scope.min_check = [];
+    $scope.parameters = [];
+    $scope.healthify_ingredients = [];
+
     /*Allergy Initializations */
     $scope.nuts = false;
     $scope.eggs = false;
@@ -269,11 +274,21 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       });
     }
 
-    // $scope.findAlternatives = function() {
-    //   var promise = new Promise(function(resolve,reject){
-    //     resolve($http.get('/api/usda/healthify/...' + $scope.confirmed.ndbno).then(function(response){return response.data;}));
-    //   });
-    // };
+    $scope.findAlternatives = function(index, ingredient) {
+      //console.log($scope.min_check);
+      //console.log($scope.parameters[index]);
+      var ingredient_info = {
+        parameter: $scope.parameters[index],
+        check: $scope.min_check[index],
+        ingredient: ingredient.item
+      };
+
+      console.log(ingredient_info);
+
+      // var promise = new Promise(function(resolve,reject){
+      //   resolve($http.get('/api/usda/healthify/' + $scope.confirmed.ndbno).then(function(response){return response.data;}));
+      // });
+    };
 
 
 
