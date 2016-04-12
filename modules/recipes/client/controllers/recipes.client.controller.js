@@ -127,6 +127,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         instructions: this.instructions,
         servings: this.servings,
         cook_time: this.cook_time,
+        imgURL: '5',
         tags: {
           allergies: {
             nuts: $scope.nuts,
@@ -268,6 +269,17 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       //console.log($scope.recipe.recipeImgURL);
       //console.log($scope.imageURL);
       $http.post('/api/recipes/'+passedRecipe._id,{ _id: passedRecipe._id, pic: $scope.imageURL });
+
+      var recipe = passedRecipe;
+
+      recipe.imgURL = 'https://s3.amazonaws.com/finalrecipepictures/'+passedRecipe._id+'.jpg';
+
+      recipe.$update(function () {
+        $location.path('recipes/' + recipe._id);
+      }, function (errorResponse) {
+        console.log('screwed');
+        $scope.error = errorResponse.data.message;
+      });
 
 
     };

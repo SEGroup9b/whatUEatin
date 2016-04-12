@@ -34,7 +34,8 @@ exports.create = function (req, res) {
 
 exports.edUploadPic = function(req,res){
   console.log(config.awscred);
-  var dataURL = req.body.pic;
+
+  /*var dataURL = req.body.pic;
   var newURL = '';
 
   //console.log(req.body.pic);
@@ -60,9 +61,10 @@ exports.edUploadPic = function(req,res){
     }
   });
 
-  var recipe = req.recipe;
-  recipe.imageURL = ('https://s3.amazonaws.com/finalrecipepictures/'+req.body._id+'.jpg');
+ 
+  var imageURL = ('https://s3.amazonaws.com/finalrecipepictures/'+req.body._id+'.jpg');*/
     
+   
 };
 
 /**
@@ -73,6 +75,7 @@ exports.read = function (req, res) {
 };
 
 /**
+
  * Update a recipe
  */
 exports.update = function (req, res) {
@@ -80,6 +83,7 @@ exports.update = function (req, res) {
 
   recipe.title = req.body.title;
   recipe.directions = req.body.directions;
+  recipe.imgURL = req.body.imgURL;
 
   recipe.save(function (err) {
     if (err) {
