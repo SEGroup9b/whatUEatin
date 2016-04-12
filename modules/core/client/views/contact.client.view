@@ -1,13 +1,13 @@
 <section ng-controller="HomeController">
-  <div class="jumbotron">
+  <div class="jumbotron" id="style">
 
-    <div class="row">
+    <div class="row" id="style">
       <header class="text-center">
         <h2 id="aboutheader"> Contact Us </h2>
       </header>
     </div>
 
-    <div class="row">
+    <div class="row" id="style">
       <div class="col-md-5 panel panel-default contact-panel">
         <h2 class="text-center">Administrator</h2>
         <p><strong>Wanda Eugene</strong> </br>
@@ -23,7 +23,7 @@
       <div class="col-md-6 panel panel-default contact-panel">
         <h2 class="text-center">Dev Team</h2>
         <p><strong>Ben Hammack:</strong> bhammack@ufl.edu <br>
-          <strong>Conor Doherty:</strong> <br>
+          <strong>Conor Doherty:</strong> conor.doherty@ufl.edu<br>
           <strong>Dakota Funchess:</strong> dfunchess@ufl.edu <br>
           <strong>Ed Tischler:</strong> etischler@ufl.edu <br>
           <strong>Madeleine Monfort:</strong> mlmonfort95@gmail.com <br>
@@ -32,13 +32,9 @@
       </div>
     </div>
   </div>
-<br>
-<br>
-<br>
-  <footer class="modal-footer modal-footer-center">
+  <footer class="modal-footer modal-footer-center" id="style">
     <a ui-sref="contact" class="footer">Contact Us</a>
     <a ui-sref="about" class="footer">About</a>
     <a ui-sref="mission" class="footer">Our Mission</a>
   </footer>
-<br>
 </section>

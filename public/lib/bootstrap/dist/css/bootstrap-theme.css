@@ -118,7 +118,7 @@ fieldset[disabled] .btn-default.active {
   background-image: -webkit-linear-gradient(top, #6aff17 0%, #4dd900 100%);
   background-image: -o-linear-gradient(top, #6aff17 0%, #4dd900 100%);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#6aff17), to(#4dd900));
-  background-image: linear-gradient(to bottom, #4dd900 0%, #22AA22 100%);
+  background-image: linear-gradient(to bottom, #4dd900 0%, #37DB37 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff6aff17', endColorstr='#ff4dd900', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;

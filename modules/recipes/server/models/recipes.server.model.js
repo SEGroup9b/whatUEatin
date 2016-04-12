@@ -51,7 +51,7 @@ var recipeSchema = new Schema({
     }
   }],
   
-  // Original ingredients
+  // Healthy ingredients
   healthy_ing: [{
     item: String,
     quantity: Number,
@@ -73,6 +73,10 @@ var recipeSchema = new Schema({
   //recipe image
   recipeImgURL: {
     type: String,
+  },
+  displayName: {
+    type: String,
+    trim: true
   },
 
   //book-keeping
