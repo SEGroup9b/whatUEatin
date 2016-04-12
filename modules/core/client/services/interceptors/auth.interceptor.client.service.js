@@ -5,7 +5,6 @@ angular.module('core').factory('authInterceptor', ['$q', '$injector',
     return {
       responseError: function(rejection) {
         if (!rejection.config.ignoreAuthModule) {
-          console.log(rejection.status);
           switch (rejection.status) {
             case 401:
               $injector.get('$state').transitionTo('authentication.signin');

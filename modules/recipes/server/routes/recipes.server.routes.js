@@ -17,9 +17,9 @@ module.exports = function (app) {
     .get(recipes.read)
     .put(recipes.update)
     .delete(recipes.delete);
-  app.route('/api/usda/:food').all(recipesPolicy.isAllowed).get(recipes.returnFoods);
+  app.route('/api/usda/:food').get(recipes.returnFoods);
 
-  app.route('/api/usda/foodReport/:ndbno').all(recipesPolicy.isAllowed).get(recipes.returnFoodReport);
+  app.route('/api/usda/foodReport/:ndbno').get(recipes.returnFoodReport);
 
   app.route('/api/usda/healthify/:foodObject').get(recipes.returnAlternatives);
 

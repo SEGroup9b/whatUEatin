@@ -110,16 +110,6 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       }
     };
 
-    //initialize 
-    $scope.initializeOrigIng = function() {
-      console.log($scope.recipe.orig_ing);
-      $scope.recipe.original_ingredients = [];
-      for(var i in $scope.orig_ing) {
-        $scope.recipe.original_ingredients[i] = $scope.recipe.orig_ing[i];
-      }
-      console.log($scope.recipe.original_ingredients);
-    };
-
     // Create new Recipe
     $scope.create = function (isValid) {
       $scope.error = null;
@@ -218,24 +208,6 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       $scope.recipe = Recipes.get({
         recipeId: $stateParams.recipeId
       });
-      // var promise = new Promise(function(resolve,reject){
-      //   var result = Recipes.get({
-      //     recipeId: $stateParams.recipeId
-      //   });
-      //   console.log('resolving result.');
-      //   resolve(result);
-      // });
-      // promise.then(function(response) {
-      //   console.log('console log PROMISE THEN is running.');
-      //   $scope.recipe = response;
-      //   $scope.original_ingredients = [];
-      //   for(var i in $scope.orig_ing) {
-      //     $scope.original_ingredients.push($scope.recipe.orig_ing[i]);
-      //   }
-      //   console.log($scope.original_ingredients);
-      // });
-
-      
     };
 
     // Called after the user selected a new picture file
@@ -296,11 +268,6 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         
       });
     }
-
-    $scope.findAlternatives = function() {
-      var promise = new Promise(function(resolve,reject){
-        resolve($http.get('/api/usda/healthify/...' + $scope.confirmed.ndbno).then(function(response){return response.data;}));
-    };
 
 
     $scope.findFoods = function(){
