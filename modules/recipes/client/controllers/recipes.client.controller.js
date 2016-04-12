@@ -2,8 +2,8 @@
 //var nutrify = require('nutrify.js');
 
 // Recipes controller
-angular.module('recipes').controller('RecipesController', ['$scope', '$stateParams', '$timeout', '$location', '$window', 'Authentication', 'FileUploader', 'Recipes',
-  function ($scope, $stateParams, $timeout, $location, $window, Authentication, FileUploader, Recipes) {
+angular.module('recipes').controller('RecipesController', ['$http','$scope', '$stateParams', '$timeout', '$location', '$window', 'Authentication', 'FileUploader', 'Recipes','Usda',
+  function ($http,$scope, $stateParams, $timeout, $location, $window, Authentication, FileUploader, Recipes,Usda) {
     $scope.authentication = Authentication;
     //$scope.imageURL = $scope.recipe.recipeImgURL;
     
@@ -23,17 +23,51 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
     });
 
     $scope.original_ingredients = [];
+
     $scope.ingredients = {
-      quantity: null,
-      unit: 'tbsp',
-      item: ''
+      item: '',
+      quantity: 0,
+      unit: '',
+      food_item: {
+        name: '',
+        ndbno: 0,
+        group: '',
+        manu: '',
+        nutrients: []
+      }
+    };
+    $scope.confirmIngredient = function(index){
+
+      $scope.confirmed = $scope.usdaList.item[index];
+      console.log($scope.confirmed);
     };
 
     $scope.addIngredientLine = function () {
-      //maybe check if previous ingredient filled out
-      console.log($scope.ingredients.item,$scope.ingredients.unit,$scope.ingredients.quantity);
-      $scope.original_ingredients.push($scope.ingredients);
-      $scope.ingredients={};
+      
+      console.log('Adding Ingredient Line');
+      $scope.ingredients.food_item.name = $scope.confirmed.name;
+      $scope.ingredients.food_item.ndbno = $scope.confirmed.ndbno;
+      $scope.ingredients.food_item.group = $scope.confirmed.group;
+      findFoodReport().then(function(result){
+        console.log(' addIngredientLine log ' + JSON.stringify(result));
+        $scope.ingredients.food_item.nutrients = result.nutrients;
+        $scope.original_ingredients.push($scope.ingredients);
+          //reset the input values
+        $scope.ingredients = {
+          item: '',
+          quantity: 0,
+          unit: '',
+          food_item: {
+            name: '',
+            ndbno: 0,
+            group: '',
+            manu: '',
+            nutrients: []
+          }
+        };
+        console.log($scope.original_ingredients);
+      });
+      
       
     };
 
@@ -46,30 +80,23 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
 
         return false;
       }
-      //$scope.populateArr();
 
       // Create new Recipe object
       var recipe = new Recipes({
         title: this.title,
-        original_ingredients: [{}],//fill in array here
+        orig_ing: [],//fill in array here
         instructions: this.instructions,
         servings: this.servings,
         cook_time: this.cook_time
       });
       console.log($scope.original_ingredients);
       console.log(recipe);
-      for(var i=0;i <$scope.original_ingredients.length;i++){
-      /*  
-      var ingredient = {
-          quantity: $scope.original_ingredients[i].quantity,
-          unit: $scope.original_ingredients[i].unit,
-          item: $scope.original_ingredients[i].item
-        };*/
-        //console.log(ingredient);
-        recipe.original_ingredients.push($scope.original_ingredients[i]);
-        console.log(recipe);
+      for(var i=0;i < $scope.original_ingredients.length; i++){
+
+        recipe.orig_ing.push($scope.original_ingredients[i]);
+        
       }
-      
+      console.log(recipe);
 
       // Redirect after save
       recipe.$save(function (response) {
@@ -126,6 +153,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
 
     // Find existing Recipe
     $scope.findOne = function () {
+      console.log($stateParams.recipeId);
       $scope.recipe = Recipes.get({
         recipeId: $stateParams.recipeId
       });
@@ -180,5 +208,24 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
       $scope.uploader.clearQueue();
       $scope.imageURL = $scope.recipe.recipeImgURL;
     };
+
+
+    function findFoodReport() {
+      
+      return new Promise(function(resolve,reject){
+        resolve($http.get('/api/usda/foodReport/' + $scope.confirmed.ndbno).then(function(response){return response.data;}));
+        
+      });
+    }
+
+
+    $scope.findFoods = function(){
+      
+      Usda.food($scope.ingredients.item).then(function(result){
+        $scope.usdaList = result;
+        console.log('printing list ' + $scope.usdaList[0]);
+      });
+    };
+   
   }
 ]);

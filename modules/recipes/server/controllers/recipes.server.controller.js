@@ -6,8 +6,8 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Recipe = mongoose.model('Recipe'),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
-
+  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  nutrify = require(path.resolve('./modules/recipes/server/controllers/nutrify.js'));
 /**
  * Create a recipe
  */
@@ -84,6 +84,16 @@ exports.list = function (req, res) {
     }
   });
 };
+/*find food on usda database*/
+exports.returnFoods = function(req,res){
+  console.log('entered find Foods serverside ' + req.foodList);
+  res.json(req.foodList);
+
+};
+exports.returnFoodReport = function(req,res){
+  console.log('findFoodReport serverside entered ' + req.nutrients);
+  res.json(req.nutrients);
+};
 
 /**
  * Recipe middleware
@@ -108,3 +118,21 @@ exports.recipeByID = function (req, res, next, id) {
     next();
   });
 };
+exports.getFoodReport = function(req,res,next,ndbno){
+  console.log('Get food report middleware ' + ndbno);
+  nutrify.food_report(ndbno).then(function(result){
+    req.nutrients = result;
+    console.log(result + ' ' + result.nutrients);
+    next();
+  });
+};
+exports.getName = function(req,res,next,name){
+  console.log('printing body ' + name);
+  nutrify.find_foods(name,'').then(function(result){
+    console.log(result);
+    req.foodList = result;
+    next();
+  });
+  
+};
+

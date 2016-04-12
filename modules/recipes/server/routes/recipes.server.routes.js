@@ -17,7 +17,12 @@ module.exports = function (app) {
     .get(recipes.read)
     .put(recipes.update)
     .delete(recipes.delete);
+  app.route('/api/usda/:food').get(recipes.returnFoods);
+
+  app.route('/api/usda/foodReport/:ndbno').get(recipes.returnFoodReport);
 
   // Finish by binding the recipe middleware
   app.param('recipeId', recipes.recipeByID);
+  app.param('food',recipes.getName);
+  app.param('ndbno', recipes.getFoodReport);
 };
