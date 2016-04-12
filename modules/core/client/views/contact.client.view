@@ -1,5 +1,5 @@
 <section ng-controller="HomeController">
-  <div class="jumbotron" id="style">
+  <div class="jumbotron" id="style" style="margin: 0px;">
 
     <div class="row" id="style">
       <header class="text-center">
@@ -32,9 +32,9 @@
       </div>
     </div>
   </div>
-  <footer class="modal-footer modal-footer-center" id="style">
-    <a ui-sref="contact" class="footer">Contact Us</a>
-    <a ui-sref="about" class="footer">About</a>
-    <a ui-sref="mission" class="footer">Our Mission</a>
-  </footer>
+<footer class="modal-footer modal-footer-center" id="footerstyle">
+  <a ui-sref="contact" class="footer">Contact Us</a>
+  <a ui-sref="about" class="footer">About</a>
+  <a ui-sref="mission" class="footer">Our Mission</a>
+</footer>
 </section>
