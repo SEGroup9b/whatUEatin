@@ -22,12 +22,11 @@ var recipeSchema = new Schema({
   },
 
   instructions: String,		// baking instructions
-  servings: Number,			// how many does this serve?
+  servings: String,			// how many does this serve?
   cook_time: String,		// time required to make
   votes: Number,			// number of upthumblikes
   
   // Health tags for user dietary needs.
-
   tags: {
     allergies: [String],
     health_concerns: [String]
