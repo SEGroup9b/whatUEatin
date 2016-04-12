@@ -21,7 +21,7 @@
       <div class="col-md-7"> <!--recipe data-->
         <div class="col-md-12 form-group" show-errors>
           <label for="title">Recipe Title</label>
-          <input name="title" type="text" ng-model="title" class="form-control" placeholder="Title" required></input>
+          <input id="title" name="title" type="text" ng-model="title" class="form-control" placeholder="Title" required>
           <div ng-messages="recipeForm.title.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Recipe title is required.</p>
           </div>
@@ -30,19 +30,19 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="servings">Servings</label>
-              <input name="servings" ng-model="servings" id="servings" placeholder="Servings" class="form-control"></input>
+              <input name="servings" ng-model="servings" id="servings" placeholder="Servings" class="form-control">
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="cook_time">Cook Time</label>
-              <input name="cook_time" ng-model="cook_time" id="cook_time"  placeholder="Total Cooking Time" class="form-control"></input>
+              <input name="cook_time" ng-model="cook_time" id="cook_time"  placeholder="Total Cooking Time" class="form-control">
             </div>
           </div>
         </div>
         <div class="input-group" id="ingredientList">
           <div class="col-md-3"><!--quantity-->
-              
+
             <input name="quantity" ng-model="ingredients.quantity" placeholder="#" class="form-control" type="Number" id="quantity">
           </div>
           <div class="col-md-3"><!--unit-->
@@ -94,8 +94,8 @@
 
   </div>
 </div>
-        
-            
+
+
 
         <div class="input-group" id="ingredientsAdded" ng-repeat="ingredient in original_ingredients">
 
@@ -118,7 +118,7 @@
     </div>
     <div class="row">
       <div class="col-md-8 col-md-offset-1">
-        <div> 
+        <div>
           <label for="instructions">Cooking Instructions</label>
         </div>
         <textarea name="instructions" ng-model="instructions" id="instructions" placeholder="add instructions here" class="form-control" rows="6"></textarea>
@@ -140,11 +140,5 @@
     <a ui-sref="about" class="footer">About</a>
     <a ui-sref="mission" class="footer">Our Mission</a>
   </footer>
-  
+
 </section>
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> dev

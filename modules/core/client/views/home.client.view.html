@@ -7,7 +7,6 @@
 
 
 <body>
-
     <div class="top">
         <!--<img id="veggies" src="modules/core/client/img/brand/veggies.jpg"/>-->
         <div class="float-left">
@@ -17,30 +16,29 @@
         <div class="z-index-2" id="overlay">
           <div class="text-center">
             <div>
-              <h2> Recipe of the Day! </h2>
-              <p>Populate with image and description of the recipe.</p>
+              <h2>Chicken Cordon Bleu</h2>
             </div>
           </div>
           <div class="">
-              <h3 class="text-center"> Post-healthification! </h3>
-              <p class="text-center"> healthy stuff </p>
+              <h3 class="text-center">Post-healthification!</h3>
               <ul>
-                <li>Ingredient 1</li>
-                <li>Ingredient 2</li>
+                <li>Traditional flour breading -> Panko breading</li>
+                <li>Chicken -> Low Fat Chicken</li>
+                <li>Cheese -> Vegan Cheese Substitute</li>
               </ul>
-              <h4 class="text-center">Nutritional Information </h4>
+              <h3 class="text-center">Nutritional Information</h3>
               <ul>
-                <li>Carbohydrates:</li>
-                <li>Saturated Fat:</li>
-                <li>Unsaturated Fat:</li>
-                <li>Protein:</li>
-                <li>Sugar:</li>
-                <li>Sodium:</li>
-                <li>Fiber:</li>
+                <li>Carbohydrates: 29g </li>
+                <li>Saturated Fat: 2g </li>
+                <li>Unsaturated Fat: 1g </li>
+                <li>Protein: 23g </li>
+                <li>Sugar: 1g </li>
+                <li>Sodium: 600mg</li>
+                <li>Fiber: 2g </li>
               </ul>
           </div>
         </div>
-    </div> 
+    </div>
 
     <div class="row" id="banner">
     </div>
@@ -52,7 +50,7 @@
       <div class="col-md-5 col-md-offset-1 center">
         <h2 class="text-center"> Browse Recipes </h2>
         <div class="table-scrolling">
-          <table class="table table-striped table-hover" id="table-border"> 
+          <table class="table table-striped table-hover" id="table-border">
             <tr ng-repeat="recipe in recipes" ng-click='showDetails($index)'> <!--ui-sref="recipes.view({recipeId: recipe._id}) --> <!--
               <td>Posted on
               <span ng-bind="recipe.updated_at | date:'mediumDate'"></span>
@@ -60,7 +58,7 @@
               </td>
               <td>by
               <span ng-bind="recipe.user.displayName"></span>
-              <p class="list-group-item-text" ng-bind="recipe.content"></p> 
+              <p class="list-group-item-text" ng-bind="recipe.content"></p>
               </td>
             </tr>
           </table>
@@ -76,7 +74,7 @@
           <strong>Cook Time:</strong> <br />
           <span>{{detailedInfo.cook_time}}</span> <br />
 
-          <strong>Ingredients:</strong><br /> 
+          <strong>Ingredients:</strong><br />
           <span ng-repeat="ingredient in detailedInfo.original_ingredients">"{{ingredient.quantity}}  {{ingredient.unit}} {{ingredient.item}}" </span> <br>
           <span ng-repeat="ingredient in detailedInfo.healthy_ing">"{{ingredient.quantity}}  {{ingredient.unit}} {{ingredient.item}}" </span> <br>
           <strong>Directions: </strong> <br>
@@ -87,58 +85,39 @@
   -->
   <div class="row">
     <div class="col-md-6 col-md-offset-3 text-center" id="cattitle">
-      <h1><span>Browse by Category</span></h1> 
+      <h1><span>Browse by Category</span></h1>
     </div>
   </div>
-  <div id="homecat">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="text-center">
-          <h3>Poultry</h3> 
-        </div>
-        <img class="center" id="cat1" src="modules/core/client/img/brand/ccb.png"/>
-      </div>
 
-      <div class="col-md-4">
-        <div class="text-center">
-          <h3>Poultry</h3> 
-        </div>
-        <img id="cat2" src="modules/core/client/img/brand/ccb.png"/>
-      </div>
+  <!--This code is modified from Ali Jafarian's tutorial (source: http://alijafarian.com/responsive-image-grids-using-css/)-->
 
-      <div class="col-md-4">
-        <div class="text-center">
-          <h3>Poultry</h3> 
-        </div>
-        <img id="cat3" src="modules/core/client/img/brand/ccb.png"/>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <div class="text-center">
-          <h3>Poultry</h3> 
-        </div>
-        <img class="center" id="cat1" src="modules/core/client/img/brand/ccb.png"/>
-      </div>
-
-      <div class="col-md-4">
-        <div class="text-center">
-          <h3>Poultry</h3> 
-        </div>
-        <img id="cat2" src="modules/core/client/img/brand/ccb.png"/>
-      </div>
-
-      <div class="col-md-4">
-        <div class="text-center">
-          <h3>Poultry</h3> 
-        </div>
-        <img id="cat3" src="modules/core/client/img/brand/ccb.png"/>
-      </div>
-    </div>
-
-  </div>
-
+  <ul class="rig columns-3">
+    <li>
+      <img ui-sref="categories.list" src="modules/core/client/img/brand/high_protein.jpg" />
+      <h3 style="text-align: center;"><strong>High Protein</strong></h3>
+    </li>
+    <li>
+      <img ui-sref="categories.list" src="modules/core/client/img/brand/low_fat.jpg" />
+      <h3 style="text-align: center;"><strong>Low Fat</strong></h3>
+    </li>
+    <li>
+      <img ui-sref="categories.list" src="modules/core/client/img/brand/low_carb.jpg" />
+      <h3 style="text-align: center;"><strong>Low Carb</strong></h3>
+    </li>
+    <li>
+      <img ui-sref="categories.list" src="modules/core/client/img/brand/lactose_free.jpg" />
+      <h3 style="text-align: center;"><strong>Lactose Free</strong></h3>
+    </li>
+    <li>
+      <img ui-sref="categories.list" src="modules/core/client/img/brand/peanut_free.jpg" />
+      <h3 style="text-align: center;"><strong>Peanut Free</strong></h3>
+    </li>
+    <li>
+      <img ui-sref="categories.list" src="modules/core/client/img/brand/gluten_free.jpg" />
+      <h3 style="text-align: center;"><strong>Gluten Free</strong></h3>
+    </li>
+  </ul>
+  <!-- End Ali's code -->
 
 </section>
 

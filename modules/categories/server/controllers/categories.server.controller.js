@@ -57,6 +57,7 @@ exports.update = function (req, res) {
  * Delete an category
  */
 exports.delete = function (req, res) {
+  console.log(req.category);
   var category = req.category;
 
   category.remove(function (err) {
