@@ -30,21 +30,11 @@
             {{ingredient.item}}
           </td>
           <td>
-            <select name="nutrients" ng-model="parameters[$index]">
+            <select name="nutrients" ng-model="parameters[$index]" class="selectpicker">
               <!-- this right hurr is a drop down box with the nutrient names -->
-              <option data-tokens="255">water</option>
-              <option data-tokens="208">energy</option>
-              <option data-tokens="203">protein</option>
-              <option data-tokens="204">total lipids (fats)</option>
-              <option data-tokens="205">carbohydrates</option>
-              <option data-tokens="291">fiber</option>
-              <option data-tokens="269">sugar</option>
-              <option data-tokens="301">calcium</option>
-              <option data-tokens="303">iron</option>
-              <option data-tokens="306">potassium</option>
-              <option data-tokens="307">sodium</option>
-              <option data-tokens="606">saturated fat</option>
+              <option ng-repeat="param in init_parameters">{{param._id}}</option>
             </select>
+            {{parameters[$index]}}
           </td>
           <td>
             <input name="minimize" ng-model="min_check[$index]" id="minimize" type="checkbox">

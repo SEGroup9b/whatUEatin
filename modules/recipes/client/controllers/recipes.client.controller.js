@@ -29,6 +29,20 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
     //initialize healthify stuff
     $scope.min_check = [];
+    $scope.init_parameters = [
+    { _id: 255, value: 'water' }, 
+    { _id: 208, value: 'energy' },
+    { _id: 203, value: 'protien' }, 
+    { _id: 204, value: 'total lipids (fat)' }, 
+    { _id: 205, value: 'carbohydrates' }, 
+    { _id: 291, value: 'fiber' }, 
+    { _id: 269, value: 'sugar' }, 
+    { _id: 301, value: 'calcium' }, 
+    { _id: 303, value: 'iron' }, 
+    { _id: 306, value: 'potassium' }, 
+    { _id: 307, value: 'sodium' }, 
+    { _id: 606, value: 'saturated fats' }
+    ];
     $scope.parameters = [];
     $scope.healthify_ingredients = [];
 
@@ -276,18 +290,21 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
     $scope.findAlternatives = function(index, ingredient) {
       //console.log($scope.min_check);
-      //console.log($scope.parameters[index]);
+      console.log($scope.parameters[index]);
+      var param_id = $scope.parameters[index];
       var ingredient_info = {
-        parameter: $scope.parameters[index],
-        check: $scope.min_check[index],
-        ingredient: ingredient.item
+        ingredient: ingredient.item,
+        ndbno: ingredient.food_item.ndbno,
+        nut_id: ingredient
       };
 
       console.log(ingredient_info);
 
-      // var promise = new Promise(function(resolve,reject){
-      //   resolve($http.get('/api/usda/healthify/' + $scope.confirmed.ndbno).then(function(response){return response.data;}));
-      // });
+      var string_ingred_info = window.atob(JSON.stringify(ingredient_info));
+
+      var promise = new Promise(function(resolve,reject){
+        resolve($http.get('/api/usda/healthify/' + string_ingred_info).then(function(response){return response.data;}));
+      });
     };
 
 
