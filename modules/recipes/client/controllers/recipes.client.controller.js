@@ -276,6 +276,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     // };
 
 
+
     $scope.findFoods = function(){
       return new Promise(function(resolve,reject){
         resolve($http.get('/api/usda/' + $scope.ingredients.item).then(function(response){
