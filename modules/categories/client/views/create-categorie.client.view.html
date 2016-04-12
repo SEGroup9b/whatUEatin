@@ -1,5 +1,6 @@
 <section ng-controller="CategoriesController">
   <div class="page-header">
+<<<<<<< Updated upstream
     <h1>New Category</h1>
   </div>
   <div class="col-md-12">
@@ -18,6 +19,23 @@
           <!--<div ng-messages="categoryForm.title.$error" role="alert">-->
             <!--<p class="help-block error-text" ng-message="required">Category Tag is required.</p>-->
           <!--</div>-->
+=======
+    <h1>New Categorie</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="categorieForm" class="form-horizontal" ng-submit="create(categorieForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label for="title">Title</label>
+          <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required>
+          <div ng-messages="categorieForm.title.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Categorie title is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="content">Content</label>
+          <textarea name="content" ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+>>>>>>> Stashed changes
         </div>
         <div class="form-group">
           <input type="submit" class="btn btn-default">
