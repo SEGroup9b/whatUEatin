@@ -7,7 +7,8 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
     //For categories and filtering by category
     $scope.currentCategory = {
       name: 'All',
-      tag: 'all'
+      tag: 'all',
+      img_path: 'modules/core/client/img/brand/ccb.png'
     };
     $scope.recipes = [];
 
@@ -40,7 +41,8 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
       // Create new Category object
       var category = new Categories({
         name: this.name,
-        tag: this.tag
+        tag: this.tag,
+        img_path: 'modules/core/client/img/brand/' + this.img_path
       });
 
       // Redirect after save
@@ -50,6 +52,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
         // Clear form fields
         $scope.name = '';
         $scope.tag = '';
+        $scope.img_path = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -57,7 +60,6 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
 
     // Remove existing Category
     $scope.remove = function (category) {
-      console.log(category);
       if (category) {
         category.$remove();
 
@@ -68,7 +70,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
         }
       } else {
         $scope.category.$remove(function () {
-          $location.path('');
+          $location.path('categories');
         });
       }
     };
