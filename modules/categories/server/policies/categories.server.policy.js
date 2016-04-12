@@ -18,7 +18,11 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/categories',
       permissions: '*'
     }, {
+<<<<<<< Updated upstream
       resources: '/api/categories/:categoryId',
+=======
+      resources: '/api/categories/:categorieId',
+>>>>>>> Stashed changes
       permissions: '*'
     }]
   }, {
@@ -27,7 +31,11 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/categories',
       permissions: ['get', 'post']
     }, {
+<<<<<<< Updated upstream
       resources: '/api/categories/:categoryId',
+=======
+      resources: '/api/categories/:categorieId',
+>>>>>>> Stashed changes
       permissions: ['get']
     }]
   }, {
@@ -36,7 +44,11 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/categories',
       permissions: ['get']
     }, {
+<<<<<<< Updated upstream
       resources: '/api/categories/:categoryId',
+=======
+      resources: '/api/categories/:categorieId',
+>>>>>>> Stashed changes
       permissions: ['get']
     }]
   }]);
@@ -48,8 +60,13 @@ exports.invokeRolesPolicies = function () {
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
+<<<<<<< Updated upstream
   // If an category is being processed and the current user created it then allow any manipulation
   if (req.category && req.user && req.category.user.id === req.user.id) {
+=======
+  // If an categorie is being processed and the current user created it then allow any manipulation
+  if (req.categorie && req.user && req.categorie.user.id === req.user.id) {
+>>>>>>> Stashed changes
     return next();
   }
 

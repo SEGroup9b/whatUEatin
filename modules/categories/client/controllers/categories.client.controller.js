@@ -54,6 +54,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
         $scope.error = errorResponse.data.message;
       });
     };
+
     // Remove existing Category
     $scope.remove = function (category) {
       console.log(category);
