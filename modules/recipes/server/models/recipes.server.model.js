@@ -27,7 +27,6 @@ var recipeSchema = new Schema({
   votes: Number,			// number of upthumblikes
   
   // Health tags for user dietary needs.
-
   tags: {
     allergies: [String],
     health_concerns: [String]
