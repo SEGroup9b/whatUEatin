@@ -34,7 +34,6 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
 
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'categoryForm');
-
         return false;
       }
 
@@ -80,7 +79,6 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
 
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'categoryForm');
-
         return false;
       }
 
