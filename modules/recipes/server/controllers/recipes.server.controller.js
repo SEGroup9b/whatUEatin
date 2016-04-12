@@ -35,8 +35,8 @@ exports.create = function (req, res) {
 exports.edUploadPic = function(req,res){
   console.log(config.awscred);
 
-  /*var dataURL = req.body.pic;
-  var newURL = '';
+  var dataURL = req.body.pic;
+  //var newURL = '';
 
   //console.log(req.body.pic);
   //console.log(req.body._id);
@@ -62,7 +62,7 @@ exports.edUploadPic = function(req,res){
   });
 
  
-  var imageURL = ('https://s3.amazonaws.com/finalrecipepictures/'+req.body._id+'.jpg');*/
+  var imageURL = ('https://s3.amazonaws.com/finalrecipepictures/'+req.body._id+'.jpg');
     
    
 };
