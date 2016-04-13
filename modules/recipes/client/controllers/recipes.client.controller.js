@@ -82,6 +82,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       console.log(index + ' ' + $scope.healthyIngredient);
     };
 
+
     $scope.addIngredientLine = function () {
       
       console.log('Adding Ingredient Line');
@@ -296,6 +297,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       console.log($scope.parameters[index]);
       var param_val = $scope.parameters[index];
       var param_id = 205;
+      $scope.ingredientNumber = index;
       for (var i in $scope.init_parameters) {
         if ($scope.init_parameters[i].value === param_val) {
           param_id = $scope.init_parameters[i]._id;
@@ -326,10 +328,26 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     };
 
     $scope.addHealthyIngredients = function() {
-      //console.log($scope.healthify_ingredients[0]);
-      for(var i in $scope.healthify_ingredients) {
-        $scope.recipe.healthy_ing.push($scope.healthify_ingredients[i]);
-      }
+      //console.log($scope.healthify_ingredients[0])
+      
+      console.log('Adding Ingredient Line');
+
+      $scope.recipe.healthy_ing[$scope.ingredientNumber] = $scope.healthyIngredient;
+
+      $scope.healthyIngredient = {
+        item: '',
+        quantity: 0,
+        unit: '',
+        food_item: {
+          name: '',
+          ndbno: '',
+          group: '',
+          manu: '',
+          nutrients: []
+        }
+      };
+      $scope.healthify_ingredients = [];
+      $scope.ingredientNumber = 0;
       
       console.log($scope.recipe);
     };
