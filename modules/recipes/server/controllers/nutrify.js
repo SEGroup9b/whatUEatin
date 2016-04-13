@@ -46,7 +46,7 @@ exports.healthify = function(query, ndbno, same_fg, nut_id, minimize) {
       }
       return exports.find_foods(query, fg);
     }).then(function(matches) {
-      
+      console.log('Making an array of promises, awww jees Ben');
       var alt_foods = [];
       for (var i = 0; i < matches.length; i++) {
         if (matches[i].name.toLowerCase().indexOf(query.toLowerCase()) !== -1 && matches[i].ndbno !== ndbno) {
@@ -62,9 +62,11 @@ exports.healthify = function(query, ndbno, same_fg, nut_id, minimize) {
       return Promise.all(promiseArray);
       
     }).then(function(resultArray) {
+      console.log('I mean, cmon Ben');
       return find_healthiest(orig, resultArray, nut_id, minimize);
       
     }).then(function(conclusion) {
+      console.log('wow');
       resolve(conclusion);
       
     });
@@ -72,13 +74,23 @@ exports.healthify = function(query, ndbno, same_fg, nut_id, minimize) {
 };
 
 function find_healthiest(orig_report, alt_reports, nutrient_id, minimize) {
+  console.log('entered find_healthiest');
   return new Promise(function(resolve, reject) {
-    var base_val = orig_report.nutrients[nutrient_id].value;
+    console.log('entered promise');
+    console.log(JSON.stringify(orig_report));
+    var base_val;
+    for(var k = 0; k < orig_report.nutrients.length;k++){
+      if(orig_report.nutrients[k].nutrient_id === nutrient_id){
+        base_val = orig_report.nutrients[k].value;
+        break;
+      }
+    }
     var min_val = base_val;
     var mindex = -1;
     var diff = 0;
     
     // Now we got the base value. 
+    console.log('printing length of alt reports ' + alt_reports.length);
     for (var i = 0; i < alt_reports.length; i++) {
       var alt_val = alt_reports[i].nutrients[nutrient_id].value;
       
@@ -96,13 +108,14 @@ function find_healthiest(orig_report, alt_reports, nutrient_id, minimize) {
         }
       }
     }
-    
+    //he returned only one option make it an array of options that match the if requirements he has
+    console.log('Its finding the "healthiest"');
     var best_report = mindex === -1 ? orig_report : alt_reports[mindex];
     var conclusion = {
       healthiest: best_report,
       difference: diff
     };
-    resolve(conclusion);
+    resolve(best_report);
   });
 }
 
@@ -112,6 +125,7 @@ function find_healthiest(orig_report, alt_reports, nutrient_id, minimize) {
 // Returns the nutrient report from a given ndbno; 
 exports.food_report = function (ndbno) {
   return new Promise(function(resolve, reject) {
+    //console.log(ndbno);
     var payload = {
       api_key: key,
       ndbno: ndbno,
@@ -119,6 +133,7 @@ exports.food_report = function (ndbno) {
       format: 'json'
     };
     var url = reportURL + querystring.stringify(payload);
+    console.log(url);
     new Request(url, function (error, response, body) {
       if (!error && response.statusCode === 200) {  
         var json_res = JSON.parse(body);

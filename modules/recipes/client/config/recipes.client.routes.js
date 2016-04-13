@@ -33,7 +33,7 @@ angular.module('recipes').config(['$stateProvider',
         }
       })
       .state('recipes.healthify',{
-        url: '/:recipeId/healthify',
+        url: '/healthify/:recipeId',
         templateUrl: 'modules/recipes/client/views/healthify-recipe.client.view.html',
         data: {
           roles: ['user','admin']

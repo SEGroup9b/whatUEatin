@@ -47,7 +47,7 @@ var recipeSchema = new Schema({
     unit: String,
     food_item: {
       name: String,
-      ndbno: Number,
+      ndbno: String,
       group: String,
       manu: String,
       nutrients: [{

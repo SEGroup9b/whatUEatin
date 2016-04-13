@@ -65,14 +65,15 @@
        </div>
        <div class="modal-body">
         <table class="table table-striped table-hover">
-         <tr style="cursor: pointer;" ng-repeat="option in usdaList.item" ng-click="confirmIngredient($index);">
-           <td>{{option.name}}</td>
+          <!-- Add ng repeat stuff for array -->
+         <tr style="cursor: pointer;" ng-click="confirmHealthify($index);">
+           <td>{{healthify_ingredients.name}}</td>
          </tr>
        </table>
  
        </div>
        <div class="modal-footer">
-         <span>Your Ingredient Is: {{confirmed.name}}</span>
+         <span>Your Ingredient Is: {{healthIngredient.name}}</span>
          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="">Okay!</button> <!--addIngredientLine()-->
       </div>
     </div>

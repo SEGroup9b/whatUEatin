@@ -26,7 +26,6 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     $scope.assestsLoaded = false;
     $scope.ingredientNumber = 0;
     $scope.apiError = false;
-
     //initialize healthify stuff
     $scope.min_check = [];
     $scope.init_parameters = [
@@ -45,7 +44,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     ];
     $scope.parameters = [];
     $scope.healthify_ingredients = [];
-
+    
     /*Allergy Initializations */
     $scope.nuts = false;
     $scope.eggs = false;
@@ -60,7 +59,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       unit: '',
       food_item: {
         name: '',
-        ndbno: 0,
+        ndbno: '',
         group: '',
         manu: '',
         nutrients: []
@@ -76,6 +75,11 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     $scope.confirmIngredient = function(index){
       $scope.confirmed = $scope.usdaList.item[index];
       console.log($scope.confirmed);
+    };
+    $scope.confirmHealthify = function(index){
+      //this confirms undefined for now should work with an array
+      $scope.healthyIngredient = $scope.healthify_ingredients[index];
+      console.log(index + ' ' + $scope.healthyIngredient);
     };
 
     $scope.addIngredientLine = function () {
@@ -93,7 +97,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
           unit: '',
           food_item: {
             name: '',
-            ndbno: 0,
+            ndbno: '',
             group: '',
             manu: '',
             nutrients: []
@@ -308,12 +312,16 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
       console.log(ingredient_info);
 
-      var string_ingred_info = window.btoa(JSON.stringify(ingredient_info));
+      var string_ingred_info =JSON.stringify(ingredient_info);
       console.log(string_ingred_info);
 
-      var promise = new Promise(function(resolve,reject){
-        resolve($http.get('/api/usda/healthify/' + string_ingred_info).then(function(response){return response.data;}));
+      $http.get('/api/usda/healthify/' + string_ingred_info).then(function(response){
+        console.log(response.data);
+        //this should be an array coming from the data
+        $scope.healthify_ingredients = response.data;
+        console.log($scope.healthify_ingredients);
       });
+      
     };
 
 
