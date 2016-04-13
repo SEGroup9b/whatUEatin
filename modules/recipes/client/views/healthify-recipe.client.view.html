@@ -32,18 +32,18 @@
           <td>
             <select name="nutrients" ng-model="parameters[$index]" class="selectpicker">
               <!-- this right hurr is a drop down box with the nutrient names -->
-              <option ng-repeat="param in init_parameters">{{param._id}}</option>
+              <option ng-repeat="param in init_parameters">{{param.value}}</option>
             </select>
-            {{parameters[$index]}}
           </td>
           <td>
-            <input name="minimize" ng-model="min_check[$index]" id="minimize" type="checkbox">
+            <input name="minimize" ng-model="min_check[$index]" id="minimize" type="checkbox" value="false">
+            {{min_check[$index]}}
               <!-- this checkbox determines whether we're finding alt ingredients that are greater/less than the current nutrient val -->
             </input>
           </td>
           <td>
             <span class="input-group-btn">
-             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="findAlternatives($index, ingredient)" > <!--findFoods()-->
+             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="findAlternatives($index, ingredient)" > 
                 <span class="glyphicon glyphicon-arrow-right"></span>
               </button>
             </span>

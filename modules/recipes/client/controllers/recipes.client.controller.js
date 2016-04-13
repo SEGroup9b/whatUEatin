@@ -289,18 +289,26 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     }
 
     $scope.findAlternatives = function(index, ingredient) {
-      //console.log($scope.min_check);
       console.log($scope.parameters[index]);
-      var param_id = $scope.parameters[index];
+      var param_val = $scope.parameters[index];
+      var param_id = 0;
+      for (var i in $scope.init_parameters) {
+        if ($scope.init_parameters[i].value === param_val) {
+          param_id = $scope.init_parameters[i]._id;
+          break;
+        }
+      }
+
       var ingredient_info = {
         ingredient: ingredient.item,
         ndbno: ingredient.food_item.ndbno,
-        nut_id: ingredient
+        nut_id: param_id,
+        minimize: $scope.min_check[index]
       };
 
       console.log(ingredient_info);
 
-      var string_ingred_info = window.atob(JSON.stringify(ingredient_info));
+      var string_ingred_info = window.btoa(JSON.stringify(ingredient_info));
 
       var promise = new Promise(function(resolve,reject){
         resolve($http.get('/api/usda/healthify/' + string_ingred_info).then(function(response){return response.data;}));
