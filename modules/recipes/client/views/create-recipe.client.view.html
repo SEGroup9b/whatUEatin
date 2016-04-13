@@ -12,8 +12,12 @@
           </div>
           <div class="text-center form-group">
             <span class="btn btn-default btn-file">
-                Select Image <input type="file" nv-file-select uploader="uploader">
+                Select Image <input type="file" ng-model="imageURL" id="imageURL" nv-file-select uploader="uploader">
             </span>
+          </div>
+          <div class="text-center form-group" ng-show="uploader.queue.length">
+            <button class="btn btn-primary" ng-click="edUploadRecipePic();">Upload</button>
+            <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
           </div>
       </div>
       <div class="col-md-7"> <!--recipe data-->

@@ -25,6 +25,7 @@ var recipeSchema = new Schema({
   servings: String,			// how many does this serve?
   cook_time: String,		// time required to make
   votes: Number,			// number of upthumblikes
+  imgURL: String,
   
   // Health tags for user dietary needs.
   tags: {

@@ -7,11 +7,17 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Recipe = mongoose.model('Recipe'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  config = require(path.resolve('./config/config')),
   nutrify = require(path.resolve('./modules/recipes/server/controllers/nutrify.js'));
 /**
  * Create a recipe
  */
+
+var AWS = require('aws-sdk');
+AWS.config = config.awscred;
+
 exports.create = function (req, res) {
+  console.log('happens1');
   var recipe = new Recipe(req.body);
   recipe.user = req.user;
 
@@ -26,6 +32,41 @@ exports.create = function (req, res) {
   });
 };
 
+exports.edUploadPic = function(req,res){
+  console.log(config.awscred);
+
+  var dataURL = req.body.pic;
+  //var newURL = '';
+
+  //console.log(req.body.pic);
+  //console.log(req.body._id);
+
+  var buf = new Buffer(dataURL.replace(/^data:image\/\w+;base64,/, ''),'base64');
+    
+
+  var s3 = new AWS.S3();
+  s3.putObject({
+    ACL: 'public-read',
+    Bucket: 'finalrecipepictures',
+    Key: req.body._id + '.jpg',
+    Body: buf,
+    ContentEncoding: 'base64',
+    ContentType: 'image/jpeg'
+  }, function(error, response) {
+    //console.log('uploaded file[' + fileName + '] to [' + remoteFilename + '] as [' + metaData + ']');
+    //console.log(arguments);
+    console.log('happened');
+    if(error){
+      console.log(error);
+    }
+  });
+
+ 
+  var imageURL = ('https://s3.amazonaws.com/finalrecipepictures/'+req.body._id+'.jpg');
+    
+   
+};
+
 /**
  * Show the current recipe
  */
@@ -34,6 +75,7 @@ exports.read = function (req, res) {
 };
 
 /**
+
  * Update a recipe
  */
 exports.update = function (req, res) {
@@ -41,6 +83,7 @@ exports.update = function (req, res) {
 
   recipe.title = req.body.title;
   recipe.directions = req.body.directions;
+  recipe.imgURL = req.body.imgURL;
 
   recipe.save(function (err) {
     if (err) {
