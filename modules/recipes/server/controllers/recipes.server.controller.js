@@ -157,8 +157,8 @@ exports.getName = function(req,res,next,name){
 };
 
 exports.getAlternatives = function(req,res,next,foodObject){
-  var jsonString = window.atob(foodObject);
-  var jsonObject = JSON.parse(jsonString);
+  //var jsonString = window.atob(foodObject);
+  var jsonObject = JSON.parse(foodObject);
   nutrify.healthify(jsonObject.query,jsonObject.ndbno,true,jsonObject.nutId,jsonObject.minimize).then(function(result){
     req.alternatives = result;
     next();

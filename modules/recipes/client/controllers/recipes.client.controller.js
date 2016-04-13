@@ -308,7 +308,8 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
       console.log(ingredient_info);
 
-      var string_ingred_info = window.btoa(JSON.stringify(ingredient_info));
+      //var string_ingred_info = window.btoa(JSON.stringify(ingredient_info));
+      var string_ingred_info = JSON.stringify(ingredient_info);
       console.log(string_ingred_info);
 
       var promise = new Promise(function(resolve,reject){
