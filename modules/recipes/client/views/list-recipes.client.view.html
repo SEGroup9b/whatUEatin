@@ -1,9 +1,9 @@
-<section ng-controller="RecipesController" ng-init="find()">
+<section ng-controller="RecipesController" id="style" ng-init="find()" style="min-height: 100vh;">
   <div class="page-header col-md-10 col-md-offset-1 text-center" id="recipeheader">
     <h1>List Recipes</h1>
   </div>
-  <div class="row" id="style">
-    <div class="list-group col-md-8 col-md-offset-2">
+  <div class="row">
+    <div class="list-group col-md-8 col-md-offset-2" style="max-height: 500px; overflow: auto;">
       <a ng-repeat="recipe in recipes" ui-sref="recipes.view({recipeId: recipe._id})" class="list-group-item">
         <small class="list-group-item-text">
           Posted on
