@@ -291,7 +291,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     $scope.findAlternatives = function(index, ingredient) {
       console.log($scope.parameters[index]);
       var param_val = $scope.parameters[index];
-      var param_id = 0;
+      var param_id = 205;
       for (var i in $scope.init_parameters) {
         if ($scope.init_parameters[i].value === param_val) {
           param_id = $scope.init_parameters[i]._id;
