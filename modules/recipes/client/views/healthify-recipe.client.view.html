@@ -2,7 +2,6 @@
   <div class="page-header">
     <h1>Recipe Healthification</h1>
   </div>
-  
   <form name="recipeForm" class="form-horizontal" ng-submit="update(recipeForm.$valid)" novalidate>
     <div class="row">
       <table class="table table-striped">
@@ -43,7 +42,7 @@
               </input>
             </td>
             <td>
-              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="findAlternatives($index, ingredient)" > 
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="findAlternatives($index, ingredient)" >
                 <span class="glyphicon glyphicon-arrow-right"></span>
               </button>
             </td>
@@ -52,13 +51,13 @@
                {{recipe.healthy_ing[$index].name}}
             </td>
           </tr>
-        </tbody>  
+        </tbody>
       </table>
     </div>
 
   <div id="myModal" class="modal fade" role="dialog">
      <div class="modal-dialog">
-   
+
        <!-- Modal content-->
        <div class="modal-content">
          <div class="modal-header">
@@ -72,28 +71,34 @@
              <td>{{hi.name}}</td>
            </tr>
          </table>
-   
+
          </div>
          <div class="modal-footer">
            <span>Your Ingredient Is: {{healthyIngredient.name}}</span>
            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="addHealthyIngredients()">Okay!</button> <!--addIngredientLine()-->
         </div>
       </div>
-   
+
     </div>
   </div>
-      
-      
+
+
     <div class="row">
       <h3>Healthification Statistics</h3>
         <table id="stats_table">
-        
-        
+
+
         </table>
     </div>
     <div class="form-group">
       <input type="submit" value="Update" class="btn btn-default">
     </div>
   </form>
-  
+
 </section>
+
+<footer class="modal-footer modal-footer-center" id="footerstyle">
+  <a ui-sref="contact" class="footer">Contact Us</a>
+  <a ui-sref="about" class="footer">About</a>
+  <a ui-sref="mission" class="footer">Our Mission</a>
+</footer>

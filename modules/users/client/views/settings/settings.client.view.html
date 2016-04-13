@@ -1,9 +1,9 @@
 <section ng-controller="SettingsController">
-  <div class="page-header">
+  <div class="page-header text-center" id="style" style="margin: 0px; border: 0px; margin-top: -18px; padding-top: 20px;">
     <h1>Settings</h1>
   </div>
-  <div class="row">
-    <nav class="col-sm-3 col-md-3">
+  <div class="row" id="style" style="padding-bottom: 30px;">
+    <nav class="col-sm-3 col-md-3 col-sm-offset-1 col-md-offset-1">
       <ul class="nav nav-pills nav-stacked">
         <li ui-sref-active="active">
           <a ui-sref="settings.profile">Edit Profile</a>
@@ -19,8 +19,13 @@
         </li>
       </ul>
     </nav>
-    <div class="col-sm-9 col-md-8 settings-view">
-      <div ui-view></div>
+    <div class="col-sm-8 col-md-8 settings-view">
+      <div ui-view id="style"></div>
     </div>
   </div>
 </section>
+  <footer class="modal-footer modal-footer-center" id="footerstyle">
+  <a ui-sref="contact" class="footer">Contact Us</a>
+  <a ui-sref="about" class="footer">About</a>
+  <a ui-sref="mission" class="footer">Our Mission</a>
+</footer>

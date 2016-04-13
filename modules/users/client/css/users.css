@@ -7,6 +7,9 @@ body {
   background-size: cover;
   font-family: 'Roboto', sans-serif;
 }
+#style {
+  background-color: #F4F7D9;
+}
 .social-img{
   width: 70px;
 
