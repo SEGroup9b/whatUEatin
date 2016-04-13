@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="col-md-7">
-      <h2 class="text-center"><strong>{{currentCategory.name}}</strong></h2>
+      <h2 class="text-center">{{currentCategory.name}}</h2>
       <div class="table-scrolling">
         <table class="table table-striped table-hover" id="table-border">
           <tr ng-repeat="recipe in recipes" ui-sref="recipes.view({recipeId: recipe._id})">
