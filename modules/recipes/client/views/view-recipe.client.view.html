@@ -1,6 +1,5 @@
-<section ng-controller="RecipesController" ng-init="findOne()" id="style">
-  <div style="min-height: 100vh;">
-    <div class="row" id="style">
+<section ng-controller="RecipesController" ng-init="findOne()" style="min-height: 100vh;" id="style">
+    <div class="row">
       <div class="page-header col-md-10 col-md-offset-1 text-center" id="recipeheader">
         <h1 ng-bind="recipe.title" style="padding-top: 20px;"></h1>
         <small>
@@ -64,9 +63,9 @@
         <p class="" ng-bind="recipe.instructions"></p>
       </div>
     </div>
-  <footer class="modal-footer modal-footer-center" id="footerstyle">
-    <a ui-sref="contact" class="footer">Contact Us</a>
-    <a ui-sref="about" class="footer">About</a>
-    <a ui-sref="mission" class="footer">Our Mission</a>
-  </footer>
 </section>
+<footer class="modal-footer modal-footer-center" id="footerstyle">
+  <a ui-sref="contact" class="footer">Contact Us</a>
+  <a ui-sref="about" class="footer">About</a>
+  <a ui-sref="mission" class="footer">Our Mission</a>
+</footer>
