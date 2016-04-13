@@ -47,27 +47,49 @@ exports.healthify = function(query, ndbno, same_fg, nut_id, minimize) {
       return exports.find_foods(query, fg);
     }).then(function(matches) {
       console.log('Making an array of promises, awww jees Ben');
+      //console.log(matches.item);
+      //console.log('matches length ' + matches.item.length);
+      
+      
       var alt_foods = [];
-      for (var i = 0; i < matches.length; i++) {
-        if (matches[i].name.toLowerCase().indexOf(query.toLowerCase()) !== -1 && matches[i].ndbno !== ndbno) {
-          alt_foods.push(matches[i]);    
+      
+      for (var i = 0; i < matches.item.length; i++) {
+        var m = matches.item[i].name.toLowerCase();
+        //console.log('match', m);
+        //console.log('query', query);
+        if (m.indexOf(query.toLowerCase()) !== -1 && matches.item[i].ndbno !== ndbno) {
+          alt_foods.push(matches.item[i]);
         }
       }
       
+      console.log('alts');
+      console.log(alt_foods);
+      
+      /*
+        if (matches[i].name.toLowerCase().indexOf(query.toLowerCase()) !== -1 && matches[i].ndbno.toString() !== ndbno.toString()) {
+          alt_foods.push(matches[i]);    
+        }
+      }
+      */
+      
       var alt_reports = [];
       var promiseArray = [];
-      for (var j = 0; i < alt_foods.length; j++) {
+      for (var j = 0; j < alt_foods.length; j++) {
+        console.log('pushing food report of', alt_foods[j].ndbno, 'into the promise array');
         promiseArray.push(exports.food_report(alt_foods[j].ndbno));
       }
       return Promise.all(promiseArray);
       
     }).then(function(resultArray) {
       console.log('I mean, cmon Ben');
-      return find_healthiest(orig, resultArray, nut_id, minimize);
+      //return find_healthiest(orig, resultArray, nut_id, minimize);
+      console.log('REULTS ARE PROGRAGES');
+      console.log(resultArray);
+      resolve(resultArray);
       
-    }).then(function(conclusion) {
-      console.log('wow');
-      resolve(conclusion);
+    //}).then(function(conclusion) {
+     // console.log('wow');
+     // resolve(conclusion);
       
     });
   });
@@ -166,7 +188,8 @@ exports.food_report = function (ndbno) {
           manu: f.manu,
           nutrients: nuts
         };
-        console.log(JSON.stringify(food));
+        //console.log(JSON.stringify(food));
+        console.log(food.name);
         
         resolve(food);
       } else {

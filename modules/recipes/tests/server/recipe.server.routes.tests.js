@@ -4,10 +4,16 @@ var should = require('should'),
   request = require('supertest'),
   path = require('path'),
   mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  Recipe = mongoose.model('Recipe'),
+  //User = mongoose.model('User'),
+  //Recipe = mongoose.model('Recipe'),
+  config = require('C:/Users/hammackb/Documents/GitHub/whatUEatin/config/env/local.js'),
+  User = require('C:/Users/hammackb/Documents/GitHub/whatUEatin/modules/users/server/models/user.server.model'),
+  Recipe = require('C:/Users/hammackb/Documents/GitHub/whatUEatin/modules/recipes/server/models/recipes.server.model'),
+  Leaderboard = require('C:/Users/hammackb/Documents/GitHub/whatUEatin/modules/leaderboards/server/models/leaderboard.server.model.js'),
   express = require(path.resolve('./config/lib/express'));
-
+  //express = require('C:/Users/hammackb/Documents/GitHub/whatUEatin/config/lib/express.js');
+  
+  
 /**
  * Globals
  */
@@ -22,11 +28,13 @@ describe('Recipe CRUD tests', function () {
     // Get application
     app = express.init(mongoose);
     agent = request.agent(app);
+    mongoose.connect(config.db.uri);
 
     done();
   });
 
   beforeEach(function (done) {
+    this.timeout(5000);
     // Create user credentials
     credentials = {
       username: 'username',
@@ -47,8 +55,14 @@ describe('Recipe CRUD tests', function () {
     // Save a user to the test db and create new recipe
     user.save(function () {
       recipe = {
-        title: 'Recipe Title',
-        content: 'Recipe Content'
+        title: 'rtitle',
+        instructions: 'instructions',
+        servings: 'servings',
+        cooktime: 'cooktime',
+        votes: 0,
+        tags: { allergies: { nuts: false, eggs: false, fish: false, dairy: false, wheat: false, soy: false }, health_concerns: [''] },
+        orig_ing: [{ item: 'butter', quantity: 5, unit: 'tbsp', food_item: { name: 'Butter, Salted', ndbno: '01001', group: '', manu: '', nutrients: [{ }] } } ],
+        user: user
       };
 
       done();
@@ -56,6 +70,7 @@ describe('Recipe CRUD tests', function () {
   });
 
   it('should be able to save an recipe if logged in', function (done) {
+    this.timeout(10000);
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -90,8 +105,10 @@ describe('Recipe CRUD tests', function () {
                 var recipes = recipesGetRes.body;
 
                 // Set assertions
+                console.log(recipes[0]);
+                
                 (recipes[0].user._id).should.equal(userId);
-                (recipes[0].title).should.match('Recipe Title');
+                (recipes[0].title).should.match('rtitle');
 
                 // Call the assertion callback
                 done();
@@ -101,6 +118,7 @@ describe('Recipe CRUD tests', function () {
   });
 
   it('should not be able to save an recipe if not logged in', function (done) {
+    this.timeout(10000);
     agent.post('/api/recipes')
       .send(recipe)
       .expect(403)
@@ -111,6 +129,7 @@ describe('Recipe CRUD tests', function () {
   });
 
   it('should not be able to save an recipe if no title is provided', function (done) {
+    this.timeout(5000);
     // Invalidate title field
     recipe.title = '';
 
@@ -132,7 +151,7 @@ describe('Recipe CRUD tests', function () {
           .expect(400)
           .end(function (recipeSaveErr, recipeSaveRes) {
             // Set message assertion
-            (recipeSaveRes.body.message).should.match('Title cannot be blank');
+            (recipeSaveRes.body.message).should.match('Path /`title/` is required.');
 
             // Handle recipe save error
             done(recipeSaveErr);
@@ -141,6 +160,7 @@ describe('Recipe CRUD tests', function () {
   });
 
   it('should be able to update an recipe if signed in', function (done) {
+    this.timeout(5000);
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -188,6 +208,7 @@ describe('Recipe CRUD tests', function () {
   });
 
   it('should be able to get a list of recipes if not signed in', function (done) {
+    this.timeout(5000);
     // Create new recipe model instance
     var recipeObj = new Recipe(recipe);
 
@@ -207,6 +228,7 @@ describe('Recipe CRUD tests', function () {
   });
 
   it('should be able to get a single recipe if not signed in', function (done) {
+    this.timeout(5000);
     // Create new recipe model instance
     var recipeObj = new Recipe(recipe);
 
@@ -224,6 +246,7 @@ describe('Recipe CRUD tests', function () {
   });
 
   it('should return proper error for single recipe with an invalid Id, if not signed in', function (done) {
+    this.timeout(5000);
     // test is not a valid mongoose Id
     request(app).get('/api/recipes/test')
       .end(function (req, res) {
@@ -236,6 +259,7 @@ describe('Recipe CRUD tests', function () {
   });
 
   it('should return proper error for single recipe which doesnt exist, if not signed in', function (done) {
+    this.timeout(5000);
     // This is a valid mongoose Id but a non-existent recipe
     request(app).get('/api/recipes/559e9cd815f80b4c256a8f41')
       .end(function (req, res) {
@@ -248,6 +272,7 @@ describe('Recipe CRUD tests', function () {
   });
 
   it('should be able to delete an recipe if signed in', function (done) {
+    this.timeout(5000);
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -291,6 +316,7 @@ describe('Recipe CRUD tests', function () {
   });
 
   it('should not be able to delete an recipe if not signed in', function (done) {
+    this.timeout(5000);
     // Set recipe user
     recipe.user = user;
 
@@ -314,6 +340,7 @@ describe('Recipe CRUD tests', function () {
   });
 
   afterEach(function (done) {
+    this.timeout(5000);
     User.remove().exec(function () {
       Recipe.remove().exec(done);
     });
