@@ -21,8 +21,11 @@ module.exports = function (app) {
 
   app.route('/api/usda/foodReport/:ndbno').get(recipes.returnFoodReport);
 
+  app.route('/api/usda/healthify/:foodObject').get(recipes.returnAlternatives);
+
   // Finish by binding the recipe middleware
   app.param('recipeId', recipes.recipeByID);
   app.param('food',recipes.getName);
   app.param('ndbno', recipes.getFoodReport);
+  app.param('foodObject',recipes.getAlternatives);
 };

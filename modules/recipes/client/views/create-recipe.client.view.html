@@ -8,14 +8,10 @@
         <div class="form-group text-center">
             <img ng-src="{{imageURL}}" alt="{{recipe.displayName}}" class="img-thumbnail user-profile-picture">
           </div>
-          <div class="text-center form-group" ng-hide="uploader.queue.length">
+          <div class="text-center form-group">
             <span class="btn btn-default btn-file">
                 Select Image <input type="file" nv-file-select uploader="uploader">
             </span>
-          </div>
-          <div class="text-center form-group" ng-show="uploader.queue.length">
-            <button class="btn btn-primary" ng-click="uploadRecipePicture();">Upload</button>
-            <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
           </div>
       </div>
       <div class="col-md-7"> <!--recipe data-->

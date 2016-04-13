@@ -101,6 +101,15 @@ exports.returnFoodReport = function(req,res){
   console.log('findFoodReport serverside entered ' + req.nutrients);
   res.json(req.nutrients);
 };
+exports.returnAlternatives = function(req,res){
+  if(!req.errorCode){
+    console.log('success on foodlist');
+    res.json(req.alternatives);
+  }else{
+    console.log('fail => error code');
+    res.json(req.errorCode);
+  }
+};
 
 /**
  * Recipe middleware
@@ -144,6 +153,18 @@ exports.getName = function(req,res,next,name){
     req.errorCode = reason;
     next();
   });
-  
+
 };
 
+exports.getAlternatives = function(req,res,next,foodObject){
+  var jsonString = window.atob(foodObject);
+  var jsonObject = JSON.parse(jsonString);
+  nutrify.healthify(jsonObject.query,jsonObject.ndbno,true,jsonObject.nutId,jsonObject.minimize).then(function(result){
+    req.alternatives = result;
+    next();
+  }).catch(function(reason){
+    req.errorCode = reason;
+    next();
+  });
+};
+  
