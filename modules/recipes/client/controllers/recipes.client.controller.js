@@ -176,15 +176,26 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
       // Redirect after save
       recipe.$save(function (response) {
-        $location.path('recipes/' + response._id);
-
+        var promise = new Promise(function(resolve,reject){
+          // Clear form fields
+          $scope.title = '';
+          $scope.directions = '';
+          console.log(recipe._id);
+          console.log(recipe.imageURL);
+          $scope.edUploadRecipePic(recipe);
+          console.log(recipe.imageURL);
+        });
+        promise.then(function(){
+          console.log('upload promise then');
+          $location.path('recipes/' + response._id);
+        });
         // Clear form fields
-        $scope.title = '';
+        /*$scope.title = '';
         $scope.directions = '';
         console.log(recipe._id);
         console.log(recipe.imageURL);
         $scope.edUploadRecipePic(recipe);
-        console.log(recipe.imageURL);
+        console.log(recipe.imageURL);*/
       }, function (errorResponse) {
         console.log('error response function called anyways');
         $scope.error = errorResponse.data.message;
