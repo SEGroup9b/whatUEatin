@@ -326,10 +326,12 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     };
 
     $scope.addHealthyIngredients = function() {
+      //console.log($scope.healthify_ingredients[0]);
       for(var i in $scope.healthify_ingredients) {
-        $scope.recipe.healthy_ing.push($scope.recipe.healthify_ingredients);
+        $scope.recipe.healthy_ing.push($scope.healthify_ingredients[i]);
       }
       
+      console.log($scope.recipe);
     };
 
 
