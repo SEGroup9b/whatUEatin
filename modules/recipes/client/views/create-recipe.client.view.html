@@ -106,21 +106,25 @@
         </div>
       </div>
 
-      <div class="input-group" id="ingredientsAdded" ng-repeat="ingredient in original_ingredients">
-          <div class="col-md-3"><!--quantity-->
-            <input  readonly name="quantity" placeholder="#" class="form-control" ng-model="ingredient.quantity" type="Number">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2" id="ingredientList" style="border-bottom: 1px solid #080808; padding: 15px;">
+          <div class="input-group" id="ingredientsAdded" ng-repeat="ingredient in original_ingredients">
+              <div class="col-md-3"><!--quantity-->
+                <input  readonly name="quantity" placeholder="#" class="form-control" ng-model="ingredient.quantity" type="Number">
+              </div>
+              <div class="col-md-3"><!--unit-->
+                <input readonly class="form-control" name="unit" ng-model="ingredient.unit" type="text">
+              </div>
+              <div class="col-md-6" ><!--item-->
+                <input  readonly name="item" placeholder="ingredient" class="form-control" ng-model="ingredient.food_item.name" type="text">
+              </div>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-secondary" ng-click="deleteIngredientLine(ingredient)">
+                  <span class="glyphicon glyphicon-minus"></span>
+                </button>
+              </span>
           </div>
-          <div class="col-md-3"><!--unit-->
-            <input readonly class="form-control" name="unit" ng-model="ingredient.unit" type="text">
-          </div>
-          <div class="col-md-6" ><!--item-->
-            <input  readonly name="item" placeholder="ingredient" class="form-control" ng-model="ingredient.food_item.name" type="text">
-          </div>
-          <span class="input-group-btn">
-              <button type="button" class="btn btn-secondary" ng-click="deleteIngredientLine(ingredient)">
-                <span class="glyphicon glyphicon-minus"></span>
-              </button>
-            </span>
+        </div>
       </div>
     </div>
 
