@@ -1,10 +1,12 @@
-<section ng-controller="RecipesController">
-  <div class="page-header col-md-10 col-md-offset-1 text-center" id="recipeheader">
-    <h1>New Recipe</h1>
+<section ng-controller="RecipesController" id="style" style="min-height: 100vh;">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 text-center" id="recipeheader">
+      <h1>New Recipe</h1>
+    </div>
   </div>
-  <form name="recipeForm" class="form-horizontal" ng-submit="create(recipeForm.$valid)" novalidate>
-    <div class="row">
-      <div class="col-md-3 col-md-offset-1"> <!--recipe image-->
+  <form name="recipeForm" class="form-horizontal" ng-submit="create(recipeForm.$valid)" novalidate >
+    <div class="row" style="padding-top: 50px;">
+      <div class="col-md-3 col-md-offset-2"> <!--recipe image-->
         <div class="form-group text-center">
             <img ng-src="{{imageURL}}" alt="{{recipe.displayName}}" class="img-thumbnail user-profile-picture">
           </div>
@@ -15,34 +17,52 @@
           </div>
       </div>
       <div class="col-md-7"> <!--recipe data-->
-        <div class="col-md-12 form-group" show-errors>
-          <label for="title">Recipe Title</label>
-          <input name="title" id="title" type="text" ng-model="title" class="form-control" placeholder="Title" required></input>
-          <div ng-messages="recipeForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Recipe title is required.</p>
+        <div class="row">
+          <div class="col-md-9 form-group" show-errors>
+            <label for="title">Recipe Title</label>
+            <input name="title" type="text" ng-model="title" class="form-control" placeholder="Title" required></input>
+            <div ng-messages="recipeForm.title.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Recipe title is required.</p>
+            </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
-              <label for="servings">Servings</label>
+              <label for="servings">Serves</label>
               <input name="servings" ng-model="servings" id="servings" placeholder="Servings" class="form-control">
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
+          <div class="col-md-5">
+            <div class="form-group" style="padding-left: 20px; padding-right: 30px;">
               <label for="cook_time">Cook Time</label>
               <input name="cook_time" ng-model="cook_time" id="cook_time"  placeholder="Total Cooking Time" class="form-control">
             </div>
           </div>
         </div>
-        <div class="input-group" id="ingredientList">
-          <div class="col-md-3"><!--quantity-->
+      </div>
 
-            <input name="quantity" ng-model="ingredients.quantity" placeholder="#" class="form-control" type="Number" id="quantity">
+
+      <div class="row" >
+        <div class="input-group col-md-8 col-md-offset-2" id="ingredientList" style="border-top: 1px solid #080808; border-bottom: 1px solid #080808; padding: 15px;">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" ng-click="findFoods();" >
+              <span class="glyphicon glyphicon-plus"></span>
+            </button>
+          </span>
+          <div class="col-md-6"><!--item-->
+            <label>Ingredient</label>
+            <input name="item" ng-model="ingredients.item" placeholder="click '+' to add ingredient" class="form-control" type="text">
           </div>
+
+          <div class="col-md-3"><!--quantity-->
+            <label>Quantity</label>
+            <input name="quantity" ng-model="ingredients.quantity" placeholder="Quantity" class="form-control" type="Number" id="quantity">
+          </div>
+
           <div class="col-md-3"><!--unit-->
-            <select class="form-control" name="unit" ng-model="ingredients.unit">
+            <label>Units</label>
+            <select class="form-control" name="unit" placeholder="Units" ng-model="ingredients.unit">
               <option>tsp</option>
               <option>tbsp</option>
               <option>cup</option>
@@ -53,54 +73,40 @@
               <!--add more options here manually, OR database-->
             </select>
           </div>
-          <div class="col-md-6"><!--item-->
-            <input name="item" ng-model="ingredients.item" placeholder="ingredient" class="form-control" type="text">
+        </div>
+      </div>
+      <!-- Modal -->
+      <div id="myModal" class="modal fade" role="dialog" style="padding-top: 30px;">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Select Your Intended Ingredient</h4>
+            </div>
+            <div class="modal-body">
+              <div class="table-scrolling">
+               <table ng-hide="apiError" ng-show="assestsLoaded" class="table table-striped table-hover">
+                  <tr  style="cursor: pointer;" ng-repeat="option in usdaList.item" ng-click="confirmIngredient($index);">
+                    <td>{{option.name}}</td>
+                  </tr>
+                </table>
+              </div>
+            <span ng-show="apiError">There was an error finding your ingredient! You can keep this ingredient or try to find another</span>
+            <center>
+              <img src="./modules/core/client/img/loaders/Preloader_4.gif" align="middle" ng-hide="assestsLoaded">
+            </center>
+            </div>
+            <div class="modal-footer">
+              <span>Your Ingredient Is: {{confirmed.name}}</span>
+              <button ng-hide="apiError" type="button" class="btn btn-default" data-dismiss="modal" ng-click="addIngredientLine()">Okay!</button>
+              <button ng-show="apiError" type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearResults()">Okay...</button>
+            </div>
           </div>
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" ng-click="findFoods();" >
-              <span class="glyphicon glyphicon-plus"></span>
-            </button>
-
-          </span>
         </div>
-
-        <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Select Your Intended Ingredient</h4>
       </div>
-      <div class="modal-body">
-        <div class="table-scrolling">
-         <table ng-hide="apiError" ng-show="assestsLoaded" class="table table-striped table-hover">
-            <tr  style="cursor: pointer;" ng-repeat="option in usdaList.item" ng-click="confirmIngredient($index);">
-              <td>{{option.name}}</td>
-            </tr>
-          </table>
-        </div>
-      <span ng-show="apiError">There was an error finding your ingredient! You can keep this ingredient or try to find another</span>
-      <center>
-        <img src="./modules/core/client/img/loaders/Preloader_4.gif" align="middle" ng-hide="assestsLoaded">
-      </center>
-      </div>
-      <div class="modal-footer">
-        <span>Your Ingredient Is: {{confirmed.name}}</span>
-        <button ng-hide="apiError" type="button" class="btn btn-default" data-dismiss="modal" ng-click="addIngredientLine()">Okay!</button>
-        <button ng-show="apiError" type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearResults()">Okay...</button>
-      </div>
-    </div>
 
-  </div>
-</div>
-
-
-
-        <div class="input-group" id="ingredientsAdded" ng-repeat="ingredient in original_ingredients">
-
+      <div class="input-group" id="ingredientsAdded" ng-repeat="ingredient in original_ingredients">
           <div class="col-md-3"><!--quantity-->
             <input  readonly name="quantity" placeholder="#" class="form-control" ng-model="ingredient.quantity" type="Number">
           </div>
@@ -115,11 +121,12 @@
                 <span class="glyphicon glyphicon-minus"></span>
               </button>
             </span>
-        </div>
       </div>
     </div>
-    <div class="row" >
-      <div class="col-md-8 col-md-offset-1">
+
+
+    <div class="row"  style="padding-top: 30px;">
+      <div class="col-md-8 col-md-offset-2">
         <div>
           <label for="instructions">Cooking Instructions</label>
         </div>
@@ -140,9 +147,9 @@
 
       </div>
     </div>
-    <div class="row" style="padding-bottom: 15px;" >
-      <div class="col-md-2 col-md-offset-1">
-        <input value="Submit Recipe!" type="submit" class="btn btn-default">
+    <div class="row" style="padding-top: 15px; padding-bottom: 30px;">
+      <div class="col-md-2" id="center" style="margin-left: 20%;">
+        <input value="Create My Recipe!" type="submit" class="btn btn-default">
       </div>
     </div>
     <div ng-show="error" class="text-danger">
