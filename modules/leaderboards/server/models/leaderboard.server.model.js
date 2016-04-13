@@ -31,4 +31,5 @@ var LeaderboardSchema = new Schema({
   }
 });
 
-mongoose.model('Leaderboard', LeaderboardSchema);
+var Leaderboard = mongoose.model('Leaderboard', LeaderboardSchema);
+module.exports = Leaderboard;

@@ -28,7 +28,6 @@ var recipeSchema = new Schema({
   imgURL: String,
   
   // Health tags for user dietary needs.
-
   tags: {
     allergies: {
       nuts: Boolean,
@@ -48,7 +47,7 @@ var recipeSchema = new Schema({
     unit: String,
     food_item: {
       name: String,
-      ndbno: Number,
+      ndbno: String,
       group: String,
       manu: String,
       nutrients: [{

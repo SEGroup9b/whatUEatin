@@ -1,10 +1,12 @@
 'use strict';
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Recipes',
-  function ($scope, Authentication, Recipes) {
+angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Recipes', 'Categories',
+  function ($scope, Authentication, Recipes, Categories) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
-    $scope.detailedInfo = undefined; 
+    $scope.detailedInfo = undefined;
+    $scope.recipes = [];
+    $scope.randomRecipe = '';
 
     // Find a list of Recipes
     $scope.find = function () {
@@ -15,5 +17,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
       $scope.detailedInfo = $scope.recipes[index];
     };
 
+    $scope.findCategories = function() {
+      $scope.categories = Categories.query();
+    };
   }
 ]);
