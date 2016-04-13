@@ -1,10 +1,10 @@
-<body>
+<body id="style">
   <style>
     body {
     background: #F4F7D9;
     }
   </style>
-  <section ng-controller="CategoriesController" ng-init="find(); findRecipes()">
+  <section ng-controller="CategoriesController" ng-init="find(); findRecipes()" style="min-height: 100vh;">
     <div class="row">
       <div class="col-md-4" style="margin: auto">
         <h2 class="text-center"><strong>Categories</strong></h2>
@@ -36,12 +36,14 @@
       </div>
     </div>
     <div class="col-sm-12">
-      <footer class="modal-footer modal-footer-center">
-        <a ui-sref="contact" class="footer">Contact Us</a>
-        <a ui-sref="about" class="footer">About</a>
-        <a ui-sref="mission" class="footer">Our Mission</a>
-      </footer>
+
       <br>
     </div>
   </section>
 </body>
+
+<footer class="modal-footer modal-footer-center" id="footerstyle">
+  <a ui-sref="contact" class="footer">Contact Us</a>
+  <a ui-sref="about" class="footer">About</a>
+  <a ui-sref="mission" class="footer">Our Mission</a>
+</footer>
