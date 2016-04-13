@@ -86,13 +86,29 @@ exports.list = function (req, res) {
 };
 /*find food on usda database*/
 exports.returnFoods = function(req,res){
-  console.log('entered find Foods serverside ' + req.foodList);
-  res.json(req.foodList);
+  //console.log('entered find Foods serverside ' + JSON.stringify(req.foodList));
+
+  if(!req.errorCode){
+    console.log('success on foodlist');
+    res.json(req.foodList);
+  }else{
+    console.log('fail => error code');
+    res.json(req.errorCode);
+  }
 
 };
 exports.returnFoodReport = function(req,res){
   console.log('findFoodReport serverside entered ' + req.nutrients);
   res.json(req.nutrients);
+};
+exports.returnAlternatives = function(req,res){
+  if(!req.errorCode){
+    console.log('success on foodlist');
+    res.json(req.alternatives);
+  }else{
+    console.log('fail => error code');
+    res.json(req.errorCode);
+  }
 };
 
 /**
@@ -132,7 +148,24 @@ exports.getName = function(req,res,next,name){
     console.log(result);
     req.foodList = result;
     next();
+  }).catch(function(reason){
+    console.log('error');
+    req.errorCode = reason;
+    next();
   });
-  
+
 };
 
+exports.getAlternatives = function(req,res,next,foodObject){
+  var jsonObject = JSON.parse(foodObject);
+  console.log(JSON.stringify(jsonObject));
+
+  nutrify.healthify(jsonObject.query,jsonObject.ndbno,true,jsonObject.nutId,jsonObject.minimize).then(function(result){
+    req.alternatives = result;
+    next();
+  }).catch(function(reason){
+    req.errorCode = reason;
+    next();
+  });
+};
+  

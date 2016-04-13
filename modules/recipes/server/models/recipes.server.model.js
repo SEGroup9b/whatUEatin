@@ -28,7 +28,14 @@ var recipeSchema = new Schema({
   
   // Health tags for user dietary needs.
   tags: {
-    allergies: [String],
+    allergies: {
+      nuts: Boolean,
+      eggs: Boolean,
+      fish: Boolean,
+      dairy: Boolean,
+      wheat: Boolean,
+      soy: Boolean
+    },
     health_concerns: [String]
   },
   
@@ -39,7 +46,7 @@ var recipeSchema = new Schema({
     unit: String,
     food_item: {
       name: String,
-      ndbno: Number,
+      ndbno: String,
       group: String,
       manu: String,
       nutrients: [{
