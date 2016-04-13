@@ -321,7 +321,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       $http.get('/api/usda/healthify/' + string_ingred_info).then(function(response){
         console.log(response.data);
         //this should be an array coming from the data
-        $scope.healthify_ingredients[index] = response.data;
+        $scope.healthify_ingredients = response.data;
         console.log($scope.healthify_ingredients);
       });
       
