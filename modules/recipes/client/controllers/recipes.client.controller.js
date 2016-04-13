@@ -300,15 +300,16 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       }
 
       var ingredient_info = {
-        ingredient: ingredient.item,
+        query: ingredient.item,
         ndbno: ingredient.food_item.ndbno,
-        nut_id: param_id,
+        nutId: param_id,
         minimize: $scope.min_check[index]
       };
 
       console.log(ingredient_info);
 
       var string_ingred_info = window.btoa(JSON.stringify(ingredient_info));
+      console.log(string_ingred_info);
 
       var promise = new Promise(function(resolve,reject){
         resolve($http.get('/api/usda/healthify/' + string_ingred_info).then(function(response){return response.data;}));
