@@ -159,6 +159,7 @@ exports.getName = function(req,res,next,name){
 exports.getAlternatives = function(req,res,next,foodObject){
   var jsonObject = JSON.parse(foodObject);
   console.log(JSON.stringify(jsonObject));
+
   nutrify.healthify(jsonObject.query,jsonObject.ndbno,true,jsonObject.nutId,jsonObject.minimize).then(function(result){
     req.alternatives = result;
     next();

@@ -313,6 +313,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       console.log(ingredient_info);
 
       var string_ingred_info =JSON.stringify(ingredient_info);
+
       console.log(string_ingred_info);
 
       $http.get('/api/usda/healthify/' + string_ingred_info).then(function(response){
