@@ -24,7 +24,7 @@
               <td>{{recipe.created_at | date:'mediumDate'}}</td>
             </tr>
           </table>
-        </div>  
+        </div>
       </div>
 
       <div class="col-md-5">
@@ -37,14 +37,14 @@
               <th>Quantity</th>
               <th>Unit</th>
             </tr>
-            <tr>
-              <td>{{detailedInfo.original_ingredients.item}}</td>
-              <td>{{detailedInfo.original_ingredients.quantity}}</td>
-              <td>{{detailedInfo.original_ingredients.unit}}</td>
+            <tr ng-repeat="item in detailedInfo.orig_ing">
+              <td>{{item.food_item.name}}</td>
+              <td>{{item.quantity}}</td>
+              <td>{{item.unit}}</td>
             </tr>
           </table>
         </div>
-      </div>     
+      </div>
     </div>
   </div>
 <!--
@@ -69,5 +69,5 @@
     <a ui-sref="about" class="footer">About</a>
     <a ui-sref="mission" class="footer">Our Mission</a>
   </footer>
-  
+
 </section>
