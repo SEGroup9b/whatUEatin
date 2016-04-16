@@ -6,11 +6,14 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a ui-sref="home"><img alt="What U Eatin?" class="" width="100" height="60" id="" src="modules/core/client/img/brand/logo3.png"/></a>
+    <!--<a ui-sref="home"><img alt="What U Eatin?" class="" width="100" height="60" id="" src="modules/core/client/img/brand/logo3.png"/></a>-->
     <!--<a ui-sref="home" class="navbar-brand">What U Eatin?</a>-->
   </div>
   <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
     <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
+      <li>
+        <a ui-sref="home" class="navbar-brand">What U Eatin?</a>
+      </li>
       <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
         <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
         <ul ng-switch-when="dropdown" class="dropdown-menu">
@@ -21,7 +24,7 @@
         <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
       </li>
     </ul>
-    <ul class="nav navbar-nav navbar-center"> <a ui-sref="home" class="navbar-brand" id="title">What U Eatin?</a>
+    <ul class="nav navbar-nav navbar-center">
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-hide="authentication.user">
       <li ui-sref-active="active">
@@ -38,9 +41,6 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <li ui-sref-active="active">
-            <a ui-sref="personalpage">View Profile</a>
-          </li>
           <li ui-sref-active="active">
             <a ui-sref="settings.profile">Edit Profile</a>
           </li>

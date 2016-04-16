@@ -3,11 +3,16 @@
 /**
  * Module dependencies.
  */
+
 var should = require('should'),
   mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  Recipe = mongoose.model('Recipe');
-
+  path = require('path'),
+  config = require('C:/Users/hammackb/Documents/GitHub/whatUEatin/config/env/local.js'),
+  User = require('C:/Users/hammackb/Documents/GitHub/whatUEatin/modules/users/server/models/user.server.model'),
+  Recipe = require('C:/Users/hammackb/Documents/GitHub/whatUEatin/modules/recipes/server/models/recipes.server.model');
+  // Had to modify User schema (not the part stored in the db, but the module.exports at the end of the file).
+  
+  
 /**
  * Globals
  */
@@ -17,6 +22,13 @@ var user, recipe;
  * Unit tests
  */
 describe('Recipe Model Unit Tests:', function () {
+
+  before(function(done) {
+    mongoose.connect(config.db.uri);
+    done();
+  });
+
+
 
   beforeEach(function (done) {
     user = new User({
@@ -30,8 +42,13 @@ describe('Recipe Model Unit Tests:', function () {
 
     user.save(function () {
       recipe = new Recipe({
-        title: 'Recipe Title',
-        content: 'Recipe Content',
+        title: 'title',
+        instructions: 'instructions',
+        servings: 'servings',
+        cooktime: 'cooktime',
+        votes: 0,
+        tags: { allergies: { nuts: false, eggs: false, fish: false, dairy: false, wheat: false, soy: false }, health_concerns: [''] },
+        orig_ing: [{ item: 'butter', quantity: 5, unit: 'tbsp', food_item: { name: 'Butter, Salted', ndbno: '01001', group: '', manu: '', nutrients: [{ }] } } ],
         user: user
       });
 

@@ -1,105 +1,128 @@
 <section ng-controller="HomeController" ng-init="find()">
+<style>
+  body {
+    background-image: url('modules/core/client/img/brand/veggies.jpg');
+  }
+</style>
 
-    <div class="row topper" id="style">
-      <div class="col-md-12 center">
-        <img id="veggies" src="modules/core/client/img/brand/veggies.jpg"/>
-        <div id="overlay-left">
-          <h3 class="text-center"> Pre-healthification... </h2>
-          <p class="text-center"> Unhealthy ingredients: </p>
-          <ul>
-            <li>Ingredient 1</li>
-            <li>Ingredient 2</li>
-          </ul>
-          <h4 class="text-center">Nutritional Information </h4>
-          <ul>
-            <li>Carbohydrates:</li>
-            <li>Saturated Fat:</li>
-            <li>Unsaturated Fat:</li>
-            <li>Protein:</li>
-            <li>Sugar:</li>
-            <li>Sodium:</li>
-            <li>Fiber:</li>
-          </ul>
+
+<body>
+    <div class="top">
+        <!--<img id="veggies" src="modules/core/client/img/brand/veggies.jpg"/>-->
+        <div class="float-left">
+          <img id="food" src="modules/core/client/img/brand/ccb.png"/>
         </div>
-        <div class="text-center" id="overlay">
-          <h2> Recipe of the Day! </h2>
-          <p>Populate with image and description of the recipe.</p>
-          <!--<ul ui-sref="recipes.view({recipeId: recipe._id})">
-            <li>
-              <span ng-bind="recipe.updated_at | date:'mediumDate'"></span>
-              <h2 class="list-group-item-heading" ng-bind="recipe.title"></h2>
-              <span ng-bind="recipe.user.displayName"></span>
-              <p class="list-group-item-text" ng-bind="recipe.content"></p> 
-            </li>
-          </ul>-->
-          
+
+        <div class="z-index-2" id="overlay">
+          <div class="text-center">
+            <div>
+              <h2>Chicken Cordon Bleu</h2>
+            </div>
+          </div>
+          <div class="">
+              <h3 class="text-center">Post-healthification!</h3>
+              <ul>
+                <li>Traditional flour breading -> Panko breading</li>
+                <li>Chicken -> Low Fat Chicken</li>
+                <li>Cheese -> Vegan Cheese Substitute</li>
+              </ul>
+              <h3 class="text-center">Nutritional Information</h3>
+              <ul>
+                <li>Carbohydrates: 29g </li>
+                <li>Saturated Fat: 2g </li>
+                <li>Unsaturated Fat: 1g </li>
+                <li>Protein: 23g </li>
+                <li>Sugar: 1g </li>
+                <li>Sodium: 600mg</li>
+                <li>Fiber: 2g </li>
+              </ul>
+          </div>
         </div>
-        <div id="overlay-right">
-          <h3 class="text-center"> Post-healthification! </h2>
-          <p class="text-center"> healthy stuff </p>
-          <ul>
-            <li>Ingredient 1</li>
-            <li>Ingredient 2</li>
-          </ul>
-          <h4 class="text-center">Nutritional Information </h4>
-          <ul>
-            <li>Carbohydrates:</li>
-            <li>Saturated Fat:</li>
-            <li>Unsaturated Fat:</li>
-            <li>Protein:</li>
-            <li>Sugar:</li>
-            <li>Sodium:</li>
-            <li>Fiber:</li>
-          </ul>
-        </div>
-      </div> 
     </div>
 
+    <div class="row" id="banner">
+    </div>
 
+</body>
+
+    <!--
     <div class="row" id="style2">
       <div class="col-md-5 col-md-offset-1 center">
         <h2 class="text-center"> Browse Recipes </h2>
         <div class="table-scrolling">
           <table class="table table-striped table-hover" id="table-border">
-            <tr ng-repeat="recipe in recipes" ng-click='showDetails($index)'> <!--ui-sref="recipes.view({recipeId: recipe._id})"-->
+            <tr ng-repeat="recipe in recipes" ng-click='showDetails($index)'> <!--ui-sref="recipes.view({recipeId: recipe._id}) --> <!--
               <td>Posted on
               <span ng-bind="recipe.updated_at | date:'mediumDate'"></span>
               <h2 class="list-group-item-heading" ng-bind="recipe.title"></h2>
               </td>
               <td>by
               <span ng-bind="recipe.user.displayName"></span>
-              <p class="list-group-item-text" ng-bind="recipe.content"></p> 
+              <p class="list-group-item-text" ng-bind="recipe.content"></p>
               </td>
             </tr>
           </table>
         </div>
       </div>
       <div class="jumbotron col-md-4 col-md-offset-1">
-            <h3>Select a Recipe for more details</h3>
-            <!-- 
-              Include a way to display detailed information about an individual listing:
-                   * consider how to use ng-click within the the table to implement this feature
-             -->
-             <br />
-             <p id="details"><strong>Title:</strong> <br />
-              <span>{{detailedInfo.title}}</span> <br />
-              <strong>Servings:</strong> <br />
-              <span>{{detailedInfo.servings}}</span> <br />
-              <strong>Cook Time:</strong> <br />
-              <span>{{detailedInfo.cook_time}}</span> <br />
+        <h3>Select a Recipe for more details</h3>
+         <br />
+         <p id="details"><strong>Title:</strong> <br />
+          <span>{{detailedInfo.title}}</span> <br />
+          <strong>Servings:</strong> <br />
+          <span>{{detailedInfo.servings}}</span> <br />
+          <strong>Cook Time:</strong> <br />
+          <span>{{detailedInfo.cook_time}}</span> <br />
 
-              <strong>Ingredients:</strong><br /> 
-              <span ng-repeat="ingredient in detailedInfo.original_ingredients">"{{ingredient.quantity}}  {{ingredient.unit}} {{ingredient.item}}" </span> <br>
-              <span ng-repeat="ingredient in detailedInfo.healthy_ing">"{{ingredient.quantity}}  {{ingredient.unit}} {{ingredient.item}}" </span> <br>
-              <strong>Directions: </strong> <br>
-              <span>{{detailedInfo.directions}} {{detailedInfo.instructions}}</span>
-             </p>
+          <strong>Ingredients:</strong><br />
+          <span ng-repeat="ingredient in detailedInfo.original_ingredients">"{{ingredient.quantity}}  {{ingredient.unit}} {{ingredient.item}}" </span> <br>
+          <span ng-repeat="ingredient in detailedInfo.healthy_ing">"{{ingredient.quantity}}  {{ingredient.unit}} {{ingredient.item}}" </span> <br>
+          <strong>Directions: </strong> <br>
+          <span>{{detailedInfo.directions}} {{detailedInfo.instructions}}</span>
+         </p>
       </div>
     </div>
+  -->
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 text-center" id="cattitle">
+      <h1><span>Browse by Category</span></h1>
+    </div>
+  </div>
 
-      <footer class="modal-footer modal-footer-center" id="style">
-        <a ui-sref="contact" class="footer">Contact Us</a>
-        <a ui-sref="about" class="footer">About</a>
-        <a ui-sref="mission" class="footer">Our Mission</a>
-      </footer>
+  <!--This code is modified from Ali Jafarian's tutorial (source: http://alijafarian.com/responsive-image-grids-using-css/)-->
+
+  <ul class="rig columns-3">
+    <li>
+      <img ui-sref="categories.list" src="modules/core/client/img/brand/high_protein.jpg" />
+      <h3 style="text-align: center;"><strong>High Protein</strong></h3>
+    </li>
+    <li>
+      <img ui-sref="categories.list" src="modules/core/client/img/brand/low_fat.jpg" />
+      <h3 style="text-align: center;"><strong>Low Fat</strong></h3>
+    </li>
+    <li>
+      <img ui-sref="categories.list" src="modules/core/client/img/brand/low_carb.jpg" />
+      <h3 style="text-align: center;"><strong>Low Carb</strong></h3>
+    </li>
+    <li>
+      <img ui-sref="categories.list" src="modules/core/client/img/brand/lactose_free.jpg" />
+      <h3 style="text-align: center;"><strong>Lactose Free</strong></h3>
+    </li>
+    <li>
+      <img ui-sref="categories.list" src="modules/core/client/img/brand/peanut_free.jpg" />
+      <h3 style="text-align: center;"><strong>Peanut Free</strong></h3>
+    </li>
+    <li>
+      <img ui-sref="categories.list" src="modules/core/client/img/brand/gluten_free.jpg" />
+      <h3 style="text-align: center;"><strong>Gluten Free</strong></h3>
+    </li>
+  </ul>
+  <!-- End Ali's code -->
+
 </section>
+
+<footer class="modal-footer modal-footer-center" id="footerstyle">
+  <a ui-sref="contact" class="footer">Contact Us</a>
+  <a ui-sref="about" class="footer">About</a>
+  <a ui-sref="mission" class="footer">Our Mission</a>
+</footer>

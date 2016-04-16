@@ -2,8 +2,8 @@
 //var nutrify = require('nutrify.js');
 
 // Recipes controller
-angular.module('recipes').controller('RecipesController', ['$scope', '$stateParams', '$timeout', '$location', '$window', 'Authentication', 'FileUploader', 'Recipes',
-  function ($scope, $stateParams, $timeout, $location, $window, Authentication, FileUploader, Recipes) {
+angular.module('recipes').controller('RecipesController', ['$http','$scope', '$stateParams', '$timeout', '$location', '$window', 'Authentication', 'FileUploader', 'Recipes','Usda',
+  function ($http,$scope, $stateParams, $timeout, $location, $window, Authentication, FileUploader, Recipes,Usda) {
     $scope.authentication = Authentication;
     //$scope.imageURL = $scope.recipe.recipeImgURL;
     
@@ -23,18 +23,115 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
     });
 
     $scope.original_ingredients = [];
+    $scope.assestsLoaded = false;
+    $scope.ingredientNumber = 0;
+    $scope.apiError = false;
+    //initialize healthify stuff
+    $scope.min_check = [];
+    $scope.init_parameters = [
+    { _id: 255, value: 'water' }, 
+    { _id: 208, value: 'energy' },
+    { _id: 203, value: 'protien' }, 
+    { _id: 204, value: 'total lipids (fat)' }, 
+    { _id: 205, value: 'carbohydrates' }, 
+    { _id: 291, value: 'fiber' }, 
+    { _id: 269, value: 'sugar' }, 
+    { _id: 301, value: 'calcium' }, 
+    { _id: 303, value: 'iron' }, 
+    { _id: 306, value: 'potassium' }, 
+    { _id: 307, value: 'sodium' }, 
+    { _id: 606, value: 'saturated fats' }
+    ];
+    $scope.parameters = [];
+    $scope.healthify_ingredients = [];
+    
+    /*Allergy Initializations */
+    $scope.nuts = false;
+    $scope.eggs = false;
+    $scope.fish = false;
+    $scope.dairy = false;
+    $scope.wheat = false;
+    $scope.soy = false;
+
     $scope.ingredients = {
-      quantity: null,
-      unit: 'tbsp',
-      item: ''
+      item: '',
+      quantity: 0,
+      unit: '',
+      food_item: {
+        name: '',
+        ndbno: '',
+        group: '',
+        manu: '',
+        nutrients: []
+      }
     };
 
+    $scope.clearResults = function(){
+      $scope.apiError = false;
+      $scope.assestsLoaded = false;
+      $scope.usdaList = [];
+    };
+
+    $scope.confirmIngredient = function(index){
+      $scope.confirmed = $scope.usdaList.item[index];
+      console.log($scope.confirmed);
+    };
+    $scope.confirmHealthify = function(index){
+      //this confirms undefined for now should work with an array
+      $scope.healthyIngredient = $scope.healthify_ingredients[index];
+      console.log(index + ' ' + $scope.healthyIngredient);
+    };
+
+
     $scope.addIngredientLine = function () {
-      //maybe check if previous ingredient filled out
-      console.log($scope.ingredients.item,$scope.ingredients.unit,$scope.ingredients.quantity);
-      $scope.original_ingredients.push($scope.ingredients);
-      $scope.ingredients={};
       
+      console.log('Adding Ingredient Line');
+      var promise = new Promise(function(resolve,reject){
+        
+        $scope.ingredients.food_item.name = $scope.confirmed.name;
+        $scope.ingredients.food_item.ndbno = $scope.confirmed.ndbno;
+        $scope.ingredients.food_item.group = $scope.confirmed.group;
+        $scope.original_ingredients.push($scope.ingredients);
+        $scope.ingredients = {
+          item: '',
+          quantity: 0,
+          unit: '',
+          food_item: {
+            name: '',
+            ndbno: '',
+            group: '',
+            manu: '',
+            nutrients: []
+          }
+        };
+        resolve();
+      });
+      promise.then(function(){
+        findFoodReport().then(function(result){
+          console.log(' addIngredientLine log ' + JSON.stringify(result));
+          if(result){
+            $scope.original_ingredients[$scope.ingredientNumber].food_item.nutrients = result.nutrients;
+              //reset the input values
+            $scope.ingredientNumber = $scope.ingredientNumber + 1;
+            $scope.usdaList = [];
+            $scope.assestsLoaded = false;
+            $scope.apiError = false;
+            console.log($scope.original_ingredients);
+          }else{
+            $scope.apiError = true;
+          }
+        });
+      });
+      
+      
+    };
+
+    $scope.deleteIngredientLine = function(ingredient) {
+      for (var i in $scope.original_ingredients) {
+        if ($scope.original_ingredients[i] === ingredient) {
+          $scope.original_ingredients.splice(i,1);
+        }
+      }
     };
 
     // Create new Recipe
@@ -46,39 +143,61 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
 
         return false;
       }
-      //$scope.populateArr();
 
       // Create new Recipe object
       var recipe = new Recipes({
         title: this.title,
-        original_ingredients: [{}],//fill in array here
+        orig_ing: [],//fill in array here
         instructions: this.instructions,
         servings: this.servings,
-        cook_time: this.cook_time
+        cook_time: this.cook_time,
+        imgURL: '5',
+        tags: {
+          allergies: {
+            nuts: $scope.nuts,
+            eggs: $scope.eggs,
+            fish: $scope.fish,
+            dairy: $scope.dairy,
+            wheat: $scope.wheat,
+            soy: $scope.soy
+          },
+          health_concerns: []
+        }
       });
       console.log($scope.original_ingredients);
       console.log(recipe);
-      for(var i=0;i <$scope.original_ingredients.length;i++){
-      /*  
-      var ingredient = {
-          quantity: $scope.original_ingredients[i].quantity,
-          unit: $scope.original_ingredients[i].unit,
-          item: $scope.original_ingredients[i].item
-        };*/
-        //console.log(ingredient);
-        recipe.original_ingredients.push($scope.original_ingredients[i]);
-        console.log(recipe);
+      for(var i=0;i < $scope.original_ingredients.length; i++){
+
+        recipe.orig_ing.push($scope.original_ingredients[i]);
+        
       }
-      
+
+      //console.log
 
       // Redirect after save
       recipe.$save(function (response) {
-        $location.path('recipes/' + response._id);
-
+        var promise = new Promise(function(resolve,reject){
+          // Clear form fields
+          $scope.title = '';
+          $scope.directions = '';
+          console.log(recipe._id);
+          console.log(recipe.imageURL);
+          $scope.edUploadRecipePic(recipe);
+          console.log(recipe.imageURL);
+        });
+        promise.then(function(){
+          console.log('upload promise then');
+          $location.path('recipes/' + response._id);
+        });
         // Clear form fields
-        $scope.title = '';
+        /*$scope.title = '';
         $scope.directions = '';
+        console.log(recipe._id);
+        console.log(recipe.imageURL);
+        $scope.edUploadRecipePic(recipe);
+        console.log(recipe.imageURL);*/
       }, function (errorResponse) {
+        console.log('error response function called anyways');
         $scope.error = errorResponse.data.message;
       });
     };
@@ -126,8 +245,10 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
 
     // Find existing Recipe
     $scope.findOne = function () {
+      console.log($stateParams.recipeId);
       $scope.recipe = Recipes.get({
         recipeId: $stateParams.recipeId
+        //this is when i'll do it
       });
     };
 
@@ -140,6 +261,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
         fileReader.onload = function (fileReaderEvent) {
           $timeout(function () {
             $scope.imageURL = fileReaderEvent.target.result;
+
           }, 0);
         };
       }
@@ -175,10 +297,120 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$statePara
       $scope.uploader.uploadAll();
     };
 
+    $scope.edUploadRecipePic = function (passedRecipe){
+      console.log('first half runs');
+
+     // console.log(passedRecipe._id);
+      //console.log($scope.recipe.recipeImgURL);
+      //console.log($scope.imageURL);
+      $http.post('/api/recipes/'+passedRecipe._id,{ _id: passedRecipe._id, pic: $scope.imageURL });
+
+      var recipe = passedRecipe;
+
+      recipe.imgURL = 'https://s3.amazonaws.com/finalrecipepictures/'+passedRecipe._id+'.jpg';
+
+      recipe.$update(function () {
+        $location.path('recipes/' + recipe._id);
+      }, function (errorResponse) {
+        console.log('screwed');
+        $scope.error = errorResponse.data.message;
+      });
+
+
+    };
+
     // Cancel the upload process
     $scope.cancelUpload = function () {
       $scope.uploader.clearQueue();
       $scope.imageURL = $scope.recipe.recipeImgURL;
     };
+
+
+    function findFoodReport() {
+      
+      return new Promise(function(resolve,reject){
+        resolve($http.get('/api/usda/foodReport/' + $scope.confirmed.ndbno).then(function(response){return response.data;}));
+        
+      });
+    }
+
+    $scope.findAlternatives = function(index, ingredient) {
+      console.log($scope.parameters[index]);
+      var param_val = $scope.parameters[index];
+      var param_id = 205;
+      $scope.ingredientNumber = index;
+      for (var i in $scope.init_parameters) {
+        if ($scope.init_parameters[i].value === param_val) {
+          param_id = $scope.init_parameters[i]._id;
+          break;
+        }
+      }
+
+      var ingredient_info = {
+        query: ingredient.item,
+        ndbno: ingredient.food_item.ndbno,
+        nutId: param_id,
+        minimize: $scope.min_check[index]
+      };
+
+      console.log(ingredient_info);
+
+      var string_ingred_info =JSON.stringify(ingredient_info);
+
+      console.log(string_ingred_info);
+
+      $http.get('/api/usda/healthify/' + string_ingred_info).then(function(response){
+        console.log(response.data);
+        //this should be an array coming from the data
+        $scope.healthify_ingredients = response.data;
+        console.log($scope.healthify_ingredients);
+      });
+      
+    };
+
+    $scope.addHealthyIngredients = function() {
+      //console.log($scope.healthify_ingredients[0])
+      
+      console.log('Adding Ingredient Line');
+
+      $scope.recipe.healthy_ing[$scope.ingredientNumber] = $scope.healthyIngredient;
+
+      $scope.healthyIngredient = {
+        item: '',
+        quantity: 0,
+        unit: '',
+        food_item: {
+          name: '',
+          ndbno: '',
+          group: '',
+          manu: '',
+          nutrients: []
+        }
+      };
+      $scope.healthify_ingredients = [];
+      $scope.ingredientNumber = 0;
+      
+      console.log($scope.recipe);
+    };
+
+
+    $scope.findFoods = function(){
+      return new Promise(function(resolve,reject){
+        resolve($http.get('/api/usda/' + $scope.ingredients.item).then(function(response){
+          if(response.data !== 404){
+            $scope.usdaList = response.data;
+            $scope.assestsLoaded = true;
+            $scope.apiError = false;
+            console.log('printing list ' + JSON.stringify(response));
+          }else{
+            $scope.usdaList = [];
+            $scope.assestsLoaded = true;
+            $scope.apiError = true;
+            console.log('error recieving list' + JSON.stringify(response.data));
+          }
+        }));
+      });
+    };
+   
   }
 ]);
