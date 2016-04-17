@@ -4,10 +4,13 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
   function ($scope, $stateParams, $location, Authentication, Recipes, Categories) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
+
     //For categories and filtering by category
     $scope.currentCategory = {
       name: 'All',
       tag: 'all',
+      allergiesIndex: -1,
+      health_concerns: 'N',
       img_path: 'modules/core/client/img/brand/ccb.png'
     };
     $scope.recipes = [];
@@ -40,9 +43,11 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
 
       // Create new Category object
       var category = new Categories({
-        name: this.name,
-        tag: this.tag,
-        img_path: 'modules/core/client/img/brand/' + this.img_path
+        name: $scope.currentCategory.name,
+        tag: $scope.currentCategory.tag,
+        allergiesIndex: $scope.currentCategory.allergiesIndex,
+        health_concerns: $scope.currentCategory.health_concerns,  
+        img_path: 'modules/core/client/img/brand/' + $scope.currentCategory.img_path
       });
 
       // Redirect after save
@@ -50,9 +55,13 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
         $location.path('categories');
 
         // Clear form fields
-        $scope.name = '';
-        $scope.tag = '';
-        $scope.img_path = '';
+        $scope.currentCategory = {
+          name: 'All',
+          tag: 'all',
+          allergiesIndex: -1,
+          health_concerns: 'N',
+          img_path: 'modules/core/client/img/brand/ccb.png'
+        };
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

@@ -1,0 +1,20 @@
+
+<section ng-controller="CategoriesController" ng-init="findOne(); findRecipes()" style="min-height: 100vh;" id="style" >
+    
+  <div class="row" id="style">
+    <div class="col-md-6 col-md-offset-3">
+      <h1>{{category.name}}</h1>
+      <div class="pull-right">
+        <a class="btn btn-primary" ng-click="remove();">
+          <i class="glyphicon glyphicon-trash"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</section>
+<footer class="modal-footer modal-footer-center" id="footerstyle">
+  <a ui-sref="contact" class="footer">Contact Us</a>
+  <a ui-sref="about" class="footer">About</a>
+  <a ui-sref="mission" class="footer">Our Mission</a>
+</footer>
