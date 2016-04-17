@@ -1,18 +1,18 @@
-
-<section ng-controller="CategoriesController" ng-init="findOne(); findRecipes()" style="min-height: 100vh;" id="style" >
-    
-  <div class="row" id="style">
-    <div class="col-md-6 col-md-offset-3">
-      <h1>{{category.name}}</h1>
-      <div class="pull-right">
-        <a class="btn btn-primary" ng-click="remove();">
-          <i class="glyphicon glyphicon-trash"></i>
-        </a>
-      </div>
+<body>
+  <section ng-controller="CategoriesController" ng-init="findOne(); findRecipes()" style="min-height: 100vh; margin: 0;" id="style" >
+    <div class="col-md-6 col-md-offset-3 text-center" id="cattitle" style="margin-top: -1px;">
+      <h1><span>{{category.name}}</span></h1>
+    </div>
+    <div class="row" ng-repeat="recipe in recipes track by $index" ng-if="$index % 4 == 0">
+    <div class="col-xs-3" ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3]" ng-if="recipes[i] != null">
+      <h2 style="margin-top: 0; margin-bottom: 0;"><span>{{recipe.title}}</span></h2>
+      <img id="recipe-img" src="{{recipes[i].imgURL}}">  
+      <br>
     </div>
   </div>
 
-</section>
+  </section>
+</body>
 <footer class="modal-footer modal-footer-center" id="footerstyle">
   <a ui-sref="contact" class="footer">Contact Us</a>
   <a ui-sref="about" class="footer">About</a>

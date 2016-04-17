@@ -374,3 +374,28 @@ h1 span {
   -moz-box-shadow: 0 0 7px 0 rgba(0,0,0,0.7);
   box-shadow: 0 0 7px 0 rgba(0,0,0,0.7);
 }
+
+h2 span {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  color: #F4F7D9; 
+  font: bold 25px/48px Helvetica, Sans-Serif; 
+  letter-spacing: -1px;  
+  background: rgb(25, 23, 24); /* fallback color */
+  background: rgba(25, 23, 24, 0.85);
+  text-align: center;
+  -webkit-box-shadow: 0 0 7px 0 rgba(0,0,0,0.7);
+  -moz-box-shadow: 0 0 7px 0 rgba(0,0,0,0.7);
+  box-shadow: 0 0 7px 0 rgba(0,0,0,0.7);
+}
+
+#recipe-img {
+  display: block; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 100%;
+  height: auto;
+  border-style: solid;
+  border-width: 2px;
+}
