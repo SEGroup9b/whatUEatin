@@ -79,11 +79,19 @@ exports.read = function (req, res) {
  * Update a recipe
  */
 exports.update = function (req, res) {
+  console.log("calling update in server.\n");
   var recipe = req.recipe;
 
+  //console.log(req.body);
+
   recipe.title = req.body.title;
-  recipe.directions = req.body.directions;
+  recipe.instructions = req.body.instructions;
+  recipe.servings = req.body.servings;
+  recipe.cook_time = req.body.cook_time;
+  recipe.healthy_ing = req.body.healthy_ing;
   recipe.imgURL = req.body.imgURL;
+
+  console.log(recipe);
 
   recipe.save(function (err) {
     if (err) {

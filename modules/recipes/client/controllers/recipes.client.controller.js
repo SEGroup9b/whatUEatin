@@ -210,6 +210,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
     // Update existing Recipe
     $scope.update = function (isValid) {
+      //console.log("calling the update in client.");
       $scope.error = null;
 
       if (!isValid) {
@@ -362,8 +363,11 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       
       console.log('Adding Ingredient Line');
 
-      $scope.recipe.healthy_ing[$scope.ingredientNumber] = $scope.healthyIngredient;
+      //add healthy ingredient to healthy_ing
+      $scope.recipe.healthy_ing[$scope.ingredientNumber].food_item = $scope.healthyIngredient;
+      //$scope.recipe.healthy_ing[$scope.ingredientNumber].item = $scope.healthyIngredient.name;
 
+      //reset healthyIngredient to null
       $scope.healthyIngredient = {
         item: '',
         quantity: 0,
@@ -376,6 +380,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
           nutrients: []
         }
       };
+      //reset the healthify_ingredients from modal to empty
       $scope.healthify_ingredients = [];
       $scope.ingredientNumber = 0;
       
