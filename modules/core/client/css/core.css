@@ -413,9 +413,10 @@ h3 span {
   margin-left: auto; 
   margin-right: auto; 
   width: 100%;
-  height: auto;
+  height: 225px;
   border-style: solid;
   border-width: 2px;
+  padding: 0;
 }
 
 #category-img {
