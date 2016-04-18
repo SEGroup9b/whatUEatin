@@ -6,7 +6,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
   function ($http,$scope, $stateParams, $timeout, $location, $window, Authentication, FileUploader, Recipes,Usda) {
     $scope.authentication = Authentication;
     //$scope.imageURL = $scope.recipe.recipeImgURL;
-    
+    $scope.user = Authentication.user;
     // Create file uploader instance
     $scope.uploader = new FileUploader({
       url: 'api/users/picture',
@@ -296,6 +296,11 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
       // Start upload
       $scope.uploader.uploadAll();
+    };
+
+
+    $scope.myFilter = function (item) { 
+      return item.user.displayName === $scope.user.displayName; 
     };
 
     $scope.edUploadRecipePic = function (passedRecipe){
