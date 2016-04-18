@@ -369,7 +369,6 @@ h1 span {
   background: rgb(25, 23, 24); /* fallback color */
   background: rgba(25, 23, 24, 0.85);
   padding: 10px; 
-
   -webkit-box-shadow: 0 0 7px 0 rgba(0,0,0,0.7);
   -moz-box-shadow: 0 0 7px 0 rgba(0,0,0,0.7);
   box-shadow: 0 0 7px 0 rgba(0,0,0,0.7);
@@ -379,6 +378,25 @@ h2 span {
   margin-left: auto;
   margin-right: auto;
   display: block;
+  width: 100%;
+  height: auto;
+  color: #F4F7D9; 
+  font: bold 25px/48px Helvetica, Sans-Serif; 
+  letter-spacing: -1px;  
+  background: rgb(25, 23, 24); /* fallback color */
+  background: rgba(25, 23, 24, 0.85);
+  text-align: center;
+  -webkit-box-shadow: 0 0 7px 0 rgba(0,0,0,0.7);
+  -moz-box-shadow: 0 0 7px 0 rgba(0,0,0,0.7);
+  box-shadow: 0 0 7px 0 rgba(0,0,0,0.7);
+}
+
+h3 span {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 40%;
+  height: auto;
   color: #F4F7D9; 
   font: bold 25px/48px Helvetica, Sans-Serif; 
   letter-spacing: -1px;  
@@ -398,4 +416,12 @@ h2 span {
   height: auto;
   border-style: solid;
   border-width: 2px;
+}
+
+#category-img {
+  display: block; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 800px;
+  height: 625px;
 }
