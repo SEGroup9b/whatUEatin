@@ -33,7 +33,7 @@ exports.create = function (req, res) {
 };
 
 exports.edUploadPic = function(req,res){
-  console.log(config.awscred);
+  //console.log(config.awscred);
 
   var dataURL = req.body.pic;
   //var newURL = '';
@@ -109,6 +109,25 @@ exports.update = function (req, res) {
  */
 exports.delete = function (req, res) {
   var recipe = req.recipe;
+  var s3 = new AWS.S3();
+  console.log(recipe.imgURL);
+  var fileName = recipe.imgURL.substring(recipe.imgURL.lastIndexOf('/')+1);
+  console.log(fileName);
+  s3.deleteObjects({
+    Bucket: 'finalrecipepictures',
+    Delete: {
+      Objects: [
+       { Key: fileName }
+      ]
+    }
+  }, function(err, data) {
+
+    if (err)
+      return console.log(err);
+
+    console.log('success');
+
+  });
 
   recipe.remove(function (err) {
     if (err) {
