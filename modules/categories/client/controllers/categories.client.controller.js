@@ -101,6 +101,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
             console.log('All tag');
           } else {
             var current;
+            console.log($scope.category.tag);
             for (var i = $scope.allRecipes.length - 1; i >= 0; i--) {
               current = $scope.allRecipes[i];
               //if allergy type, check for allergies
@@ -111,7 +112,7 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
                   continue;
                 } else $scope.recipes.push(current);
               } else if ($scope.category.t_type === 'health'){
-                if (current.tags.health_concerns.indexOf($scope.category.tag === -1)) {
+                if (current.tags.health_concerns.indexOf($scope.category.tag) === -1) {
                   console.log(current.title + ' is not ' + $scope.category.name);
                   continue;
                 } else $scope.recipes.push(current);

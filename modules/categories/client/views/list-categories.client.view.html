@@ -6,7 +6,7 @@
       </div>
     </div>
     <div>
-      <carousel interval="4000" id="category-img" style="">
+      <carousel interval="3500" id="category-img" style="">
         <slide ng-repeat="category in categories | orderBy: 'name'" active="category.active" id="slideStyle">
           <div>
             <img ui-sref="categories.view({categoryId: category._id})" ng-src="{{category.img_path}}" id="category-img">
