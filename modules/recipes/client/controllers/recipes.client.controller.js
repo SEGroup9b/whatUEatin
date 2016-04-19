@@ -66,10 +66,15 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       }
     };
 
-    //initialize healthy_ing array
-    $scope.intializeIngredients = function() {
+    $scope.init_ing = false;
 
-    };
+    //initialize healthy_ing array
+    function initializeIngredients() {
+      for (var i in $scope.recipe.orig_ing) {
+        $scope.recipe.healthy_ing.push($scope.recipe.orig_ing[i].food_item);
+      }
+      $scope.init_ing = true;
+    }
 
     $scope.clearResults = function(){
       $scope.apiError = false;
@@ -309,8 +314,8 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       console.log($stateParams.recipeId);
       $scope.recipe = Recipes.get({
         recipeId: $stateParams.recipeId
-        //this is when i'll do it
       });
+      //$scope.init_ing = true;
     };
 
     // Called after the user selected a new picture file
@@ -436,6 +441,9 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
     $scope.addHealthyIngredients = function() {
       //console.log($scope.healthify_ingredients[0])
+      if($scope.init_ing === false) {
+        initializeIngredients();
+      }
       
       console.log('Adding Ingredient Line');
 
