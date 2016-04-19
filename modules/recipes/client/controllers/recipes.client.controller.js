@@ -5,7 +5,8 @@
 angular.module('recipes').controller('RecipesController', ['$http','$scope', '$stateParams', '$timeout', '$location', '$window', 'Authentication', 'FileUploader', 'Recipes','Usda',
   function ($http,$scope, $stateParams, $timeout, $location, $window, Authentication, FileUploader, Recipes,Usda) {
     $scope.authentication = Authentication;
-
+    //var outerrecipe;
+    //console.log($scope.recipe);
     $scope.user = Authentication.user;
     // Create file uploader instance
     $scope.uploader = new FileUploader({
@@ -237,7 +238,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       }
 
       var recipe = $scope.recipe;
-
+      $scope.edUploadRecipePic(recipe);
       recipe.$update(function () {
         $location.path('recipes/' + recipe._id);
       }, function (errorResponse) {
@@ -268,6 +269,10 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         fileReader.onload = function (fileReaderEvent) {
           $timeout(function () {
             $scope.imageURL = fileReaderEvent.target.result;
+            try{
+              $scope.recipe.imgURL = fileReaderEvent.target.result;
+            }
+            catch(Exception){}
 
           }, 0);
         };
@@ -313,9 +318,11 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     //amazon pic upload, Works sometimes?
     $scope.edUploadRecipePic = function (passedRecipe){
       console.log('first half runs');
-
-      $http.post('/api/recipes/'+passedRecipe._id,{ _id: passedRecipe._id, pic: $scope.imageURL });
-
+      //console.log($scope.recipe.imgURL);
+      if (typeof myVar !== 'undefined')
+        $http.post('/api/recipes/'+passedRecipe._id,{ _id: passedRecipe._id, pic: $scope.recipe.imgURL });
+      else
+        $http.post('/api/recipes/'+passedRecipe._id,{ _id: passedRecipe._id, pic: $scope.imageURL });
       var recipe = passedRecipe;
 
       recipe.imgURL = 'https://s3.amazonaws.com/finalrecipepictures/'+passedRecipe._id+'.jpg';
