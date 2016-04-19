@@ -37,7 +37,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
         fileReader.onload = function (fileReaderEvent) {
           $timeout(function () {
             $scope.imageURL = fileReaderEvent.target.result;
-            console.log($scope.imageURL);
+            //console.log($scope.imageURL);
           }, 0);
         };
       }
@@ -99,12 +99,28 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
      //console.log(document.getElementById('bobby').value);
       //document.getElementById('bobby').src ="model.jpg"
 
+      var imagesize = $scope.imageURL.length * (3/4);
+      console.log(imagesize);
+
+      var isgo = true;
+
+      if(imagesize > 1000000){
+        isgo = false;
+      }
+
      
 
+      if(isgo){
+        $http.post('/api/users/picture',{ user_id: $scope.user._id, pic: $scope.imageURL });
+        alert('Image Set!');
+      }
 
-      $http.post('/api/users/picture',{ user_id: $scope.user._id, pic: $scope.imageURL });
+      if(!isgo)
+        alert('Image file can\'t be over 1MB!');
      
       //console.log(response.length);
+
+
       
       //console.log(JSON.stringify(response));
     };

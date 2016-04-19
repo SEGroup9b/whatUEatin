@@ -7,13 +7,13 @@
           <img ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
          
         </div>
-        <div class="text-center form-group" ng-hide="uploader.queue.length">
+        <div class="text-center form-group">
           <span class="btn btn-default btn-file">
               Select Image <input type="file" nv-file-select uploader="uploader" id ="bobby">
           </span>
         </div>
         <div class="text-center form-group" ng-show="uploader.queue.length">
-          <button class="btn btn-primary" ng-click="edUploadUserPic();">Create Bucket</button>
+          <button class="btn btn-primary" ng-click="edUploadUserPic();">Change Picture</button>
           <!--<button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>-->
 
         </div>
