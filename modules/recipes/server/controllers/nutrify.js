@@ -1,7 +1,6 @@
 'use strict';
 
 var Request = require('request');      // for API calls
-//var Promise = require('promise');      // for writing working code
 var querystring = require('querystring');   // for constructing API calls easily.
 var key = 'YAJ2M9l67OaqNMPCEfBcoccVtQDY5LPUR20rFzP8';    // our USDA api key
 var reportURL = 'http://api.nal.usda.gov/ndb/reports/?';  
@@ -24,13 +23,6 @@ var nutrientURL = 'http://api.nal.usda.gov/ndb/nutrients/?';
 */
 
 
-/*
-nutrify('butter', '01001', true, 291, true).then(function(result) {     
-  console.log("Alternative food to [butter, whipped with salt]: ");
-  console.log(result.healthiest);
-  console.log("This value is " + result.difference + " less than the original");
-});
-*/
 
 
 // Returns the most "healthy" ndbno alternative to a given ndbno; via PROMISES WOW WE LEAN BOYS.
@@ -38,17 +30,17 @@ exports.healthify = function(query, ndbno, same_fg, nut_id, minimize) {
   var orig;
   return new Promise(function(resolve, reject) {
     var promiseArray = [];
+    //retrieving food report on current item
     exports.food_report(ndbno).then(function(report) {   
       var fg = report.group;
       orig = report;
       if (same_fg === false) {
         fg = ''; 
       }
+      //returning actual food query from usda to compare to
       return exports.find_foods(query, fg);
     }).then(function(matches) {
-      console.log('Making an array of promises, awww jees Ben');
-      //console.log(matches.item);
-      //console.log('matches length ' + matches.item.length);
+      //console.log('Making an array of promises, awww jees Ben');
       
       
       var alt_foods = [];
@@ -62,44 +54,36 @@ exports.healthify = function(query, ndbno, same_fg, nut_id, minimize) {
         }
       }
       
-      console.log('alts');
-      console.log(alt_foods);
+      //console.log('alts');
+      //console.log(alt_foods);
       
-      /*
-        if (matches[i].name.toLowerCase().indexOf(query.toLowerCase()) !== -1 && matches[i].ndbno.toString() !== ndbno.toString()) {
-          alt_foods.push(matches[i]);    
-        }
-      }
-      */
       
       var alt_reports = [];
       var promiseArray = [];
+      //promise for each result from find foods and getting food report for each
       for (var j = 0; j < alt_foods.length; j++) {
-        console.log('pushing food report of', alt_foods[j].ndbno, 'into the promise array');
+        //console.log('pushing food report of', alt_foods[j].ndbno, 'into the promise array');
         promiseArray.push(exports.food_report(alt_foods[j].ndbno));
       }
+      //continuing only after all have resolved
       return Promise.all(promiseArray);
       
     }).then(function(resultArray) {
-      console.log('I mean, cmon Ben');
+      //console.log('I mean, cmon Ben');
       //return find_healthiest(orig, resultArray, nut_id, minimize);
-      console.log('REULTS ARE PROGRAGES');
-      console.log(resultArray);
+      //returning array of objects
       resolve(resultArray);
-      
-    //}).then(function(conclusion) {
-     // console.log('wow');
-     // resolve(conclusion);
-      
+
     });
   });
 };
 
 function find_healthiest(orig_report, alt_reports, nutrient_id, minimize) {
-  console.log('entered find_healthiest');
+  //comparing each ingredient based on chosen nutrient and whether or not to minimize based on that ingredient
+  //console.log('entered find_healthiest');
   return new Promise(function(resolve, reject) {
-    console.log('entered promise');
-    console.log(JSON.stringify(orig_report));
+    //console.log('entered promise');
+    //console.log(JSON.stringify(orig_report));
     var base_val;
     for(var k = 0; k < orig_report.nutrients.length;k++){
       if(orig_report.nutrients[k].nutrient_id === nutrient_id){
@@ -112,7 +96,7 @@ function find_healthiest(orig_report, alt_reports, nutrient_id, minimize) {
     var diff = 0;
     
     // Now we got the base value. 
-    console.log('printing length of alt reports ' + alt_reports.length);
+    //console.log('printing length of alt reports ' + alt_reports.length);
     for (var i = 0; i < alt_reports.length; i++) {
       var alt_val = alt_reports[i].nutrients[nutrient_id].value;
       
@@ -131,7 +115,7 @@ function find_healthiest(orig_report, alt_reports, nutrient_id, minimize) {
       }
     }
     //he returned only one option make it an array of options that match the if requirements he has
-    console.log('Its finding the "healthiest"');
+    //console.log('Its finding the "healthiest"');
     var best_report = mindex === -1 ? orig_report : alt_reports[mindex];
     var conclusion = {
       healthiest: best_report,
@@ -178,7 +162,7 @@ exports.food_report = function (ndbno) {
               unit: n.unit,
               value: n.value // value per 100 grams.
             });
-            console.log(JSON.stringify(nuts));
+            //console.log(JSON.stringify(nuts));
           }
         }
         var food = {
@@ -189,7 +173,7 @@ exports.food_report = function (ndbno) {
           nutrients: nuts
         };
         //console.log(JSON.stringify(food));
-        console.log(food.name);
+        //console.log(food.name);
         
         resolve(food);
       } else {
@@ -203,7 +187,7 @@ exports.food_report = function (ndbno) {
 
 // Returns a list of possible ndbno values matching a given query; via callback.
 exports.find_foods = function (ing_name, food_group) {
-  console.log('Inside nutrify finding food');
+  //console.log('Inside nutrify finding food');
   return new Promise(function(resolve, reject) {
     if (food_group === undefined) food_group = '';
     var payload = {
