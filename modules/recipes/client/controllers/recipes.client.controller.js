@@ -5,7 +5,7 @@
 angular.module('recipes').controller('RecipesController', ['$http','$scope', '$stateParams', '$timeout', '$location', '$window', 'Authentication', 'FileUploader', 'Recipes','Usda',
   function ($http,$scope, $stateParams, $timeout, $location, $window, Authentication, FileUploader, Recipes,Usda) {
     $scope.authentication = Authentication;
-    //$scope.imageURL = $scope.recipe.recipeImgURL;
+
     $scope.user = Authentication.user;
     // Create file uploader instance
     $scope.uploader = new FileUploader({
@@ -22,16 +22,22 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       }
     });
 
+    //ingredients array for pushing ingredients during creation
     $scope.original_ingredients = [];
+    //Bool to check if assests loaded from promises for the loading gif 
     $scope.assestsLoaded = false;
+    //index for pushed ingredients
     $scope.ingredientNumber = 0;
+    //error checking for api calls
     $scope.apiError = false;
     //initialize healthify stuff
+    //array for min check on each item in the orig_ing list on healthify page
     $scope.min_check = [];
+    //nutrient id's for usda database
     $scope.init_parameters = [
     { _id: 255, value: 'water' }, 
     { _id: 208, value: 'energy' },
-    { _id: 203, value: 'protien' }, 
+    { _id: 203, value: 'protein' }, 
     { _id: 204, value: 'total lipids (fat)' }, 
     { _id: 205, value: 'carbohydrates' }, 
     { _id: 291, value: 'fiber' }, 
@@ -42,7 +48,9 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     { _id: 307, value: 'sodium' }, 
     { _id: 606, value: 'saturated fats' }
     ];
+    //parameter drop down
     $scope.parameters = [];
+    //array for healthify ingredients to be pushed to
     $scope.healthify_ingredients = [];
     
     /*Allergy Initializations */
@@ -65,28 +73,31 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         nutrients: []
       }
     };
-
+    //Clears the modal info for failed api request on button press
     $scope.clearResults = function(){
       $scope.apiError = false;
       $scope.assestsLoaded = false;
       $scope.usdaList = [];
     };
-
+    //Selected ingredient from list in create recipe modal
     $scope.confirmIngredient = function(index){
       $scope.confirmed = $scope.usdaList.item[index];
       console.log($scope.confirmed);
     };
+    //Selected ingredient from list in healthify modal
     $scope.confirmHealthify = function(index){
       //this confirms undefined for now should work with an array
       $scope.healthyIngredient = $scope.healthify_ingredients[index];
       console.log(index + ' ' + $scope.healthyIngredient);
     };
 
-
+    //pushing the ingredient into the ingredient array
     $scope.addIngredientLine = function () {
       
       
       console.log('Adding Ingredient Line');
+      //promises Promises PROMISES
+      //ensduring the ndbno is set before running the get request using it
       var promise = new Promise(function(resolve,reject){
         
         $scope.ingredients.food_item.name = $scope.confirmed.name;
@@ -107,9 +118,11 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         };
         resolve();
       });
+      //running the promise then the findFood report THEN setting the result and resetting error info
       promise.then(function(){
         findFoodReport().then(function(result){
           console.log(' addIngredientLine log ' + JSON.stringify(result));
+          //error checking 
           if(result){
             $scope.original_ingredients[$scope.ingredientNumber].food_item.nutrients = result.nutrients;
               //reset the input values
@@ -123,10 +136,8 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
           }
         });
       });
-      
-      
     };
-
+    //removing ingredient from array
     $scope.deleteIngredientLine = function(ingredient) {
       for (var i in $scope.original_ingredients) {
         if ($scope.original_ingredients[i] === ingredient) {
@@ -183,6 +194,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
           $scope.directions = '';
           console.log(recipe._id);
           console.log(recipe.imageURL);
+          //recipe pic upload to amazon
           $scope.edUploadRecipePic(recipe);
           console.log(recipe.imageURL);
         });
@@ -190,13 +202,6 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
           console.log('upload promise then');
           $location.path('recipes/' + response._id);
         });
-        // Clear form fields
-        /*$scope.title = '';
-        $scope.directions = '';
-        console.log(recipe._id);
-        console.log(recipe.imageURL);
-        $scope.edUploadRecipePic(recipe);
-        console.log(recipe.imageURL);*/
       }, function (errorResponse) {
         console.log('error response function called anyways');
         $scope.error = errorResponse.data.message;
@@ -253,7 +258,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         //this is when i'll do it
       });
     };
-
+    //copy pasted mean generate picture upload. May break picture preview may not, not enough to test thoroughly
     // Called after the user selected a new picture file
     $scope.uploader.onAfterAddingFile = function (fileItem) {
       if ($window.FileReader) {
@@ -303,13 +308,12 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     $scope.myFilter = function (item) { 
       return item.user.displayName === $scope.user.displayName; 
     };
+    //end copy pasted code
 
+    //amazon pic upload, Works sometimes?
     $scope.edUploadRecipePic = function (passedRecipe){
       console.log('first half runs');
 
-     // console.log(passedRecipe._id);
-      //console.log($scope.recipe.recipeImgURL);
-      //console.log($scope.imageURL);
       $http.post('/api/recipes/'+passedRecipe._id,{ _id: passedRecipe._id, pic: $scope.imageURL });
 
       var recipe = passedRecipe;
@@ -332,7 +336,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       $scope.imageURL = $scope.recipe.recipeImgURL;
     };
 
-
+    //call nutrify findfoodreport and return promise object holding foodreport object
     function findFoodReport() {
       
       return new Promise(function(resolve,reject){
@@ -340,7 +344,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         
       });
     }
-
+    //used in healthify to get alternative ingredients
     $scope.findAlternatives = function(index, ingredient) {
       console.log($scope.parameters[index]);
       var param_val = $scope.parameters[index];
@@ -361,11 +365,11 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       };
 
       console.log(ingredient_info);
-
+      //stringing object to pass through url
       var string_ingred_info =JSON.stringify(ingredient_info);
 
       console.log(string_ingred_info);
-
+      //get request using string object. Suggest using base64 encoding package in the future to prevent string characters interfering in url data
       $http.get('/api/usda/healthify/' + string_ingred_info).then(function(response){
         console.log(response.data);
         //this should be an array coming from the data
@@ -376,13 +380,13 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     };
 
     $scope.addHealthyIngredients = function() {
-      //console.log($scope.healthify_ingredients[0])
+
       
       console.log('Adding Ingredient Line');
 
       //add healthy ingredient to healthy_ing
       $scope.recipe.healthy_ing[$scope.ingredientNumber].food_item = $scope.healthyIngredient;
-      //$scope.recipe.healthy_ing[$scope.ingredientNumber].item = $scope.healthyIngredient.name;
+    
 
       //reset healthyIngredient to null
       $scope.healthyIngredient = {
@@ -406,12 +410,9 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
 
     $scope.findFoods = function(){
-      if (!$scope.ingredients.item) {
-        $scope.$broadcast('show-errors-check-validity', 'item');
-
-        return false;
-      }
+      //returns promise with food object
       return new Promise(function(resolve,reject){
+        //get request that then does error checking based on result
         resolve($http.get('/api/usda/' + $scope.ingredients.item).then(function(response){
           if(response.data !== 404){
             $scope.usdaList = response.data;
