@@ -212,7 +212,7 @@ exports.find_foods = function (ing_name, food_group) {
       q: ing_name,
       sort: 'r', // sort by food [n]ame or [r]elevance.
       fg: food_group, // food group id. unknown.
-      max: 20,
+      max: 30,
       offset: 0,
     };
     var url = searchURL + querystring.stringify(payload);

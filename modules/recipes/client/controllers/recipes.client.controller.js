@@ -85,6 +85,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
     $scope.addIngredientLine = function () {
       
+      
       console.log('Adding Ingredient Line');
       var promise = new Promise(function(resolve,reject){
         
@@ -405,6 +406,11 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
 
     $scope.findFoods = function(){
+      if (!$scope.ingredients.item) {
+        $scope.$broadcast('show-errors-check-validity', 'item');
+
+        return false;
+      }
       return new Promise(function(resolve,reject){
         resolve($http.get('/api/usda/' + $scope.ingredients.item).then(function(response){
           if(response.data !== 404){
