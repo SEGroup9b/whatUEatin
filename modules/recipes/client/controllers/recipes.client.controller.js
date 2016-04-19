@@ -59,6 +59,8 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     $scope.fat = false;
     $scope.sodium = false;
     $scope.carb = false;
+    $scope.vegetarian = false;
+    $scope.vegan = false;
 
     $scope.ingredients = {
       item: '',
@@ -204,6 +206,12 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       }
       if ($scope.sodium) {
         recipe.tags.health_concerns.push('sodium');
+      }
+      if ($scope.vegetarian) {
+        recipe.tags.health_concerns.push('vegetarian');
+      }
+      if ($scope.vegan) {
+        recipe.tags.health_concerns.push('vegan');
       }
 
       //console.log

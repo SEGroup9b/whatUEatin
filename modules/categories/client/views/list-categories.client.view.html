@@ -1,19 +1,18 @@
 <body>
-  <section ng-controller="CategoriesController" ng-init="find(); findRecipes()" style="min-height: 100vh;" id="style">
+  <section ng-controller="CategoriesController" ng-init="find()" style="min-height: 100vh;" id="style">
     <div class="row">
       <div class="col-md-6 col-md-offset-3 text-center" id="cattitle" style="margin-top: -2px;">
         <h1><span>Browse by Category</span></h1>
       </div>
     </div>
-
     <div>
       <carousel interval="4000" id="category-img" style="">
-        <slide ng-repeat="category in categories" active="category.active" id="slideStyle">
+        <slide ng-repeat="category in categories | orderBy: 'name'" active="category.active" id="slideStyle">
           <div>
-            <img ui-sref="categories.view({categoryId: category._id})"ng-src="{{category.img_path}}" id="category-img">
+            <img ui-sref="categories.view({categoryId: category._id})" ng-src="{{category.img_path}}" id="category-img">
           </div>
           <div class="carousel-caption" style="bottom: 20px">
-            <h3><span>{{ category.name }}</span></h3>
+            <h3 ui-sref="categories.view({categoryId: category._id})"><span>{{ category.name }}</span></h3>
           </div>
         </slide>
       </carousel>

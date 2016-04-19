@@ -8,21 +8,29 @@
         <fieldset>
           <div class="form-group" show-errors>
             <label for="name">Name</label>
-            <input name="name" type="text" ng-model="currentCategory.name" id="name" class="form-control" placeholder="Name" required>
+            <input name="name" type="text" ng-model="name" id="name" class="form-control" placeholder="Name" required>
             <div ng-messages="categoryForm.title.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Category Name is required.</p>
             </div>
           </div>
           <div class="form-group">
             <label for="tag">Tag</label>
-            <input name="tag" type="text" ng-model="currentCategory.tag" id="tag" class="form-control" placeholder="Tag" required>
+            <input name="tag" type="text" ng-model="tag" id="tag" class="form-control" placeholder="Tag" required>
             <div ng-messages="categoryForm.title.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Category Tag is required.</p>
             </div>
           </div>
           <div class="form-group">
+            <label for="t_type">Type</label>
+            <input name="t_type" type="text" ng-model="t_type" id="t_type" class="form-control" placeholder="Type" required>
+            <p style="color: #F00">Categories have two types: allergy or health. If you want to filter out, choose allergy. If you want to filter in, use health.</p>
+            <div ng-messages="categoryForm.title.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Category Type is required.</p>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="img_path">Local Image Name</label>
-            <input name="img_path" type="text" ng-model="currentCategory.img_path" id="img_path" class="form-control" placeholder="Local Image Name" required>
+            <input name="img_path" type="text" ng-model="img_path" id="img_path" class="form-control" placeholder="Local Image Name" required>
             <p style="color: #F00">Note: all images will be prefixed with the path /modules/core/client/img/brand/. Store all photos there!</p>
             <div ng-messages="categoryForm.title.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Category Image Path is required.</p>
