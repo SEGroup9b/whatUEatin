@@ -22,14 +22,21 @@ var recipeSchema = new Schema({
   },
 
   instructions: String,		// baking instructions
-  servings: Number,			// how many does this serve?
+  servings: String,			// how many does this serve?
   cook_time: String,		// time required to make
   votes: Number,			// number of upthumblikes
+  imgURL: String,
   
   // Health tags for user dietary needs.
-
   tags: {
-    allergies: [String],
+    allergies: {
+      nuts: Boolean,
+      eggs: Boolean,
+      fish: Boolean,
+      dairy: Boolean,
+      wheat: Boolean,
+      soy: Boolean
+    },
     health_concerns: [String]
   },
   
@@ -40,7 +47,7 @@ var recipeSchema = new Schema({
     unit: String,
     food_item: {
       name: String,
-      ndbno: Number,
+      ndbno: String,
       group: String,
       manu: String,
       nutrients: [{

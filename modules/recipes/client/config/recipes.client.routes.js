@@ -10,6 +10,10 @@ angular.module('recipes').config(['$stateProvider',
         url: '/recipes',
         template: '<ui-view/>'
       })
+      .state('recipes.mine', {
+        url: '/myrecipes',
+        templateUrl: 'modules/recipes/client/views/users-personal-recipes.client.view.html'
+      })
       .state('recipes.list', {
         url: '',
         templateUrl: 'modules/recipes/client/views/list-recipes.client.view.html'
@@ -30,6 +34,13 @@ angular.module('recipes').config(['$stateProvider',
         templateUrl: 'modules/recipes/client/views/edit-recipe.client.view.html',
         data: {
           roles: ['user', 'admin']
+        }
+      })
+      .state('recipes.healthify',{
+        url: '/:recipeId/healthify',
+        templateUrl: 'modules/recipes/client/views/healthify-recipe.client.view.html',
+        data: {
+          roles: ['user','admin']
         }
       });
   }

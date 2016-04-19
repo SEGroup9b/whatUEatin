@@ -90,16 +90,11 @@ s3.upload({Body: 'Hello again!'}, function() {
   });
 
   //var buffer = new Buffer;
-  setTimeout(function(){  
-    s3.getObject({ Bucket: 'bucketCreationTest', Key: req.body.user_id+'.jpg' }, function(err, data) { 
-      if (err) console.log(err, err.stack); // an error occurred
-  else {
-  //console.log(data.Body.toString());
-        newURL = data.Body.toString();
-   //console.log(data);
-
-      }               // successful response
-    });
+ 
+  s3.getObject({ Bucket: 'bucketCreationTest', Key: req.body.user_id+'.jpg' }, function(err, data) { 
+    if (err) console.log(err, err.stack); // an error occurred
+    newURL = data.Body.toString();
+  });
 
    //buffer.toString('utf-8');
 
@@ -113,47 +108,46 @@ s3.upload({Body: 'Hello again!'}, function() {
   //console.log(https://s3.amazonaws.com/bucketCreationTest/56fc357a93d77997114d12d1);
   //console.log('--------------');
   //console.log(newURL);
-    var user = req.user;
-    var message = null;
-    var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
-    var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
-    
-    // Filtering to upload only images
-    upload.fileFilter = profileUploadFileFilter;
+  var user = req.user;
+  var message = null;
+  var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
+  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
+  
+  // Filtering to upload only images
+  upload.fileFilter = profileUploadFileFilter;
 
-    if (user) {
-      upload(req, res, function (uploadError) {
-        if(uploadError) {
-          return res.status(400).send({
-            message: 'Error occurred while uploading profile picture'
-          });
-        } else {
-          user.profileImageURL = 'https://s3.amazonaws.com/bucketCreationTest/'+ req.body.user_id+'.jpg';
-          console.log('https://s3.amazonaws.com/bucketCreationTest/'+ req.body.user_id+'.jpg');
+  if (user) {
+    upload(req, res, function (uploadError) {
+      if(uploadError) {
+        return res.status(400).send({
+          message: 'Error occurred while uploading profile picture'
+        });
+      } else {
+        user.profileImageURL = 'https://s3.amazonaws.com/bucketCreationTest/'+ req.body.user_id+'.jpg';
+        console.log('https://s3.amazonaws.com/bucketCreationTest/'+ req.body.user_id+'.jpg');
 
-          user.save(function (saveError) {
-            if (saveError) {
-              return res.status(400).send({
-                message: errorHandler.getErrorMessage(saveError)
-              });
-            } else {
-              req.login(user, function (err) {
-                if (err) {
-                  res.status(400).send(err);
-                } else {
-                  res.json(user);
-                }
-              });
-            }
-          });
-        }
-      });
-    } else {
-      res.status(400).send({
-        message: 'User is not signed in'
-      });
-    }
-  }, 3000);
+        user.save(function (saveError) {
+          if (saveError) {
+            return res.status(400).send({
+              message: errorHandler.getErrorMessage(saveError)
+            });
+          } else {
+            req.login(user, function (err) {
+              if (err) {
+                res.status(400).send(err);
+              } else {
+                res.json(user);
+              }
+            });
+          }
+        });
+      }
+    });
+  } else {
+    res.status(400).send({
+      message: 'User is not signed in'
+    });
+  }
 
 };
 
