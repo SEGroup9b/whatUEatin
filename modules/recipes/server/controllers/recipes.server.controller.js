@@ -79,7 +79,7 @@ exports.read = function (req, res) {
  * Update a recipe
  */
 exports.update = function (req, res) {
-  console.log("calling update in server.\n");
+  console.log('calling update in server.\n');
   var recipe = req.recipe;
 
   //console.log(req.body);

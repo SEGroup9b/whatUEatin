@@ -210,18 +210,21 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
     // Remove existing Recipe
     $scope.remove = function (recipe) {
-      if (recipe) {
-        recipe.$remove();
+      var mycontinue = confirm('Are you sure you would like to delete your recipe?');
+      if(mycontinue){
+        if (recipe) {
+          recipe.$remove();
 
-        for (var i in $scope.recipes) {
-          if ($scope.recipes[i] === recipe) {
-            $scope.recipes.splice(i, 1);
+          for (var i in $scope.recipes) {
+            if ($scope.recipes[i] === recipe) {
+              $scope.recipes.splice(i, 1);
+            }
           }
+        } else {
+          $scope.recipe.$remove(function () {
+            $location.path('recipes');
+          });
         }
-      } else {
-        $scope.recipe.$remove(function () {
-          $location.path('recipes');
-        });
       }
     };
 
