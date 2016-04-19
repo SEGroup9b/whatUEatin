@@ -239,6 +239,22 @@ box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
   border-radius: 25px;
 }
 
+#shadow {
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
+}
+
+#recipepicture {
+  min-height: 50%; min-width: 100%;
+  max-height: 100%; max-width: 100%;
+  margin-left: auto; margin-right: auto;
+  
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.7);
+}
+
 #title {
   position: absolute;
   text-align: center;
