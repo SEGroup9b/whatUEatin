@@ -66,6 +66,11 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       }
     };
 
+    //initialize healthy_ing array
+    $scope.intializeIngredients = function() {
+
+    };
+
     $scope.clearResults = function(){
       $scope.apiError = false;
       $scope.assestsLoaded = false;
@@ -127,10 +132,64 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       
     };
 
+    $scope.addIngredient = function () {
+      console.log('Adding Ingredient Line');
+      var promise = new Promise(function(resolve,reject){
+        
+        $scope.ingredients.food_item.name = $scope.confirmed.name;
+        $scope.ingredients.food_item.ndbno = $scope.confirmed.ndbno;
+        $scope.ingredients.food_item.group = $scope.confirmed.group;
+        $scope.recipe.orig_ing.push($scope.ingredients);
+        $scope.ingredients = {
+          item: '',
+          quantity: 0,
+          unit: '',
+          food_item: {
+            name: '',
+            ndbno: '',
+            group: '',
+            manu: '',
+            nutrients: []
+          }
+        };
+        resolve();
+      });
+      promise.then(function(){
+        findFoodReport().then(function(result){
+          console.log(' addIngredient log ' + JSON.stringify(result));
+          if(result){
+            $scope.recipe.orig_ing[$scope.ingredientNumber].food_item.nutrients = result.nutrients;
+              //reset the input values
+            $scope.ingredientNumber = $scope.ingredientNumber + 1;
+            $scope.usdaList = [];
+            $scope.assestsLoaded = false;
+            $scope.apiError = false;
+            console.log($scope.recipe.orig_ing);
+          }else{
+            $scope.apiError = true;
+          }
+        });
+      });
+      
+    };
+
+    //deletes for create recipe page
     $scope.deleteIngredientLine = function(ingredient) {
       for (var i in $scope.original_ingredients) {
         if ($scope.original_ingredients[i] === ingredient) {
           $scope.original_ingredients.splice(i,1);
+        }
+      }
+    };
+
+    //deletes for edit recipe page
+    $scope.deleteIngredient = function(ingredient) {
+      for (var i in $scope.recipe.orig_ing) {
+        if ($scope.recipe.orig_ing[i] === ingredient) {
+          $scope.recipe.orig_ing.splice(i,1);
+          if($scope.recipe.healthy_ing) {
+            $scope.recipe.healthy_ing.splice(i,1);
+          }
         }
       }
     };
