@@ -5,7 +5,7 @@
 angular.module('recipes').controller('RecipesController', ['$http','$scope', '$stateParams', '$timeout', '$location', '$window', 'Authentication', 'FileUploader', 'Recipes','Usda',
   function ($http,$scope, $stateParams, $timeout, $location, $window, Authentication, FileUploader, Recipes,Usda) {
     $scope.authentication = Authentication;
-    //$scope.imageURL = $scope.recipe.recipeImgURL;
+    //$scope.imageURL = $scope.recipe.recipeImgURL;.
     $scope.user = Authentication.user;
     // Create file uploader instance
     $scope.uploader = new FileUploader({

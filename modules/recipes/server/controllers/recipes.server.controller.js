@@ -17,7 +17,7 @@ var path = require('path'),
 
   
 /**
- * Create a recipe
+ * Create a recipe.
  */
 
 var AWS = require('aws-sdk');
