@@ -73,6 +73,17 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         nutrients: []
       }
     };
+
+    $scope.init_ing = false;
+
+    //initialize healthy_ing array
+    function initializeIngredients() {
+      for (var i in $scope.recipe.orig_ing) {
+        $scope.recipe.healthy_ing.push($scope.recipe.orig_ing[i].food_item);
+      }
+      $scope.init_ing = true;
+    }
+
     //Clears the modal info for failed api request on button press
     $scope.clearResults = function(){
       $scope.apiError = false;
@@ -137,11 +148,65 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         });
       });
     };
-    //removing ingredient from array
+
+    $scope.addIngredient = function () {
+      console.log('Adding Ingredient Line');
+      var promise = new Promise(function(resolve,reject){
+        
+        $scope.ingredients.food_item.name = $scope.confirmed.name;
+        $scope.ingredients.food_item.ndbno = $scope.confirmed.ndbno;
+        $scope.ingredients.food_item.group = $scope.confirmed.group;
+        $scope.recipe.orig_ing.push($scope.ingredients);
+        $scope.ingredients = {
+          item: '',
+          quantity: 0,
+          unit: '',
+          food_item: {
+            name: '',
+            ndbno: '',
+            group: '',
+            manu: '',
+            nutrients: []
+          }
+        };
+        resolve();
+      });
+      promise.then(function(){
+        findFoodReport().then(function(result){
+          console.log(' addIngredient log ' + JSON.stringify(result));
+          if(result){
+            $scope.recipe.orig_ing[$scope.ingredientNumber].food_item.nutrients = result.nutrients;
+              //reset the input values
+            $scope.ingredientNumber = $scope.ingredientNumber + 1;
+            $scope.usdaList = [];
+            $scope.assestsLoaded = false;
+            $scope.apiError = false;
+            console.log($scope.recipe.orig_ing);
+          }else{
+            $scope.apiError = true;
+          }
+        });
+      });
+      
+    };
+
+    //deletes for create recipe page
     $scope.deleteIngredientLine = function(ingredient) {
       for (var i in $scope.original_ingredients) {
         if ($scope.original_ingredients[i] === ingredient) {
           $scope.original_ingredients.splice(i,1);
+        }
+      }
+    };
+
+    //deletes for edit recipe page
+    $scope.deleteIngredient = function(ingredient) {
+      for (var i in $scope.recipe.orig_ing) {
+        if ($scope.recipe.orig_ing[i] === ingredient) {
+          $scope.recipe.orig_ing.splice(i,1);
+          if($scope.recipe.healthy_ing) {
+            $scope.recipe.healthy_ing.splice(i,1);
+          }
         }
       }
     };
@@ -255,8 +320,8 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       console.log($stateParams.recipeId);
       $scope.recipe = Recipes.get({
         recipeId: $stateParams.recipeId
-        //this is when i'll do it
       });
+      //$scope.init_ing = true;
     };
     //copy pasted mean generate picture upload. May break picture preview may not, not enough to test thoroughly
     // Called after the user selected a new picture file
@@ -380,7 +445,10 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     };
 
     $scope.addHealthyIngredients = function() {
-
+      //console.log($scope.healthify_ingredients[0])
+      if($scope.init_ing === false) {
+        initializeIngredients();
+      }
       
       console.log('Adding Ingredient Line');
 
