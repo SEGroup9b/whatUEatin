@@ -136,6 +136,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
     // Create new Recipe
     $scope.create = function (isValid) {
+
       $scope.error = null;
 
       if (!isValid) {
@@ -173,33 +174,46 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       }
 
       //console.log
+      //this is where ill check to see the file size
+      var sizegood = true;
+      var imgsize = $scope.imageURL.length * (3/4);
+      console.log(imgsize);
 
+      if(imgsize > 1000000){
+        sizegood = false;
+        alert('Image size can\'t be greater than 1MB!');
+      }
+
+
+      if(sizegood){
       // Redirect after save
-      recipe.$save(function (response) {
-        var promise = new Promise(function(resolve,reject){
+        recipe.$save(function (response) {
+          var promise = new Promise(function(resolve,reject){
+            // Clear form fields
+            $scope.title = '';
+            $scope.directions = '';
+            console.log(recipe._id);
+            console.log(recipe.imageURL);
+            $scope.edUploadRecipePic(recipe);
+            console.log(recipe.imageURL);
+            setTimeout(function(){ }, 10000);
+          });
+          promise.then(function(){
+            console.log('upload promise then');
+            $location.path('recipes/' + response._id);
+          });
           // Clear form fields
-          $scope.title = '';
+          /*$scope.title = '';
           $scope.directions = '';
           console.log(recipe._id);
           console.log(recipe.imageURL);
           $scope.edUploadRecipePic(recipe);
-          console.log(recipe.imageURL);
+          console.log(recipe.imageURL);*/
+        }, function (errorResponse) {
+          console.log('error response function called anyways');
+          $scope.error = errorResponse.data.message;
         });
-        promise.then(function(){
-          console.log('upload promise then');
-          $location.path('recipes/' + response._id);
-        });
-        // Clear form fields
-        /*$scope.title = '';
-        $scope.directions = '';
-        console.log(recipe._id);
-        console.log(recipe.imageURL);
-        $scope.edUploadRecipePic(recipe);
-        console.log(recipe.imageURL);*/
-      }, function (errorResponse) {
-        console.log('error response function called anyways');
-        $scope.error = errorResponse.data.message;
-      });
+      }
     };
 
     // Remove existing Recipe
