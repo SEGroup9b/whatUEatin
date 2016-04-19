@@ -46,7 +46,7 @@ exports.edUploadPic = function(req,res){
   //var newURL = '';
 
   //console.log(req.body.pic);
-  //console.log(req.body._id);
+  console.log(req.body._id);
 
   var buf = new Buffer(dataURL.replace(/^data:image\/\w+;base64,/, ''),'base64');
     
@@ -62,15 +62,24 @@ exports.edUploadPic = function(req,res){
   }, function(error, response) {
     //console.log('uploaded file[' + fileName + '] to [' + remoteFilename + '] as [' + metaData + ']');
     //console.log(arguments);
+    var imageURL = ('https://s3.amazonaws.com/finalrecipepictures/'+req.body._id+'.jpg');
     console.log('happened');
     if(error){
       console.log(error);
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(error)
+      });
     }
+
+    return res.status(200).send({
+      imgURL: imageURL
+    }); 
+    
+    
   });
 
  
-  var imageURL = ('https://s3.amazonaws.com/finalrecipepictures/'+req.body._id+'.jpg');
-    
+
    
 };
 
