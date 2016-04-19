@@ -167,7 +167,7 @@ module.exports.initModulesClientRoutes = function (app) {
   });
 };
 
-/**.
+/**..
  * Configure the modules ACL policies
  */
 module.exports.initModulesServerPolicies = function (app) {
