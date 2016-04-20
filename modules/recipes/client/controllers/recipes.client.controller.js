@@ -270,7 +270,6 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
           $scope.directions = '';
           console.log(recipe._id);
           console.log(recipe.imageURL);
-<<<<<<< HEAD
           $scope.edUploadRecipePic(recipe).then(function(){
             console.log(recipe.imageURL);
             $location.path('recipes/' + response._id);
@@ -293,18 +292,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
           console.log('error response function called anyways');
           $scope.error = errorResponse.data.message;
         });
-<<<<<<< HEAD
       }
-=======
-        promise.then(function(){
-          console.log('upload promise then');
-          $location.path('recipes/' + response._id);
-        });
-      }, function (errorResponse) {
-        console.log('error response function called anyways');
-        $scope.error = errorResponse.data.message;
-      });
->>>>>>> dev
     };
 
     // Remove existing Recipe
