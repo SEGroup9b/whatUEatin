@@ -1,4 +1,4 @@
-<section ng-controller="HomeController" ng-init="find()" style="min-height: 70vh;">
+<section ng-controller="HomeController" ng-init="find(); findRandomRecipe()" style="min-height: 70vh;">
 <style>
   body {
     background-image: url('modules/core/client/img/brand/veggies.jpg');
@@ -8,31 +8,31 @@
     <div class="top">
         <!--<img id="veggies" src="modules/core/client/img/brand/veggies.jpg"/>-->
         <div class="float-left">
-          <img id="food" src="modules/core/client/img/brand/ccb.png"/>
+          <img id="food" ui-sref="recipes.view({recipeId: randomRecipe._id})" ng-src="{{randomRecipe.imgURL}}"/>
         </div>
 
         <div class="z-index-2" id="overlay">
           <div class="text-center">
             <div>
-              <h2>Chicken Cordon Bleu</h2>
+              <h2 ui-sref="recipes.view({recipeId: randomRecipe._id})">{{randomRecipe.title}}</h2>
             </div>
           </div>
           <div class="">
-              <h3 class="text-center">Post-healthification!</h3>
+              <h5 style="font-color: #0000FF" class="text-center">Posted by {{randomRecipe.user.displayName}}</h5>
+              <h3 class="text-center">Nutrients Per Serving:</h3>
               <ul>
-                <li>Traditional flour breading -> Panko breading</li>
-                <li>Chicken -> Low Fat Chicken</li>
-                <li>Cheese -> Vegan Cheese Substitute</li>
-              </ul>
-              <h3 class="text-center">Nutritional Information</h3>
-              <ul>
-                <li>Carbohydrates: 29g </li>
-                <li>Saturated Fat: 2g </li>
-                <li>Unsaturated Fat: 1g </li>
-                <li>Protein: 23g </li>
-                <li>Sugar: 1g </li>
-                <li>Sodium: 600mg</li>
-                <li>Fiber: 2g </li>
+                <!-- 0 water -->
+                <li>Calories: {{randomRecipeNutrientTotals[1] / randomRecipe.servings}}</li>
+                <li>Protein: {{randomRecipeNutrientTotals[2] / randomRecipe.servings | number: filter}}g</li>
+                <li>Total Fat: {{randomRecipeNutrientTotals[3] / randomRecipe.servings | number: filter}}g</li> 
+                <li>Total Carbs: {{randomRecipeNutrientTotals[4] / randomRecipe.servings | number: filter}}g </li>    
+                <li>Fiber: {{randomRecipeNutrientTotals[5] / randomRecipe.servings | number: filter}}g</li>         
+                <li>Sugar: {{randomRecipeNutrientTotals[6] / randomRecipe.servings | number: filter}}g</li>
+                <li>Calcium: {{randomRecipeNutrientTotals[7] / randomRecipe.servings | number: filter}}mg</li>   
+                <li>Iron: {{randomRecipeNutrientTotals[8] / randomRecipe.servings | number: filter}}mg</li>   
+                <li>Potassium: {{randomRecipeNutrientTotals[9] / randomRecipe.servings | number: filter}}mg</li>    
+                <li>Sodium: {{randomRecipeNutrientTotals[10] / randomRecipe.servings | number: filter}}mg</li> 
+                <li>Saturated Fat: {{randomRecipeNutrientTotals[11] / randomRecipe.servings | number: filter}}g</li>
               </ul>
           </div>
         </div>
