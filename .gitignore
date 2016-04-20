@@ -25,6 +25,7 @@ app/tests/coverage/
 .bower-*/
 .idea/
 coverage/
+config/env
 
 # MEAN.js app and assets
 # ======================
