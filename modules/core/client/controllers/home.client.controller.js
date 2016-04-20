@@ -7,7 +7,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
     $scope.recipes = [];
     $scope.randomRecipe = {};
     $scope.randomRecipeNutrientTotals = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    $scope.filter = 2;
+    $scope.filter = 1;
 
     // Find a list of Recipes
     $scope.find = function () {

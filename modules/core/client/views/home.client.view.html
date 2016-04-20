@@ -22,7 +22,7 @@
               <h3 class="text-center">Nutrients Per Serving:</h3>
               <ul>
                 <!-- 0 water -->
-                <li>Calories: {{randomRecipeNutrientTotals[1] / randomRecipe.servings}}</li>
+                <li>Calories: {{randomRecipeNutrientTotals[1] / randomRecipe.servings | number: 0}}</li>
                 <li>Protein: {{randomRecipeNutrientTotals[2] / randomRecipe.servings | number: filter}}g</li>
                 <li>Total Fat: {{randomRecipeNutrientTotals[3] / randomRecipe.servings | number: filter}}g</li> 
                 <li>Total Carbs: {{randomRecipeNutrientTotals[4] / randomRecipe.servings | number: filter}}g </li>    
