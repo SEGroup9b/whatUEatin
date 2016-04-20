@@ -26,10 +26,16 @@
           </table>
         </div>
       </div>
-
+      
       <div class="col-md-5">
         <div class="panel panel-body">
+          <div class="pull-right" ng-show="shouldshow">
+          <a class="btn btn-primary" ui-sref="recipes.view({recipeId: detailedInfo._id})">
+            Link to full recipe
+          </a>
+        </div>
           <h2>Recipe Information</h2>
+
           <h4>{{detailedInfo.title}}</h4>
           <table class="table table-hover">
             <tr>
@@ -43,7 +49,7 @@
               <td>{{item.unit}}</td>
             </tr>
           </table>
-          <a class="btn btn-primary" ng-show="shouldshow" ui-sref="recipes.view({recipeId: detailedInfo._id})">Link to the full recipe</a>
+          
         </div>
       </div>
     </div>
