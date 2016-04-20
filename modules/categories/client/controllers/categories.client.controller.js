@@ -4,30 +4,14 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
   function ($scope, $stateParams, $location, Authentication, Recipes, Categories) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
+
     //For categories and filtering by category
-    $scope.currentCategory = {
-      name: 'All',
-      tag: 'all',
-      img_path: 'modules/core/client/img/brand/ccb.png'
-    };
+    $scope.name = 'All';
+    $scope.tag = 'all';
+    $scope.img_path = 'modules/core/client/img/brand/ccb.png';
+    $scope.t_type = 'allergy';
     $scope.recipes = [];
-
-    //Adjusts the current filter
-    $scope.adjustFilter = function(index) {
-      $scope.currentCategory = $scope.categories[index];
-      console.log('Adjusting tag to ' + $scope.currentCategory.tag);
-
-      if ($scope.currentCategory.tag === 'all') {
-        $scope.recipes = $scope.allRecipes;
-        return;
-      } else {
-        for (var i = $scope.recipes.length - 1; i >= 0; i--) {
-          if ($scope.allRecipes[i].tags.allergies.indexOf($scope.currentCategory.tag) > -1 || $scope.allRecipes[i].tags.health_concerns.indexOf($scope.currentCategory.tag) > -1){
-            $scope.recipes.push($scope.allRecipes[i]);
-          }
-        }
-      }
-    };
+    //$scope.category = {};
 
     // Create new Category
     $scope.create = function (isValid) {
@@ -40,9 +24,10 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
 
       // Create new Category object
       var category = new Categories({
-        name: this.name,
-        tag: this.tag,
-        img_path: 'modules/core/client/img/brand/' + this.img_path
+        name: $scope.name,
+        tag: $scope.tag, 
+        img_path: 'modules/core/client/img/brand/' + $scope.img_path,
+        t_type: $scope.t_type
       });
 
       // Redirect after save
@@ -50,9 +35,10 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
         $location.path('categories');
 
         // Clear form fields
-        $scope.name = '';
-        $scope.tag = '';
-        $scope.img_path = '';
+        $scope.name = 'All';
+        $scope.tag = 'all';
+        $scope.img_path = 'modules/core/client/img/brand/ccb.png';
+        $scope.t_type = 'allergy';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -107,7 +93,36 @@ angular.module('core').controller('CategoriesController', ['$scope', '$statePara
 
     $scope.findRecipes = function() {
       $scope.allRecipes = Recipes.query();
-      $scope.recipes = $scope.allRecipes;
+      $scope.recipes = [];
+      $scope.category.$promise.then(function() {
+        $scope.allRecipes.$promise.then(function() {
+          if ($scope.category.tag === 'all') {
+            $scope.recipes = $scope.allRecipes;
+            console.log('All tag');
+          } else {
+            var current;
+            console.log($scope.category.tag);
+            for (var i = $scope.allRecipes.length - 1; i >= 0; i--) {
+              current = $scope.allRecipes[i];
+              //if allergy type, check for allergies
+              if ($scope.category.t_type === 'allergy') {
+                //if it contains an allergy, skip it
+                if (current.tags.allergies.indexOf($scope.category.tag) > -1) {
+                  console.log(current.title + ' contains ' + $scope.category.tag);
+                  continue;
+                } else $scope.recipes.push(current);
+              } else if ($scope.category.t_type === 'health'){
+                if (current.tags.health_concerns.indexOf($scope.category.tag) === -1) {
+                  console.log(current.title + ' is not ' + $scope.category.name);
+                  continue;
+                } else $scope.recipes.push(current);
+              } else {
+                $scope.recipes.push(current);
+              }
+            }
+          }
+        });
+      });    
     };
   }
 ]);

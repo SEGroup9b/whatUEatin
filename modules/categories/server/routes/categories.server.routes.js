@@ -10,15 +10,14 @@ module.exports = function (app) {
   // Categories collection routes
   app.route('/api/categories').all(categoriesPolicy.isAllowed)
     .get(categories.list)
-    .post(categories.create)
-    .delete(categories.delete);
+    .post(categories.create);
 
-  // Single category routes
+  // Single categorie routes
   app.route('/api/categories/:categoryId').all(categoriesPolicy.isAllowed)
     .get(categories.read)
     .put(categories.update)
     .delete(categories.delete);
 
-  // Finish by binding the category middleware
+  // Finish by binding the categorie middleware
   app.param('categoryId', categories.categoryByID);
 };

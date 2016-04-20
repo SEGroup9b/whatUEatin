@@ -28,15 +28,28 @@ var recipeSchema = new Schema({
   imgURL: String,
   
   // Health tags for user dietary needs.
+  /*
+    ALLERGIES:
+      Key         |    Value:
+    -----------------------------------
+      peanut      |   Peanut Allergy
+      gluten      |   Gluten Allergy
+      soy         |   Soy Allergy
+      lactose     |   Lactose Allergy
+      egg         |   Egg Allergy
+      fish        |   Fish Allergy
+      shellfish   |   Shellfish Allergy
+    
+    HEALTH CONCERNS:
+      Key         |    Value:
+    -----------------------------------
+      protein     |   High Protein
+      fat         |   Low Fat
+      sodium      |   Low Sodium
+      carb        |   Low Carb
+  */
   tags: {
-    allergies: {
-      nuts: Boolean,
-      eggs: Boolean,
-      fish: Boolean,
-      dairy: Boolean,
-      wheat: Boolean,
-      soy: Boolean
-    },
+    allergies: [String],
     health_concerns: [String]
   },
   

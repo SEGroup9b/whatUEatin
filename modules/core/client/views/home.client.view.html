@@ -1,11 +1,9 @@
-<section ng-controller="HomeController" ng-init="find()">
+<section ng-controller="HomeController" ng-init="find()" style="min-height: 70vh;">
 <style>
   body {
     background-image: url('modules/core/client/img/brand/veggies.jpg');
   }
 </style>
-
-
 <body>
     <div class="top">
         <!--<img id="veggies" src="modules/core/client/img/brand/veggies.jpg"/>-->
@@ -39,9 +37,18 @@
           </div>
         </div>
     </div>
-
-    <div class="row" id="banner">
+<!--
+    <div class="col-md-12 text-center">
+      <div class="btn-group">
+        <p>
+          <a class="btn btn-primary btn-lg" ui-sref="categories.list">Categories</a>
+          <a class="btn btn-primary btn-lg" ui-sref="recipes.list">Recipes</a>
+        </p>
+      </div>
     </div>
+-->
+    <div class="row" id="banner">
+    </div> 
 
 </body>
 
@@ -83,41 +90,6 @@
       </div>
     </div>
   -->
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3 text-center" id="cattitle">
-      <h1><span>Browse by Category</span></h1>
-    </div>
-  </div>
-
-  <!--This code is modified from Ali Jafarian's tutorial (source: http://alijafarian.com/responsive-image-grids-using-css/)-->
-
-  <ul class="rig columns-3">
-    <li>
-      <img ui-sref="categories.list" src="modules/core/client/img/brand/high_protein.jpg" />
-      <h3 style="text-align: center;"><strong>High Protein</strong></h3>
-    </li>
-    <li>
-      <img ui-sref="categories.list" src="modules/core/client/img/brand/low_fat.jpg" />
-      <h3 style="text-align: center;"><strong>Low Fat</strong></h3>
-    </li>
-    <li>
-      <img ui-sref="categories.list" src="modules/core/client/img/brand/low_carb.jpg" />
-      <h3 style="text-align: center;"><strong>Low Carb</strong></h3>
-    </li>
-    <li>
-      <img ui-sref="categories.list" src="modules/core/client/img/brand/lactose_free.jpg" />
-      <h3 style="text-align: center;"><strong>Lactose Free</strong></h3>
-    </li>
-    <li>
-      <img ui-sref="categories.list" src="modules/core/client/img/brand/peanut_free.jpg" />
-      <h3 style="text-align: center;"><strong>Peanut Free</strong></h3>
-    </li>
-    <li>
-      <img ui-sref="categories.list" src="modules/core/client/img/brand/gluten_free.jpg" />
-      <h3 style="text-align: center;"><strong>Gluten Free</strong></h3>
-    </li>
-  </ul>
-  <!-- End Ali's code -->
 
 </section>
 
