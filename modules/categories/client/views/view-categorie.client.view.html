@@ -1,0 +1,24 @@
+<body>
+  <section ng-controller="CategoriesController" ng-init="findOne(); findRecipes()" style="min-height: 100vh; margin: 0;" id="style">
+    <div class="col-md-6 col-md-offset-3 text-center" id="cattitle" style="margin-top: -1px;">
+      <h1><span>{{category.name}}</span></h1>
+      <!-- <a class="btn btn-primary" ng-click="remove();">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+      <br> -->
+    </div>
+    <div class="row" style="padding: 3px;" ng-repeat="recipe in recipes track by $index" ng-if="$index % 4 == 0">
+      <div class="col-md-3" style="padding: 0;" ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3]" ng-if="recipes[i] != null">
+        <img id="recipe-img" src="{{recipes[i].imgURL}}" ui-sref="recipes.view({recipeId: recipes[i]._id})">  
+        <h2 style="margin-top: 0; margin-bottom: 0;"><span>{{recipes[i].title}}</span></h2>
+        <br>
+      </div>
+    </div>
+
+  </section>
+</body>
+<footer class="modal-footer modal-footer-center" id="footerstyle">
+  <a ui-sref="contact" class="footer">Contact Us</a>
+  <a ui-sref="about" class="footer">About</a>
+  <a ui-sref="mission" class="footer">Our Mission</a>
+</footer>

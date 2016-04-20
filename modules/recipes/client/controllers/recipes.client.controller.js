@@ -54,12 +54,21 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     $scope.healthify_ingredients = [];
     
     /*Allergy Initializations */
-    $scope.nuts = false;
+    $scope.peanuts = false;
     $scope.eggs = false;
     $scope.fish = false;
     $scope.dairy = false;
     $scope.wheat = false;
     $scope.soy = false;
+    $scope.shellfish = false;
+
+    /*Category Initializations */
+    $scope.protein = false;
+    $scope.fat = false;
+    $scope.sodium = false;
+    $scope.carb = false;
+    $scope.vegetarian = false;
+    $scope.vegan = false;
 
     $scope.ingredients = {
       item: '',
@@ -231,23 +240,56 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         cook_time: this.cook_time,
         imgURL: '5',
         tags: {
-          allergies: {
-            nuts: $scope.nuts,
-            eggs: $scope.eggs,
-            fish: $scope.fish,
-            dairy: $scope.dairy,
-            wheat: $scope.wheat,
-            soy: $scope.soy
-          },
+          allergies: [],
           health_concerns: []
         }
       });
       console.log($scope.original_ingredients);
       console.log(recipe);
       for(var i=0;i < $scope.original_ingredients.length; i++){
+        recipe.orig_ing.push($scope.original_ingredients[i]);       
+      }
 
-        recipe.orig_ing.push($scope.original_ingredients[i]);
-        
+      //This is bad and I feel bad
+      if ($scope.peanuts) {
+        recipe.tags.allergies.push('peanut');
+      }
+      if ($scope.eggs) {
+        recipe.tags.allergies.push('egg');
+      }
+      if ($scope.fish) {
+        recipe.tags.allergies.push('fish');
+      }
+      if ($scope.dairy) {
+        recipe.tags.allergies.push('lactose');
+      }
+      if ($scope.wheat) {
+        recipe.tags.allergies.push('gluten');
+      }
+      if ($scope.soy) {
+        recipe.tags.allergies.push('soy');
+      }
+      if ($scope.shellfish) {
+        recipe.tags.allergies.push('shellfish');
+      }
+
+      if ($scope.protein) {
+        recipe.tags.health_concerns.push('protein');
+      }
+      if ($scope.carb) {
+        recipe.tags.health_concerns.push('carb');
+      }
+      if ($scope.fat) {
+        recipe.tags.health_concerns.push('fat');
+      }
+      if ($scope.sodium) {
+        recipe.tags.health_concerns.push('sodium');
+      }
+      if ($scope.vegetarian) {
+        recipe.tags.health_concerns.push('vegetarian');
+      }
+      if ($scope.vegan) {
+        recipe.tags.health_concerns.push('vegan');
       }
 
       //console.log
@@ -521,7 +563,6 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
           }
         }));
       });
-    };
-   
+    };   
   }
 ]);

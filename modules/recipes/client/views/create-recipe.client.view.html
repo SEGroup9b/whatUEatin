@@ -44,30 +44,34 @@
 
 
       <div class="row" >
-        <div class="input-group col-md-8 col-md-offset-2" name="ingredientListSubmit" style="border-top: 1px solid #080808; border-bottom: 1px solid #080808; padding: 15px;">
-          
-            
-              
-          
-          
-
-          <div class="col-md-3"><!--quantity-->
-            <label>Quantity</label>
-            <input name="quantity" ng-model="ingredients.quantity" placeholder="Quantity" class="form-control" type="Number" id="quantity">
-          </div>
-
-          <div class="col-md-3"><!--unit-->
-            <label>Units</label>
-            <select class="form-control" name="unit" placeholder="Units" ng-model="ingredients.unit">
-              <option>tsp</option>
-              <option>tbsp</option>
-              <option>cup</option>
-              <option>stick</option>
-              <option>oz</option>
-              <option>grams</option>
-              <option>box</option>
-              <!--add more options here manually, OR database-->
-            </select>
+        <div class="input-group col-md-8 col-md-offset-2" id="ingredientList" style="border-top: 1px solid #080808; border-bottom: 1px solid #080808; padding: 15px;">
+          <div class="input-group" id="ingredientsAdded">
+            <div class="col-md-3"><!--quantity-->
+              <label>Quantity</label>
+              <input name="quantity" ng-model="ingredients.quantity" placeholder="Quantity" class="form-control" type="Number" id="quantity">
+            </div>
+            <div class="col-md-3"><!--unit-->
+              <label>Units</label>
+              <select class="form-control" name="unit" placeholder="Units" ng-model="ingredients.unit">
+                <option>tsp</option>
+                <option>tbsp</option>
+                <option>cup</option>
+                <option>stick</option>
+                <option>oz</option>
+                <option>grams</option>
+                <option>box</option>
+                <!--add more options here manually, OR database-->
+              </select>
+            </div>
+            <div class="col-md-6"><!--item-->
+              <label>Ingredient</label>
+              <input name="item" ng-model="ingredients.item" placeholder="Ingredient" class="form-control" type="text">
+            </div>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" ng-click="findFoods();" >
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </span>
           </div>
           <div class="col-md-6"><!--item-->
             <label>Ingredient</label>
@@ -135,26 +139,42 @@
 
 
     <div class="row"  style="padding-top: 30px;">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-8 col-md-offset-2" style="border-bottom: 1px solid #080808; padding: 15px;">
         <div>
           <label for="instructions">Cooking Instructions</label>
         </div>
         <textarea name="instructions" ng-model="instructions" id="instructions" placeholder="add instructions here" class="form-control" rows="6"></textarea>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-8 col-md-offset-1">
+    <div class="row" style="margin-top 15px;">
+      <br>
+      <div class="col-md-8 col-md-offset-2">
         <div>
           <label for="allergies">Allergies</label>
         </div>
-        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="nuts">Nut Allergy</label>
-        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="eggs">Eggs Allergy</label>
-        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="dairy">Dairy Allergy</label>
-        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="fish">Fish Allergy</label>
-        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="wheat">Wheat Allergy</label>
-        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="soy">Soy Allergy</label>
-
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="peanuts">Peanuts</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="eggs">Eggs</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="dairy">Dairy</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="fish">Fish</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="wheat">Wheat</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="soy">Soy</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="shellfish">Shellfish</label>
       </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div>
+          <label for="allergies">Categories</label>
+        </div>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="protein">High Protein</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="fat">Low Fat</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="carb">Low Carb</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="sodium">Low Sodium</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="vegetarian">Vegetarian</label>
+        <label class="checkbox-inline"><input type="checkbox" id="cbox1" ng-model="vegan">Vegan</label>
+      </div>
+    </div>
     </div>
     <div class="row" style="padding-top: 15px; padding-bottom: 30px;">
       <div class="col-md-2" id="center" style="margin-left: 20%;">
