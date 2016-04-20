@@ -4,6 +4,7 @@
 angular.module('leaderboards').controller('LeaderboardsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Leaderboards', 'Recipes',
   function ($scope, $stateParams, $location, Authentication, Leaderboards, Recipes) {
     $scope.authentication = Authentication;
+    $scope.shouldshow=false;
     /*Legacy module code
     // Create new Leaderboard
     $scope.create = function (isValid) {
@@ -77,6 +78,7 @@ angular.module('leaderboards').controller('LeaderboardsController', ['$scope', '
           $scope.detailedInfo = $scope.recipes[i];
         }
       }
+      $scope.shouldshow = true;
     };
 
     // Find a list of Leaderboards
