@@ -5,7 +5,7 @@
 angular.module('recipes').controller('RecipesController', ['$http','$scope', '$stateParams', '$timeout', '$location', '$window', 'Authentication', 'FileUploader', 'Recipes','Usda',
   function ($http,$scope, $stateParams, $timeout, $location, $window, Authentication, FileUploader, Recipes,Usda) {
     $scope.authentication = Authentication;
-
+    //$scope.imageURL = $scope.recipe.recipeImgURL;..
     $scope.user = Authentication.user;
     // Create file uploader instance
     $scope.uploader = new FileUploader({
@@ -213,6 +213,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
 
     // Create new Recipe
     $scope.create = function (isValid) {
+
       $scope.error = null;
 
       if (!isValid) {
@@ -250,19 +251,51 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
       }
 
       //console.log
+      //this is where ill check to see the file size
+      var sizegood = true;
+      var imgsize = $scope.imageURL.length * (3/4);
+      console.log(imgsize);
 
+      if(imgsize > 1000000){
+        sizegood = false;
+        alert('Image size can\'t be greater than 1MB!');
+      }
+
+
+      if(sizegood){
       // Redirect after save
-      recipe.$save(function (response) {
-        var promise = new Promise(function(resolve,reject){
-          // Clear form fields
+        recipe.$save(function (response) {
+            // Clear form fields
           $scope.title = '';
           $scope.directions = '';
           console.log(recipe._id);
           console.log(recipe.imageURL);
-          //recipe pic upload to amazon
-          $scope.edUploadRecipePic(recipe);
+<<<<<<< HEAD
+          $scope.edUploadRecipePic(recipe).then(function(){
+            console.log(recipe.imageURL);
+            $location.path('recipes/' + response._id);
+          });
+          
+            //setTimeout(function(){ }, 10000);
+          /*
+          promise.then(function(){
+            console.log('upload promise then');
+            
+          });*/
+          // Clear form fields
+          /*$scope.title = '';
+          $scope.directions = '';
+          console.log(recipe._id);
           console.log(recipe.imageURL);
+          $scope.edUploadRecipePic(recipe);
+          console.log(recipe.imageURL);*/
+        }, function (errorResponse) {
+          console.log('error response function called anyways');
+          $scope.error = errorResponse.data.message;
         });
+<<<<<<< HEAD
+      }
+=======
         promise.then(function(){
           console.log('upload promise then');
           $location.path('recipes/' + response._id);
@@ -271,6 +304,7 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
         console.log('error response function called anyways');
         $scope.error = errorResponse.data.message;
       });
+>>>>>>> dev
     };
 
     // Remove existing Recipe
@@ -379,20 +413,24 @@ angular.module('recipes').controller('RecipesController', ['$http','$scope', '$s
     $scope.edUploadRecipePic = function (passedRecipe){
       console.log('first half runs');
 
-      $http.post('/api/recipes/'+passedRecipe._id,{ _id: passedRecipe._id, pic: $scope.imageURL });
+     // console.log(passedRecipe._id);
+      //console.log($scope.recipe.recipeImgURL);
+      //console.log($scope.imageURL);
+      return new Promise(function(resolve,reject){
+        console.log('promise happens in client side');
+        resolve($http.post('/api/recipes/'+passedRecipe._id,{ _id: passedRecipe._id, pic: $scope.imageURL }).then(function(){
+          var recipe = passedRecipe;
+          console.log('then function runs');
+          recipe.imgURL = 'https://s3.amazonaws.com/finalrecipepictures/'+passedRecipe._id+'.jpg';
 
-      var recipe = passedRecipe;
-
-      recipe.imgURL = 'https://s3.amazonaws.com/finalrecipepictures/'+passedRecipe._id+'.jpg';
-
-      recipe.$update(function () {
-        $location.path('recipes/' + recipe._id);
-      }, function (errorResponse) {
-        console.log('screwed');
-        $scope.error = errorResponse.data.message;
+          recipe.$update(function () {
+            //$location.path('recipes/' + recipe._id);
+          }, function (errorResponse) {
+            console.log('screwed');
+            $scope.error = errorResponse.data.message;
+          });
+        }));
       });
-
-
     };
 
     // Cancel the upload process
