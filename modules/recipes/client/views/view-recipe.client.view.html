@@ -15,6 +15,17 @@
       </div>
     </div>
     <div class="row" id="style">
+      <div class="col-md-2 col-md-offset-2" style="padding-top: 40px;">
+        <label style="font-size: 16px;">Servings:</label>
+        <p class="lead" ng-bind="recipe.servings"></p>
+        <label style="font-size: 16px;">Cook Time:</label>
+        <p class="lead" ng-bind="recipe.cook_time"></p>
+      </div>
+      <div class="col-md-5 " style="padding-bottom: 50px; padding-top: 30px;">
+        <img id="recipepicture" ng-src="{{recipe.imgURL}}">
+      </div>
+    </div>
+    <div class="row" id="style">
       <div class="col-md-6 col-md-offset-3">
         <div class="pull-right" ng-show="authentication.user._id == recipe.user._id">
           <a class="btn btn-primary" ui-sref="recipes.edit({recipeId: recipe._id})">
@@ -30,7 +41,7 @@
       </div>
     </div>
   <div class="row" id="style">
-    <div class="col-md-6 col-md-offset-2">
+    <div class="col-md-8 col-md-offset-2">
       <label style="font-size: 20px;">Ingredients</label>
       <table class="table table-striped">
         <thead>
@@ -38,39 +49,29 @@
             <th>Quantity</th>
             <th>Unit</th>
             <th>Ingredient</th>
+            <th>Healthified Ingredients</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="ingredient in recipe.orig_ing">
             <td>{{ingredient.quantity}}</td>
             <td>{{ingredient.unit}}</td>
-            <td>{{ingredient.item}}</td>
+            <td>{{ingredient.food_item.name}}</td>
+            <td>{{recipe.healthy_ing[$index].food_item.name}}</td>
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="col-md-2">
-      <!--Recipe description-->
-      <label style="font-size: 16px;">Servings:</label>
-      <p class="lead" ng-bind="recipe.servings"></p>
-      <label style="font-size: 16px;">Cook Time:</label>
-      <p class="lead" ng-bind="recipe.cook_time"></p>
     </div>
   </div>
     <!--table of ingredients-->
 
     <div class="row" id="style">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-8 col-md-offset-2" style="padding-bottom: 50px;">
         <label style="font-size: 16px;">Directions:</label>
         <p class="" ng-bind="recipe.instructions"></p>
       </div>
     </div>
-    <div class="row" id="style">
-      <div class="col-md-4 col-md-offset-4">
-        <label style="font-size: 16px;">Picture:</label>
-          <img ng-src="{{recipe.imgURL}}">
-      </div>
-    </div>
+
 </div>
 </section>
 <footer class="modal-footer modal-footer-center" id="footerstyle">

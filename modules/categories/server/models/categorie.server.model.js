@@ -16,7 +16,8 @@ var CategorySchema = new Schema({
   },
   name: String,
   tag: String,
-  img_path: String //make sure this is local (doesn't support online URL paths)
+  img_path: String, //make sure this is local (doesn't support online URL paths)
+  t_type: String
 });
 
 mongoose.model('Category', CategorySchema);

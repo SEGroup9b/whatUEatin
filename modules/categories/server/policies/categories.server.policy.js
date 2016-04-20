@@ -48,8 +48,8 @@ exports.invokeRolesPolicies = function () {
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
-  // If an category is being processed and the current user created it then allow any manipulation
-  if (req.category && req.user && req.category.user.id === req.user.id) {
+  // If an categorie is being processed and the current user created it then allow any manipulation
+  if (req.category) {
     return next();
   }
 

@@ -21,6 +21,13 @@ angular.module('categories').config(['$stateProvider',
           roles: ['admin']
         }
       })
+      .state('categories.view', {
+        url: '/:categoryId',
+        templateUrl: 'modules/categories/client/views/view-categorie.client.view.html',
+        data: {
+          roles: ['admin', 'user']
+        }
+      })
       .state('categories.edit', {
         url: '/:categoryId/edit',
         templateUrl: 'modules/categories/client/views/edit-categorie.client.view.html',

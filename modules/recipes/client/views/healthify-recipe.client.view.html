@@ -37,7 +37,6 @@
             </td>
             <td>
               <input name="minimize" ng-model="min_check[$index]" id="minimize" type="checkbox" value="false">
-              {{min_check[$index]}}
                 <!-- this checkbox determines whether we're finding alt ingredients that are greater/less than the current nutrient val -->
               </input>
             </td>
@@ -48,7 +47,7 @@
             </td>
             <td>
                <!-- display the healthier ingredients -->
-               {{recipe.healthy_ing[$index].name}}
+               {{recipe.healthy_ing[$index].food_item.name}}
             </td>
           </tr>
         </tbody>

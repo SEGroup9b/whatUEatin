@@ -82,3 +82,7 @@ mongod
 *.ntvs*
 *.njsproj
 *.sln
+
+# Sensative Info
+# =========
+/config/env/*.js

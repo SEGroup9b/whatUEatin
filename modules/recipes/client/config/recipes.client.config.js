@@ -10,10 +10,14 @@ angular.module('recipes').run(['Menus',
       type: 'dropdown',
       roles: ['*']
     });
-
+    //Add my recipes list item
+    Menus.addSubMenuItem('topbar', 'recipes', {
+      title: 'My Recipes',
+      state: 'recipes.mine'
+    });
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'recipes', {
-      title: 'List Recipes',
+      title: 'All Recipes',
       state: 'recipes.list'
     });
 

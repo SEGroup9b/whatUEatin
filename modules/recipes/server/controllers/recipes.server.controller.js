@@ -9,8 +9,15 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   config = require(path.resolve('./config/config')),
   nutrify = require(path.resolve('./modules/recipes/server/controllers/nutrify.js'));
+
+
+
+
+
+
+  
 /**
- * Create a recipe
+ * Create a recipe..
  */
 
 var AWS = require('aws-sdk');
@@ -33,13 +40,13 @@ exports.create = function (req, res) {
 };
 
 exports.edUploadPic = function(req,res){
-  console.log(config.awscred);
+  //console.log(config.awscred);
 
   var dataURL = req.body.pic;
   //var newURL = '';
 
   //console.log(req.body.pic);
-  //console.log(req.body._id);
+  console.log(req.body._id);
 
   var buf = new Buffer(dataURL.replace(/^data:image\/\w+;base64,/, ''),'base64');
     
@@ -55,15 +62,24 @@ exports.edUploadPic = function(req,res){
   }, function(error, response) {
     //console.log('uploaded file[' + fileName + '] to [' + remoteFilename + '] as [' + metaData + ']');
     //console.log(arguments);
+    var imageURL = ('https://s3.amazonaws.com/finalrecipepictures/'+req.body._id+'.jpg');
     console.log('happened');
     if(error){
       console.log(error);
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(error)
+      });
     }
+
+    return res.status(200).send({
+      imgURL: imageURL
+    }); 
+    
+    
   });
 
  
-  var imageURL = ('https://s3.amazonaws.com/finalrecipepictures/'+req.body._id+'.jpg');
-    
+
    
 };
 
@@ -79,11 +95,20 @@ exports.read = function (req, res) {
  * Update a recipe
  */
 exports.update = function (req, res) {
+  console.log('calling update in server.\n');
   var recipe = req.recipe;
 
+  //console.log(req.body);
+
   recipe.title = req.body.title;
-  recipe.directions = req.body.directions;
+  recipe.instructions = req.body.instructions;
+  recipe.servings = req.body.servings;
+  recipe.cook_time = req.body.cook_time;
+  recipe.healthy_ing = req.body.healthy_ing;
+  recipe.orig_ing = req.body.orig_ing;
   recipe.imgURL = req.body.imgURL;
+
+  console.log(recipe);
 
   recipe.save(function (err) {
     if (err) {
@@ -101,6 +126,25 @@ exports.update = function (req, res) {
  */
 exports.delete = function (req, res) {
   var recipe = req.recipe;
+  var s3 = new AWS.S3();
+  console.log(recipe.imgURL);
+  var fileName = recipe.imgURL.substring(recipe.imgURL.lastIndexOf('/')+1);
+  console.log(fileName);
+  s3.deleteObjects({
+    Bucket: 'finalrecipepictures',
+    Delete: {
+      Objects: [
+       { Key: fileName }
+      ]
+    }
+  }, function(err, data) {
+
+    if (err)
+      return console.log(err);
+
+    console.log('success');
+
+  });
 
   recipe.remove(function (err) {
     if (err) {

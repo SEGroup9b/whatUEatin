@@ -78,6 +78,9 @@ module.exports.initMiddleware = function (app) {
     app.locals.cache = 'memory';
   }
 
+  //set limit to 1mb
+  app.use(bodyParser({ limit: '1mb' }));
+
   // Request body parsing middleware should be above methodOverride
   app.use(bodyParser.urlencoded({
     extended: true
@@ -164,7 +167,7 @@ module.exports.initModulesClientRoutes = function (app) {
   });
 };
 
-/**
+/**..
  * Configure the modules ACL policies
  */
 module.exports.initModulesServerPolicies = function (app) {
