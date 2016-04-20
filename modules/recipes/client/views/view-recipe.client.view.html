@@ -38,13 +38,15 @@
             <th>Quantity</th>
             <th>Unit</th>
             <th>Ingredient</th>
+            <th>Healthified Ingredients</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="ingredient in recipe.orig_ing">
             <td>{{ingredient.quantity}}</td>
             <td>{{ingredient.unit}}</td>
-            <td>{{ingredient.item}}</td>
+            <td>{{ingredient.food_item.name}}</td>
+            <td>{{recipe.healthy_ing[$index].food_item.name}}</td>
           </tr>
         </tbody>
       </table>
