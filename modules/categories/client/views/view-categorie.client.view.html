@@ -10,7 +10,7 @@
     <div class="row" style="padding: 3px;" ng-repeat="recipe in recipes track by $index" ng-if="$index % 4 == 0">
       <div class="col-md-3" style="padding: 0;" ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3]" ng-if="recipes[i] != null">
         <img id="recipe-img" src="{{recipes[i].imgURL}}" ui-sref="recipes.view({recipeId: recipes[i]._id})">  
-        <h2 style="margin-top: 0; margin-bottom: 0;"><span>{{recipes[i].title}}</span></h2>
+        <h2 style="margin-top: 0; margin-bottom: 0;"><span style="max-width: 350px;">{{recipes[i].title}}</span></h2>
         <br>
       </div>
     </div>
