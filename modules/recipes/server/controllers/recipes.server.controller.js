@@ -105,6 +105,7 @@ exports.update = function (req, res) {
   recipe.servings = req.body.servings;
   recipe.cook_time = req.body.cook_time;
   recipe.healthy_ing = req.body.healthy_ing;
+  recipe.orig_ing = req.body.orig_ing;
   recipe.imgURL = req.body.imgURL;
 
   console.log(recipe);
