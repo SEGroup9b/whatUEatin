@@ -27,20 +27,20 @@ https://stark-taiga-55141.herokuapp.com/
 ![recipe by category](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/recipe_by_category.PNG)
 
 ## Running Instructions
-1. Clone Repository
-2. 
+#### Clone Repository
+####  Run
 ```bash
 $ npm install
 ```
-3.
+#### Run
 ```bash
 $ bower install
 ```
-4. 
+####  Run
 ```bash
 $ grunt
 ```
-5. Visit localhost:3000 on web browser
+#### Visit localhost:3000 on web browser
 
 ## How to Update Database and Server Connections
 Under config/env you'll need create/update your development.js/production.js to have the proper mongoDB location as well as update your amazon and USDA API keys.
