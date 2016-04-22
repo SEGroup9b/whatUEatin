@@ -8,23 +8,23 @@ https://stark-taiga-55141.herokuapp.com/
 
 ## Implemented Features
 -Landing Page
-[![Landing Page](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/landing_page.PNG)]
+![Landing Page](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/landing_page.PNG)
 -Create Recipe
-[![Create Recipe](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/create_recipe.PNG)]
+![Create Recipe](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/create_recipe.PNG)
 -Healthify Page
-[![Healthify Page](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/healthify.PNG)]
+![Healthify Page](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/healthify.PNG)
 -View Recipes Page
-[![View Recipes Page](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/view_recipes.PNG)]
+![View Recipes Page](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/view_recipes.PNG)
 -Leaderboard Page
-[![View Leaaderboard](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/leaderboard.PNG)]
+![View Leaaderboard](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/leaderboard.PNG)
 -Profile Page
-[![Profile Page](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/view_profile.PNG)]
+![Profile Page](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/view_profile.PNG)
 -List Recipes Page
-[![list recipes](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/list_recipes.PNG)]
+![list recipes](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/list_recipes.PNG)
 -List Categories Page
-[![categories](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/list_categories.PNG)]
+![categories](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/list_categories.PNG)
 -Recipe by Category
-[![recipe by category](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/recipe_by_category.PNG)]
+![recipe by category](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/recipe_by_category.PNG)
 
 ## Running Instructions
 1. 
