@@ -2,9 +2,9 @@
 https://stark-taiga-55141.herokuapp.com/
 
 ## Code Credits
--Bootstrap
--USDA database API (https://ndb.nal.usda.gov/ndb/doc/index)
--Yeoman full stack generator (https://github.com/angular-fullstack/generator-angular-fullstack)
+###-Bootstrap
+###-USDA database API (https://ndb.nal.usda.gov/ndb/doc/index)
+###-Yeoman full stack generator (https://github.com/angular-fullstack/generator-angular-fullstack)
 
 ## Implemented Features
 -Landing Page
@@ -27,11 +27,10 @@ https://stark-taiga-55141.herokuapp.com/
 ![recipe by category](https://raw.githubusercontent.com/SEGroup9b/whatUEatin/dev/screenshots/recipe_by_category.PNG)
 
 ## Running Instructions
-1. 
-Clone Repository
+1. Clone Repository
 2. 
 ```bash
-		$ npm install
+$ npm install
 ```
 3.
 ```bash
@@ -41,13 +40,9 @@ $ bower install
 ```bash
 $ grunt
 ```
-5. 
-Visit localhost:3000 on web browser
+5. Visit localhost:3000 on web browser
 
 ## How to Update Database and Server Connections
 Under config/env you'll need create/update your development.js/production.js to have the proper mongoDB location as well as update your amazon and USDA API keys.
 Within the recipe and user modules you'll have to update the url's for bucket uploads/saving as we didn't make global variables for them due to time contraints. (Or just make your own globals in development/production and replace them apporpriately
 
-
-# whatUEatin
-#whatUEatin
