@@ -47,6 +47,8 @@ var recipeSchema = new Schema({
       fat         |   Low Fat
       sodium      |   Low Sodium
       carb        |   Low Carb
+      vegetarian  |   Vegetarian
+      vegan       |   Vegan
   */
   tags: {
     allergies: [String],

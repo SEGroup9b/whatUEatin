@@ -1,8 +1,9 @@
 'use strict';
-
+var path = path = require('path');
 var Request = require('request');      // for API calls
 var querystring = require('querystring');   // for constructing API calls easily.
-var key = 'YAJ2M9l67OaqNMPCEfBcoccVtQDY5LPUR20rFzP8';    // our USDA api key
+var config = require(path.resolve('./config/config'))
+var key = config.usdaAPI.apiKey;    // our USDA api key
 var reportURL = 'http://api.nal.usda.gov/ndb/reports/?';  
 var searchURL = 'http://api.nal.usda.gov/ndb/search/?';
 var nutrientURL = 'http://api.nal.usda.gov/ndb/nutrients/?';
